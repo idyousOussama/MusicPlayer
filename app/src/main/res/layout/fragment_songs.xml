@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.SongsFragment">
+
+
+
+
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/songScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:gravity="center_horizontal">
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/songsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:nestedScrollingEnabled="false"
+            android:fastScrollEnabled="true"
+            android:scrollIndicators="none"
+            />
+
+        <!-- No songs found message -->
+        <TextView
+            android:id="@+id/songsNotFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/sognsNotFound_text"
+            android:textColor="@color/Accent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            />
+
+        <!-- View hidden songs button -->
+        <TextView
+            android:id="@+id/ViewHidenSongs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="View 70 hidden Songs"
+            android:textSize="14sp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/Primary"
+            android:layout_marginTop="5dp"
+            android:drawableRight="@drawable/arrow_view" />
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

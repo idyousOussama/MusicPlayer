@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+android:background="@drawable/white_background"
+    >
+    <ProgressBar
+        android:id="@+id/processing_progerss"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        />
+    <TextView
+        android:id="@+id/dialog_process_text"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/processing_progerss"
+        android:fontFamily="@font/poppins_extralight"
+        android:includeFontPadding="false"
+        android:text="@string/Unhiding_text"
+        android:textSize="20sp" />
+
+
+
+</RelativeLayout>

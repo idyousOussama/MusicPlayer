@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SplachActivity">
+
+    <ImageView
+        android:layout_width="237dp"
+        android:layout_height="215dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/app_logo" />
+    <ProgressBar
+        android:id="@+id/splach_progress"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="15dp"
+        android:visibility="gone"
+        android:layout_marginBottom="15dp"
+        />
+
+
+</RelativeLayout>

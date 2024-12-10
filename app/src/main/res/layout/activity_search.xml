@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activities.SearchActivity">
+
+    <RelativeLayout
+        android:id="@+id/search_toolbar"
+        android:layout_width="401dp"
+        android:layout_height="65dp">
+
+        <ImageView
+            android:id="@+id/search_goBack_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/arrow_left" />
+
+        <EditText
+            android:id="@+id/input_search_bar"
+            android:layout_width="340dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/inputes_accent_backround"
+            android:layout_toRightOf="@+id/search_goBack_btn"
+            android:hint="@string/search_text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:fontFamily="@font/poppins_extralight"
+            />
+    </RelativeLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/searchScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_toolbar"
+>
+ <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/search_songsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/Primary"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:text="Songs(100)"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_songsText"
+                android:visibility="gone"
+
+
+                />
+            <TextView
+                android:id="@+id/search_albumText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/searchRV"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:layout_marginStart="10dp"
+                android:text="Albums(100)"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchAlbumRV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/search_albumText"
+                android:visibility="gone"
+                />
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+<ProgressBar
+    android:id="@+id/search_progress"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:visibility="gone"
+    android:layout_centerInParent="true"/>
+<LinearLayout
+    android:id="@+id/noResult_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_centerInParent="true"
+android:gravity="center"
+    android:visibility="gone"
+    >
+    <ImageView
+        android:layout_width="86dp"
+        android:layout_height="87dp"
+        android:src="@drawable/list_search" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/noResult_message_text"
+    android:fontFamily="@font/poppins_extralight"
+    android:includeFontPadding="false"
+
+    />
+</LinearLayout>
+
+</RelativeLayout>
