@@ -4,13 +4,18 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.jamplayer.Activities.ShowAlbumActivity.ShowAlbumDetailsManagerObj.selectedAlbum
 import com.example.jamplayer.Activities.ShowAlbumActivity.ShowAlbumDetailsManagerObj.selectedAlbumSongsList
+import com.example.jamplayer.Activities.ShowPlaylistActivity.showPlaylistmanager.playList
+import com.example.jamplayer.Activities.ShowPlaylistActivity.showPlaylistmanager.playlistSongs
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.currentPosition
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.curretSong
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.position
@@ -19,15 +24,20 @@ import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.songsL
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.albumList
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.executor
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.jamViewModel
+import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.playLists
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.unHideSong
 import com.example.jamplayer.Adapters.AlbumAdapter
 import com.example.jamplayer.Adapters.AudiosAdapter
+import com.example.jamplayer.Adapters.PlaylistAdapter
 import com.example.jamplayer.Listeners.AlbumMusicLisntener
 import com.example.jamplayer.Listeners.MusicFileItemsListener
+import com.example.jamplayer.Listeners.PlayListItemListener
 import com.example.jamplayer.Moduls.Album
 import com.example.jamplayer.Moduls.MusicFile
+import com.example.jamplayer.Moduls.PlayList
 import com.example.jamplayer.Services.BaseApplication
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivitySearchBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +50,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userIsActive = true
         setSearch()
         initbackBtn()
     }
@@ -62,44 +73,40 @@ class SearchActivity : AppCompatActivity() {
                     val filteredAlbumList = albumList.filter {
                         it.name!!.contains(searchText, ignoreCase = true) || it.name!!.contains(searchText, ignoreCase = true)
                     }
+                    val filteredPlayList = playLists.filter {
+                        it.title!!.contains(searchText, ignoreCase = true) || it.title!!.contains(searchText, ignoreCase = true)
+                    }
                     // Launch a coroutine to update the UI
                     lifecycleScope.launch {
-                        if(filteredSongList.isEmpty() && filteredAlbumList.isEmpty() ){
+                        binding.searchProgress.visibility = View.GONE
+
+                        if (filteredSongList.isEmpty() && filteredAlbumList.isEmpty() && filteredPlayList.isEmpty()) {
                             binding.searchScroll.visibility = View.GONE
-                            binding.searchProgress.visibility =View.GONE
-                              binding.noResultLayout.visibility = View.VISIBLE
-                        }else if (filteredSongList.isEmpty() && filteredAlbumList.isNotEmpty() ) {
-                            setFilteredAlbumsList(filteredAlbumList as ArrayList)
-                            binding.searchProgress.visibility = View.GONE
-                            binding.noResultLayout.visibility =  View.GONE
+                            binding.noResultLayout.visibility = View.VISIBLE
+                        } else {
                             binding.noResultLayout.visibility = View.GONE
                             binding.searchScroll.visibility = View.VISIBLE
-                            binding.searchSongsText.visibility = View.GONE
-                            binding.searchAlbumText.visibility = View.VISIBLE
-                            binding.searchAlbumText.setText("Albums" + "("+filteredAlbumList.size.toString()+")")
 
-                        }else if (filteredSongList.isNotEmpty() && filteredAlbumList.isEmpty()){
-                            setFilteredSongsList(filteredSongList as ArrayList)
-                            binding.searchProgress.visibility = View.GONE
-                            binding.noResultLayout.visibility = View.GONE
-                            binding.searchScroll.visibility = View.VISIBLE
-                            binding.searchSongsText.visibility = View.VISIBLE
-                            binding.searchAlbumText.visibility = View.GONE
-                            binding.noResultLayout.visibility =  View.GONE
-                            binding.searchAlbumText.setText("Songs" + "("+ filteredSongList.size.toString()+")")
+                            handleFilteredList(
+                                filteredAlbumList,
+                                binding.searchAlbumText,
+                                binding.searchAlbumLayout,
+                                "Albums"
+                            ) { setFilteredAlbumsList(filteredAlbumList as ArrayList) }
 
-                        }else{
-                            setFilteredSongsList(filteredSongList as ArrayList)
-                            setFilteredAlbumsList(filteredAlbumList as ArrayList)
-                            binding.searchProgress.visibility = View.GONE
-                            binding.searchScroll.visibility = View.VISIBLE
-                            binding.searchSongsText.visibility = View.VISIBLE
-                            binding.searchAlbumText.visibility = View.VISIBLE
-                            binding.noResultLayout.visibility =  View.GONE
-                            binding.searchAlbumText.setText("Songs" + "("+ filteredSongList.size.toString()+")")
-                            binding.searchAlbumText.setText("Albums" + "("+filteredAlbumList.size.toString()+")")
+                            handleFilteredList(
+                                filteredSongList,
+                                binding.searchSongsText,
+                                binding.searchSongsLayout,
+                                "Songs"
+                            ) { setFilteredSongsList(filteredSongList as ArrayList) }
 
-
+                            handleFilteredList(
+                                filteredPlayList,
+                                binding.searchPlayListText,
+                                binding.searchPlayListLayout,
+                                "Playlists"
+                            ) { setFilteredPlaylist(filteredPlayList as ArrayList) }
                         }
                     }
                 }
@@ -112,9 +119,26 @@ class SearchActivity : AppCompatActivity() {
         }
 
     }
+    private fun handleFilteredList(
+        list: List<Any>,
+        textView: TextView,
+        linarLayout: LinearLayout,
+        label: String,
+        updateList: (ArrayList<Any>) -> Unit
+    ) {
+        if (list.isNotEmpty()) {
+            updateList(ArrayList(list))
+            textView.visibility = View.VISIBLE
+            linarLayout.visibility = View.VISIBLE
+            textView.text = "$label (${list.size})"
+        } else {
+            textView.visibility = View.GONE
+            linarLayout.visibility = View.GONE
+        }
+    }
     private fun setFilteredAlbumsList(filteredAlbums :ArrayList<Album>) {
         val albumsAdapter = AlbumAdapter(1)
-        if(filteredAlbums != null){
+
             binding.searchAlbumRV.apply {
                 if(settings!!.itemType == "small"){
                     layoutManager = LinearLayoutManager(baseContext)
@@ -126,15 +150,7 @@ class SearchActivity : AppCompatActivity() {
             }
             albumsAdapter.setAlbumsList(filteredAlbums)
 
-            binding.searchAlbumText.text = "Albums(${filteredAlbums.size})"
-            binding.searchAlbumText.visibility = View.VISIBLE
-            binding.searchAlbumRV.visibility = View.VISIBLE
-            binding.searchProgress.visibility = View.GONE
-        }else{
-            binding.searchAlbumText.visibility = View.GONE
-            binding.searchAlbumRV.visibility = View.GONE
-            binding.searchProgress.visibility = View.GONE
-        }
+
         albumsAdapter.setListner(object : AlbumMusicLisntener {
             override fun onAlbumItemClicked(album: Album, albumSongs: ArrayList<MusicFile>) {
                 selectedAlbum = album
@@ -147,9 +163,9 @@ class SearchActivity : AppCompatActivity() {
     private fun setFilteredSongsList(filteredSongs: ArrayList<MusicFile>) {
 
         val songsAdapter = AudiosAdapter(1)
-        if (filteredSongs.isNotEmpty()){
+
             songsAdapter.setMusicFile(filteredSongs)
-            binding.searchRV.apply {
+            binding.searchSongRV.apply {
                 if (settings!!.itemType == "small"){
                     layoutManager = LinearLayoutManager(baseContext)
                 }else  {
@@ -159,15 +175,7 @@ class SearchActivity : AppCompatActivity() {
                 adapter = songsAdapter
 
             }
-            binding.searchSongsText.text = "Songs(${filteredSongs.size})"
-            binding.searchSongsText.visibility = View.VISIBLE
-            binding.searchRV.visibility = View.VISIBLE
-            binding.searchProgress.visibility = View.GONE
-        }else{
-            binding.searchSongsText.visibility = View.GONE
-            binding.searchRV.visibility = View.GONE
-            binding.searchProgress.visibility = View.GONE
-        }
+
         songsAdapter.setListner(object : MusicFileItemsListener{
             override fun onItemClickListner(mFile: MusicFile, position: Int) {
                 if(mFile != null){
@@ -179,6 +187,35 @@ class SearchActivity : AppCompatActivity() {
             }
         })
     }
+    private fun setFilteredPlaylist(filteredPlaylist: ArrayList<PlayList>) {
+        val playListAdapter =PlaylistAdapter(1)
+        playListAdapter.setPlayLists(filteredPlaylist)
+            binding.searchPlayListRV.apply {
+                if (settings!!.itemType == "small"){
+                    layoutManager = LinearLayoutManager(baseContext)
+                }else  {
+                    layoutManager = GridLayoutManager(baseContext,2)
+                }
+                setHasFixedSize(true)
+                adapter = playListAdapter
+
+            }
+
+        playListAdapter.setPlayListItemListener(object : PlayListItemListener{
+            override fun onPlayListItemClicked(
+                selectedPlayList: PlayList,
+                playListSongs: ArrayList<MusicFile>
+            ) {
+                playlistSongs = playListSongs
+                playList = selectedPlayList
+                navigateToNewActivty(ShowPlaylistActivity::class.java)            }
+        })
+    }
+    private fun navigateToNewActivty(newActivity: Class<ShowPlaylistActivity>) {
+val newActivityInntent = Intent(baseContext , newActivity)
+        startActivity(newActivityInntent)
+    }
+
     private fun setSongsListForPlaying(positionz: Int, songList : ArrayList<MusicFile>, isRandom: Boolean) {
         var currentMediaPlayer = BaseApplication.PlayingMusicManager.mediaPlayer
         if(currentMediaPlayer != null){
@@ -199,6 +236,10 @@ class SearchActivity : AppCompatActivity() {
 
 
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }
 

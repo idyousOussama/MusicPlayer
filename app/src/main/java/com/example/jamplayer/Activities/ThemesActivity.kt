@@ -18,6 +18,7 @@ import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
 import com.example.jamplayer.Adapters.ThemesAdapter
 import com.example.jamplayer.AppDatabase.ViewModels.JamViewModel
 import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivityThemesBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,6 +34,7 @@ var currentItemSize = settings!!.itemType
         super.onCreate(savedInstanceState)
      binding = ActivityThemesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userIsActive = true
         getSettings()
         setThemeViews()
         initBtns()
@@ -149,5 +151,9 @@ val list : ArrayList<Int> = ArrayList()
         }
         themesAdapter.setThemeViews(list)
 
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }

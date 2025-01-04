@@ -16,6 +16,7 @@ import com.example.jamplayer.Listeners.MyFeedbackItemsListener
 import com.example.jamplayer.Moduls.FeedbackMessage
 import com.example.jamplayer.Moduls.MyFeedback
 import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivityUserFeedBackBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,6 +31,7 @@ val feedbacksAdapter = MyFeedbacksAdapter()
         super.onCreate(savedInstanceState)
 binding =ActivityUserFeedBackBinding.inflate(layoutInflater)
     setContentView(binding.root)
+        userIsActive = true
         checkUserNetworck()
         refreshPage()
         initbackBtn()
@@ -183,5 +185,9 @@ if (p0.exists()){
         setFeedbackWraning(R.drawable.no_feedback,R.string.no_feed_backs_message)
     }
 
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }

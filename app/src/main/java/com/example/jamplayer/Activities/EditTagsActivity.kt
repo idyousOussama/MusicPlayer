@@ -16,6 +16,7 @@ import androidx.core.widget.addTextChangedListener
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.jamViewModel
 import com.example.jamplayer.R
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.curretSong
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivityEditTagsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +36,7 @@ class EditTagsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditTagsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userIsActive = true
 
         getCurrentSong()
         saveCurrentSongChanges()
@@ -107,6 +109,9 @@ class EditTagsActivity : AppCompatActivity() {
                     currentSongArtist.orEmpty(),
                     currentSongImage
                 )
+                curretSong!!.title = currentSongName.toString()
+                curretSong!!.artist = currentSongArtist.toString()
+                curretSong!!.musicImage = currentSongImage
                 runOnUiThread {
                     finish()
                     Toast.makeText(baseContext, R.string.current_song_edited_successful, Toast.LENGTH_SHORT).show()
@@ -180,5 +185,9 @@ class EditTagsActivity : AppCompatActivity() {
             (height * scaleFactor).toInt(),
             true
         )
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }

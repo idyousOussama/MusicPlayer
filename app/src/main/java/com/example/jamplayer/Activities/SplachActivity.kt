@@ -28,6 +28,7 @@ import com.example.jamplayer.Moduls.PlayList
 import com.example.jamplayer.Moduls.Settings
 import com.example.jamplayer.Moduls.User
 import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivitySplachBinding
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.*
@@ -53,6 +54,7 @@ class SplachActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplachBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userIsActive = true
         ItemsManagers.jamViewModel = ViewModelProvider(this).get(JamViewModel::class.java)
         checkPermissionsAndInitialize()
     }
@@ -132,11 +134,9 @@ class SplachActivity : AppCompatActivity() {
     private suspend fun insertDefaultPlayLists(): ArrayList<PlayList> {
         val likedSongList :ArrayList<Int> = ArrayList()
 val mostPlayedSongList :ArrayList<Int> = ArrayList()
-val recentlyPlayedSongList :ArrayList<Int> = ArrayList()
 val defaultPlayLists : ArrayList<PlayList> = ArrayList()
         defaultPlayLists.add( PlayList(0 ,getString(R.string.likedSongs_text),R.drawable.full_heart,likedSongList))
         defaultPlayLists.add(PlayList(0 ,getString(R.string.mostPlayedSongs_text),R.drawable.most_played_icon,mostPlayedSongList) )
-        defaultPlayLists.add( PlayList(0 ,getString(R.string.RecentlyPlayedSongs_text),R.drawable.recently_played_icon,recentlyPlayedSongList))
    jamViewModel.insertMultPlayLists(defaultPlayLists)
         return defaultPlayLists
     }
@@ -221,5 +221,9 @@ val defaultPlayLists : ArrayList<PlayList> = ArrayList()
     }
     companion object {
         private const val PERMISSION_REQUEST_CODE = 1
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }

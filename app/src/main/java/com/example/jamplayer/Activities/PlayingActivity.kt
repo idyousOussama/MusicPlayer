@@ -63,7 +63,7 @@ class PlayingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        userIsActive = true
         requestNotificationPermission()
         binding.musicProgress.thumb?.alpha = 0
         getIntentMethod()
@@ -127,6 +127,7 @@ class PlayingActivity : AppCompatActivity() {
          startActivity(Intent.createChooser(shareIntent, "Share Song via"))
      }
         editTagBtn.setOnClickListener {
+            bottomSheet.dismiss()
             val EditTagIntent = Intent(this@PlayingActivity , EditTagsActivity::class.java)
             startActivity(EditTagIntent)
         }
@@ -211,6 +212,7 @@ class PlayingActivity : AppCompatActivity() {
                 jamViewModel.insertNewPalyList(newPlayList)
                 Toast.makeText(baseContext,R.string.newPlaylist_added, Toast.LENGTH_SHORT).show()
                 playList = jamViewModel.getPlaylistByTitle(titleText)
+                playLists.add(playList!!)
                 dialog.dismiss()
             }else {
                 Toast.makeText(baseContext,R.string.this_PlayList_added, Toast.LENGTH_SHORT).show()
@@ -403,13 +405,10 @@ val wraningDialogView = LayoutInflater.from(this@PlayingActivity).inflate(R.layo
         if(curretSong!!.isLiked){
             binding.songLike.setImageResource(R.drawable.full_heart)
         }
-        Toast.makeText(baseContext,songsList.size.toString() , Toast.LENGTH_SHORT).show()
         if (position != -1 && songsList.isNotEmpty()) {
             stratService(MusicPlayService.Actions.PLAY)
         }
     }
-
-
     private fun stratService(action: MusicPlayService.Actions) {
         Intent(this,MusicPlayService::class.java).also {
             it.action = action.name

@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jamplayer.Activities.SelectPlaylistSongsActivity
 import com.example.jamplayer.Activities.SelectPlaylistSongsActivity.selectPlayListSongsManager.playListSelectSongs
-import com.example.jamplayer.Activities.SelectPlaylistSongsActivity.selectPlayListSongsManager.toSetResult
 import com.example.jamplayer.Activities.ShowPlaylistActivity
 import com.example.jamplayer.Activities.ShowPlaylistActivity.showPlaylistmanager.playList
 import com.example.jamplayer.Activities.ShowPlaylistActivity.showPlaylistmanager.playlistSongs
@@ -112,8 +111,9 @@ if(playList == null){
     jamViewModel.insertNewPalyList(newPlayList)
     Toast.makeText(requireContext(),R.string.newPlaylist_added, Toast.LENGTH_SHORT).show()
    playList = jamViewModel.getPlaylistByTitle(titleText)
+    playLists.add(playList!!)
+    playListsAdapter.setNewPlayList(playList!!)
     dialog.dismiss()
-    navigateToNewActivty(ShowPlaylistActivity::class.java,requireContext())
 }else {
     Toast.makeText(requireContext(),R.string.this_PlayList_added, Toast.LENGTH_SHORT).show()
 }
@@ -169,7 +169,6 @@ if(noEmpty) {
             }
             setHasFixedSize(true)
             adapter = playListsAdapter
-            isNestedScrollingEnabled = false
 
         }
         binding.playListCreateNewPlayBtn.visibility = View.VISIBLE 

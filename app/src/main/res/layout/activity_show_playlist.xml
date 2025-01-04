@@ -140,27 +140,20 @@
         </RelativeLayout>
 
     </LinearLayout>
-<androidx.core.widget.NestedScrollView
-    android:id="@+id/show_Playlist_scroll"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="2dp"
-    android:visibility="gone"
-    android:layout_below="@+id/show_playList_btns_layout"
-
-    >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playList_songRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/show_playList_btns_layout"
+        android:layout_gravity="center_horizontal"
         />
-</androidx.core.widget.NestedScrollView>
 <LinearLayout
     android:id="@+id/playlist_notFound_song_wraning"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
     android:gravity="center"
+    android:visibility="gone"
     android:orientation="vertical"
     android:layout_below="@+id/show_playList_btns_layout">
     <ImageView

@@ -31,24 +31,14 @@
                 android:padding="15dp"
                 />
         </RelativeLayout>
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            >
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/playList_RV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:fastScrollEnabled="true"
-                    android:scrollIndicators="none"
                     android:layout_gravity="center_horizontal"
                     />
-
-        </ScrollView>
         </LinearLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

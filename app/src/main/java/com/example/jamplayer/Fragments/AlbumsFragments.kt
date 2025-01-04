@@ -47,18 +47,10 @@ class AlbumsFragments : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         intialAlbums(view)
-
-
         binding.albumsRefreshSwipe.setOnRefreshListener {
             intialAlbums(view)
-
         }
-
-
-
-
     }
-
     private fun intialAlbums(view: View) {
         executor.execute{
             if (albumList.isNotEmpty()) {
@@ -68,15 +60,13 @@ class AlbumsFragments : Fragment() {
                 CoroutineScope(Dispatchers.Main).launch {
                     albumList = jamViewModel.getAllAlbums()  as ArrayList
                     albumAdapter.setAlbumsList(albumList)
+                    setUpList(view.context)
                 }
-                setUpList()
-
             }else{
                 albumAdapter.setAlbumsList(albumList)
-                setUpList()
+                setUpList(view.context)
 
             }
-
             } else {
                 binding.albumsScroll.visibility = View.GONE
 binding.albumNotFoundWraning.visibility = View.VISIBLE            }
@@ -86,12 +76,12 @@ binding.albumNotFoundWraning.visibility = View.VISIBLE            }
 
     }
 
-    private fun setUpList() {
+    private fun setUpList(context : Context) {
         binding.albumsList.apply {
             if(settings!!.itemType == "small"){
-                layoutManager = LinearLayoutManager(requireContext())
+                layoutManager = LinearLayoutManager(context)
             }else {
-                layoutManager = GridLayoutManager(requireContext(),2)
+                layoutManager = GridLayoutManager(context,2)
             }
             setHasFixedSize(true)
             adapter = albumAdapter

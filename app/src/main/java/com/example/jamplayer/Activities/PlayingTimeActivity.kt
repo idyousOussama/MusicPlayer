@@ -24,7 +24,6 @@ class PlayingTimeActivity : AppCompatActivity() {
         }
     }
     private fun setPalyingTime() {
-        Toast.makeText(baseContext,settings!!.playingTime.toString(),Toast.LENGTH_SHORT).show()
                binding.playingTimeTextBar.setText(formatTime(settings!!.playingTime.toInt()))
        binding.songsPlayingTime.setText(formatTime(settings!!.playingTime.toInt()))
     }
@@ -35,5 +34,8 @@ class PlayingTimeActivity : AppCompatActivity() {
 
         return if (playingTime >= 3600) "$hours:$minutes:$seconds" else "$minutes:$seconds"
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
+    }
 }

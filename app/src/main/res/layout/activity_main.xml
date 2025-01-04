@@ -73,7 +73,7 @@ android:layout_alignParentLeft="true"
         android:background="@drawable/items_background_selector"
 
         android:layout_centerVertical="true"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="7dp"
         android:layout_toLeftOf="@+id/main_setting_btn_layout"
         android:src="@drawable/search" />
 </RelativeLayout>

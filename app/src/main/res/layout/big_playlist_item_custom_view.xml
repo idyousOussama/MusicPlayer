@@ -37,6 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="center"
+
+        android:layout_centerHorizontal="true"
         android:layout_toLeftOf="@+id/small_playList_item_songsNum"
         >
     <RelativeLayout

@@ -22,6 +22,7 @@ import com.example.jamplayer.Moduls.Album
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.R
 import com.example.jamplayer.Services.BaseApplication
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivityShowAlbumBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,6 +39,7 @@ class ShowAlbumActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
       binding = ActivityShowAlbumBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userIsActive = true
 getSelectedAlbum()
         setAlbumSongList()
         moveBack()
@@ -141,5 +143,9 @@ if(selectedAlbumSongsList.get(0).musicImage != null){
             BaseApplication.PlayingMusicManager.mediaPlayer?.release()
             BaseApplication.PlayingMusicManager.mediaPlayer = null
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }

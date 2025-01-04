@@ -22,6 +22,7 @@ import com.example.jamplayer.Listeners.SelecteSongsListener
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.Moduls.PlayList
 import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivitySelectPlaylistSongsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,13 +35,13 @@ class SelectPlaylistSongsActivity : AppCompatActivity() {
     var playListSongs : ArrayList<MusicFile> = unHideSong
     object selectPlayListSongsManager{
         var playListSelectSongs : PlayList? = null
-        var toSetResult = false
     }
     val hiddenSongsAdapter  = SelectSongsAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =ActivitySelectPlaylistSongsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userIsActive = true
          initSelectSongs()
         setSongs(playListSongs)
         saveSelectedSongs()
@@ -109,13 +110,6 @@ class SelectPlaylistSongsActivity : AppCompatActivity() {
             }
         }
     }
-
-
-    private fun navigateToNewActivity(newActivity : Class<*>) {
-        val mainIntent = Intent(baseContext,newActivity)
-        startActivity(mainIntent)
-    }
-
     private fun setSongs(hiddenSongList: ArrayList<MusicFile>) {
         if (this.playListSongs.isNotEmpty()){
             hiddenSongsAdapter.setSongList(hiddenSongList)
@@ -158,7 +152,7 @@ class SelectPlaylistSongsActivity : AppCompatActivity() {
             }
 
             override fun onHiddenSongLongClikcked(selectedSong: MusicFile) {
-                TODO("Not yet implemented")
+
             }
         })
     }
@@ -207,5 +201,8 @@ class SelectPlaylistSongsActivity : AppCompatActivity() {
         }
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
+    }
 }

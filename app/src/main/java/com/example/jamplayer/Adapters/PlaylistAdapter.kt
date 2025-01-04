@@ -50,17 +50,13 @@ return playLists.size    }
     override fun onBindViewHolder(p0: PlaylistVH, p1: Int) {
         val playList = playLists[p1]
         val context = p0.itemView.context
-
         // Retrieve playlist titles from resources
         val likedListTitle = context.getString(R.string.likedSongs_text)
         val mostPlayedTitle = context.getString(R.string.mostPlayedSongs_text)
-        val recentlyPlayedTitle = context.getString(R.string.RecentlyPlayedSongs_text)
-
 // Get filtered songs based on playlist type
         val playListSongs: ArrayList<MusicFile> = when (playList.title) {
             likedListTitle -> unHideSong.filter { it.isLiked }.toCollection(ArrayList())
-            mostPlayedTitle -> unHideSong.filter { it.playedNumber > 10 }.toCollection(ArrayList())
-            recentlyPlayedTitle -> unHideSong.filter { it.isPlayedRecently }.toCollection(ArrayList())
+            mostPlayedTitle -> unHideSong.filter { it.playedNumber > 2 }.toCollection(ArrayList())
             else -> {
                 val result = ArrayList<MusicFile>() // Initialize the list for the else branch
                 for (item in playList.playlistSong) {

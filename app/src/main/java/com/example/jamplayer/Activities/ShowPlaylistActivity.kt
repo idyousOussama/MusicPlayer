@@ -57,12 +57,13 @@ class ShowPlaylistActivity : AppCompatActivity() {
         }
     }
     private fun moveToAddSongs() {
-        if (playList!!.title != getString(R.string.likedSongs_text) && playList!!.title != getString(R.string.RecentlyPlayedSongs_text) && playList!!.title != getString(R.string.mostPlayedSongs_text)){
+        if (playList!!.title != getString(R.string.likedSongs_text) && playList!!.title != getString(R.string.mostPlayedSongs_text)){
             binding.showPlayListAddSongToPlayListBtn.visibility = View.VISIBLE
         }
         binding.showPlayListAddSongToPlayListBtn.setOnClickListener {
             if(playList != null) {
                 playListSelectSongs = playList
+                finish()
             navigateToNewActivity(SelectPlaylistSongsActivity::class.java)
             }else{
                 runOnUiThread {
@@ -97,7 +98,7 @@ val newActivityIntent = Intent(baseContext , newActivity)
     private fun setUpPlaylistSongsList() {
         if(playlistSongs!!.isNotEmpty()){
             binding.playlistNotFoundSongWraning.visibility = View.GONE
-            binding.showPlaylistScroll.visibility = View.VISIBLE
+            binding.playListSongRV.visibility = View.VISIBLE
             if(playlistSongs!!.get(0).musicImage != null) {
                 binding.showPlayListImage.setImageBitmap(playlistSongs!!.get(0).musicImage)
             }else{
@@ -105,14 +106,14 @@ val newActivityIntent = Intent(baseContext , newActivity)
             }
             songsAdapter.setMusicFile(playlistSongs!!)
             if(playlistSongs!!.size == 1) {
-                binding.showPlayListSongNum.setText(playlistSongs!!.size.toString() + getString(R.string.song_text))
+                binding.showPlayListSongNum.setText(playlistSongs!!.size.toString() +" " + getString(R.string.song_text))
             }else{
-                binding.showPlayListSongNum.setText(playlistSongs!!.size.toString() + getString(R.string.songs_text))
+                binding.showPlayListSongNum.setText(playlistSongs!!.size.toString()+" " + getString(R.string.songs_text))
 
             }
             setupRecyclerView()
         } else {
-            binding.showPlaylistScroll.visibility = View.GONE
+            binding.playListSongRV.visibility = View.GONE
             binding.playlistNotFoundSongWraning.visibility = View.VISIBLE
             binding.showPlayListSongNum.visibility = View.GONE
         }
@@ -138,7 +139,6 @@ val newActivityIntent = Intent(baseContext , newActivity)
         currentMediaPlayer?.let {
             if (it.isPlaying) addPlayingTime()
         }
-        Toast.makeText(baseContext, "Playing: ${mFile.title}", Toast.LENGTH_SHORT).show()
         curretSong = mFile
         random = false
         PlayingMusicManager.position = position
@@ -168,5 +168,9 @@ val newActivityIntent = Intent(baseContext , newActivity)
         position = positionz
         val intent = Intent(baseContext,PlayingActivity :: class.java)
         startActivity(intent)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }

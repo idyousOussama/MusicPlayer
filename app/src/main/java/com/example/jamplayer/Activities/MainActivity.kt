@@ -59,6 +59,7 @@ private var lastAddedSongName : String? = null
          super.onCreate(savedInstanceState)
          binding = ActivityMainBinding.inflate(layoutInflater)
          setContentView(binding.root)
+         userIsActive = true
          jamViewModel = ViewModelProvider(this).get(JamViewModel::class.java)
          initBtns()
          initViewPager()
@@ -191,14 +192,7 @@ private var lastAddedSongName : String? = null
                                          val albumArt = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM_ART))
                                          val songCount = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.NUMBER_OF_SONGS))
                                       jamViewModel.insertNewAlbum(Album(0,changedAlbumName,artistName,albumArt,songCount.toString(),uri.toString()))
-                                         runOnUiThread{
-                                             Toast.makeText(context , "we added  nw Album" + changedAlbumName  ,Toast.LENGTH_SHORT ).show()
-                                         }
                                          c.close()
-                                     }else{
-                                         runOnUiThread{
-                                             Toast.makeText(context , "Alrady Have that albumName" + changedAlbumName  ,Toast.LENGTH_SHORT ).show()
-                                         }
                                      }
                                  }
                              }
@@ -229,6 +223,5 @@ private var lastAddedSongName : String? = null
              }
          }
      }
-
 
  }

@@ -2,7 +2,7 @@
     <string name="app_name">Socialfy</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="song_text">Song</string>
+    <string name="song_text">song</string>
     <string name="song_txt">songs</string>
     <string name="album_txt">Albums</string>
     <string name="play_now_text">Playing Now</string>
@@ -14,7 +14,7 @@
     <string name="select_all_text">Select all</string>
     <string name="UnHide_text">Unhide</string>
     <string name="Unhiding_text">Unhiding...</string>
-    <string name="noResult_message_text"><![CDATA[No result of your Music & Albums]]></string>
+    <string name="noResult_message_text"><![CDATA[No result of your Music & Albums & Playlists]]></string>
     <string name="settings_text">Settings</string>
     <string name="themes_text">Theme</string>
     <string name="equalizer_text">Equalizer</string>
@@ -105,7 +105,7 @@
     <string name="likedSongs_text">Liked songs</string>
     <string name="mostPlayedSongs_text">Most played</string>
     <string name="RecentlyPlayedSongs_text">Recently played</string>
-    <string name="songs_text">Songs</string>
+    <string name="songs_text">songs</string>
     <string name="no_Songs_fond_text">No songs found.</string>
     <string name="new_playlist_text">New playlist</string>
     <string name="playlist_name_text">Playlist name</string>

@@ -39,6 +39,7 @@ import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.curret
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.mediaPlayer
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.random
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.repeate
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.Services.MusicPlayService
 import com.example.jamplayer.databinding.ActivityHiddenSongsBinding
 import kotlinx.coroutines.CoroutineScope
@@ -63,6 +64,7 @@ class HiddenSongsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 binding = ActivityHiddenSongsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userIsActive = true
         CoroutineScope(Dispatchers.Main).launch {
             hiddenSongs = jamViewModel.getHiddenSongs() as ArrayList<MusicFile>
             setHiddenSongs(hiddenSongs)
@@ -235,9 +237,7 @@ if(toAdd ){
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
         })
-
     }
-
     private fun updateSeekBar(songSeekBar: SeekBar , playPauseBtn : ImageView) {
         handler.post(object : Runnable {
             override fun run() {
@@ -254,22 +254,18 @@ if(toAdd ){
             }
         })
     }
-
-
     private fun enableUnHideBtn() {
         binding.unHideSongsBtn.isEnabled = true
         binding.unHideSongsBtn.setBackgroundResource(R.drawable.enable_btns_backround)
         @Suppress("DEPRECATION")
         binding.unHideSongsBtn.setTextColor(resources.getColor(R.color.white))
     }
-
     private fun disableUnHideBtn() {
         binding.unHideSongsBtn.isEnabled = false
         binding.unHideSongsBtn.setBackgroundResource(R.drawable.disable_btns_backround)
         @Suppress("DEPRECATION")
         binding.unHideSongsBtn.setTextColor(resources.getColor(R.color.disable_text_color))
     }
-
     fun alertProcessingDialog(){
         val dialogView = LayoutInflater.from(this).inflate(R.layout.processing_dialog_custom,null)
         val processText =dialogView.findViewById<TextView>(R.id.dialog_process_text)
@@ -279,8 +275,7 @@ if(toAdd ){
         processText.setText(R.string.Unhiding_text)
         processDialog.create()
     }
-
-private fun searchingUnhiddenSongs(){
+     private fun searchingUnhiddenSongs(){
 binding.hiddenInputSearchBar.addTextChangedListener {
     val searchText = binding.hiddenInputSearchBar.text.toString()
     binding.selectAllBox.visibility = View.GONE
@@ -299,8 +294,7 @@ executor.execute {
 }
 }
     }
-
-    val broadcastReceiver = object : BroadcastReceiver() {
+     val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val data = intent?.getStringExtra("hidden_data_key")
             when(data){
@@ -314,5 +308,9 @@ executor.execute {
         super.onStart()
         val filter = IntentFilter(ACTION_TRACK_UPDATE)
         registerReceiver(broadcastReceiver, filter)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }

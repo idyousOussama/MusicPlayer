@@ -89,6 +89,7 @@ private val albumImage = itemView.findViewById<ImageView>(R.id.album_Image)
                 if(albumSongsList.isEmpty()){
                     albumSongsNum1.visibility = View.GONE
                     albumSongsNum2 .visibility = View.GONE
+                    songNum.visibility = View.VISIBLE
                 }else if (albumSongsList.size == 1){
                     albumSongsNum1.visibility = View.VISIBLE
                     albumSongsNum2 .visibility = View.GONE

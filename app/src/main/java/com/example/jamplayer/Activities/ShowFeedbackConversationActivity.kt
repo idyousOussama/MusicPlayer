@@ -12,6 +12,7 @@ import com.example.jamplayer.Adapters.FeedbackMessageAdapter
 import com.example.jamplayer.Moduls.FeedbackMessage
 import com.example.jamplayer.Moduls.MyFeedback
 import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivityShowFeedbackConversationBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -30,6 +31,7 @@ class ShowFeedbackConversationActivity : AppCompatActivity() {
 
         binding = ActivityShowFeedbackConversationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userIsActive = true
 getIntentFeedback()
         sendNewFeedbackMessage()
         initSubBtn()
@@ -135,5 +137,9 @@ binding.myFeedbackMessagesProgress.visibility = View.GONE
         val sdf = SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.getDefault())
         val date = Date(timestamp)
         return sdf.format(date)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }

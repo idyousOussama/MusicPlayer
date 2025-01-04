@@ -143,6 +143,7 @@ class SongsFragment : Fragment() {
         if (songsList.isNotEmpty()) {
             val intent = Intent(requireContext(), PlayingActivity::class.java)
             startActivity(intent)
+
         }
     }
     private fun addPlayingTime() {

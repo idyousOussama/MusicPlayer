@@ -21,6 +21,7 @@ import com.example.jamplayer.Listeners.FeedbackListener
 import com.example.jamplayer.Listeners.SubmitButtonListener
 import com.example.jamplayer.Moduls.FeedbackMessage
 import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivityFeedBackBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -42,7 +43,9 @@ object SubmitFeedbackBtnManager{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 binding =ActivityFeedBackBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
+        userIsActive = true
         addSimpleFeedFragment()
         initFeedbacksBtns()
         submitFeedback()
@@ -213,6 +216,9 @@ if(isChecked){
         val date = Date(timestamp)
         return sdf.format(date)
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
+    }
 
 }

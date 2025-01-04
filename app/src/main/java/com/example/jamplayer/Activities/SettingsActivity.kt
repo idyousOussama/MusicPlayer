@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.firebaseDB
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.user
 import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivitySettingsBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,6 +23,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userIsActive = true
 initBtns()
  checkNewMessage()
         initbackBtn()
@@ -89,5 +91,9 @@ val intent = Intent(this,intClass)
         startActivity(intent)
         finish()
 
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }

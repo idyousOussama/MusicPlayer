@@ -29,7 +29,8 @@ android:layout_centerInParent="true"
            android:orientation="vertical"
            android:layout_marginStart="10dp"
            android:layout_toLeftOf="@+id/small_playList_item_songsNum"
-android:gravity="center_vertical"
+           android:gravity="center_vertical"
+           android:layout_centerVertical="true"
            >
            <LinearLayout
                android:layout_width="wrap_content"
@@ -67,6 +68,7 @@ android:gravity="center_vertical"
                android:layout_height="wrap_content"
                android:fontFamily="@font/poppins_extralight"
                android:text="Album Name"
+
                android:layout_marginTop="5dp"
                android:includeFontPadding="false"
                android:textColor="@color/Primary"

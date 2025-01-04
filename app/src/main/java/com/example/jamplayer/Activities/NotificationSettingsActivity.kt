@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.jamViewModel
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
 import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivityNotificationSettingsBinding
 
 class NotificationSettingsActivity : AppCompatActivity() {
@@ -22,6 +23,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNotificationSettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    userIsActive = true
 setCurrentNotificationsSettings()
 initNotificationSettingsBtns()
     upDateNotificationSetting()
@@ -93,5 +95,9 @@ initNotificationSettingsBtns()
         }else{
             binding.saveNotificationBtn.visibility = View.VISIBLE
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        userIsActive = false
     }
 }
