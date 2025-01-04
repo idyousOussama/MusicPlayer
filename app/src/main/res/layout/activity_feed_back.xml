@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.FeedBackActivity">
+<LinearLayout
+    android:id="@+id/feedBack_tool_bar_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_margin="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/feed_back_go_back_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
+        android:src="@drawable/arrow_left"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tell_us_your_problem_text"
+        android:textColor="@color/Background"
+        android:textSize="22sp"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:includeFontPadding="false"/>
+</LinearLayout>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+
+    android:layout_alignParentRight="true"
+    android:layout_margin="10dp"
+    >
+    <ImageView
+        android:id="@+id/to_feedBack_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
+
+        android:src="@drawable/letter_icon"
+
+
+        />
+
+    <ImageView
+        android:id="@+id/add_feedback_red_dot"
+        android:layout_width="9dp"
+        android:layout_height="13dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/red_dot"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/feedBack_tool_bar_layout"
+        android:layout_above="@+id/feed_back_submit_Btn"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            >
+            <LinearLayout
+                android:id="@+id/feed_back_btns_toplayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:id="@+id/feedBack_ADs_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/disable_btns_backround"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/Ads_text" />
+                <TextView
+                    android:id="@+id/feedBack_FileNotFound_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                  android:gravity="center"
+                    android:background="@drawable/disable_btns_backround"
+
+                    android:text="@string/fileNotFound_text"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginStart="7dp"
+                    android:fontFamily="@font/poppins"
+                    android:includeFontPadding="false"
+                    />
+                <TextView
+                    android:id="@+id/feedBack_FileCantPlay_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                   android:gravity="center"
+                    android:text="@string/filecantplay_text"
+                    android:background="@drawable/disable_btns_backround"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:fontFamily="@font/poppins"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="7dp"
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/bottom_feed_back_btns_toplayout_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+
+                >
+                <TextView
+                    android:id="@+id/feedBack_musicStop_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="@string/music_stop_text"
+                    android:background="@drawable/disable_btns_backround"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:fontFamily="@font/poppins"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="7dp"
+                    />
+                <TextView
+                    android:id="@+id/feedBack_app_slow_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="@string/app_slow_text"
+                    android:background="@drawable/disable_btns_backround"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:fontFamily="@font/poppins"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="7dp"
+                    />
+                <TextView
+                    android:id="@+id/feedBack_others_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:text="@string/others_text"
+                    android:background="@drawable/disable_btns_backround"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:fontFamily="@font/poppins"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="7dp"
+                    />
+
+            </LinearLayout>
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/feedback_container_fragment"
+                android:name="com.example.jamplayer.Fragments.FeedbackFragments.SimpleFeedbackFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+    </ScrollView>
+    <TextView
+        android:id="@+id/feed_back_submit_Btn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/disable_btns_backround"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/submit_text"
+        android:enabled="false"
+        android:textColor="@color/disable_text_color"
+        android:textSize="15sp"
+android:layout_alignParentBottom="true"
+        android:layout_margin="7dp"
+        />
+
+
+
+</RelativeLayout>

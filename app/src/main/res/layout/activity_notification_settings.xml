@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".Activities.NotificationSettingsActivity">
+    <RelativeLayout
+        android:id="@+id/notification_settings_tool_bar_layout"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/notification_settings_backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:background="@drawable/items_background_selector"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_left" />
+
+        <TextView
+            android:id="@+id/notification_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/notification_settings_backBtn"
+            android:text="@string/notification_text"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="7dp"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:includeFontPadding="false"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/forground_notification_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notification_settings_tool_bar_layout"
+        android:layout_marginTop="15dp"
+        >
+
+        <Switch
+            android:id="@+id/forground_notification_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:checked="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_music_control_notifications"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/poppins_light"
+        />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/musicPlayed_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/forground_notification_layout"
+        android:layout_marginTop="20dp"
+        >
+
+        <Switch
+            android:id="@+id/secondary_notification_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:checked="true"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/poppins_light"
+            android:includeFontPadding="false"
+            android:textSize="20sp"
+            android:text="@string/enable_Secondary_notifications"
+            android:textColor="@color/black" />
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/save_notification_Btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/enable_btns_backround"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/save_text"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="gone"
+        />
+
+
+
+</RelativeLayout>

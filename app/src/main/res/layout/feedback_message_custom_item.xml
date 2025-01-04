@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_marginTop="10dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/feedback_message_items_sender_Img"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/small_place_holder_image" />
+    <TextView
+        android:id="@+id/feedback_message_items_sender_title"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/feedback_message_items_sender_Img"
+        android:layout_marginStart="5dp"
+        android:includeFontPadding="false"
+        android:layout_alignTop="@+id/feedback_message_items_sender_Img"/>
+    <TextView
+        android:id="@+id/feedback_message_items_sent_date"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+     android:layout_alignParentRight="true"
+        android:includeFontPadding="false"
+
+        android:layout_alignTop="@+id/feedback_message_items_sender_Img"/>
+   <TextView
+       android:id="@+id/feedback_message_items_feedbackType"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/feedback_message_items_sent_date"
+       android:background="@drawable/disable_btns_backround"
+       android:padding="5dp"
+       android:includeFontPadding="false"
+       android:layout_marginTop="10dp"
+       />
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/ads_problem_RV"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/feedback_message_items_feedbackType"
+android:visibility="gone"
+    android:layout_marginTop="10dp"
+
+    />
+
+    <TextView
+        android:id="@+id/feedback_message_items_message_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/Background"
+        android:layout_marginTop="10dp"
+        android:gravity="center|left"
+        android:includeFontPadding="false"
+        android:background="@drawable/gray_btns_backround"
+        android:padding="10dp"
+        android:layout_below="@+id/ads_problem_RV"
+        />
+
+
+
+
+
+</RelativeLayout>

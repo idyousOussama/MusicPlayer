@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".Activities.SettingsActivity">
+    <ImageView
+        android:id="@+id/setting_back_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/arrow_left" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/setting_back_btn"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+            <TextView
+                android:id="@+id/settng_setting_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_extrabold"
+                android:text="@string/settings_text"
+                android:textColor="@color/Background"
+                android:includeFontPadding="false"
+                android:textSize="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"/>
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/palaying_hidenSongLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/song_notification_backround"
+                android:layout_below="@+id/settng_setting_text"
+                >
+                <LinearLayout
+                    android:id="@+id/setting_theme_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/items_background_selector"
+
+                    >
+
+                    <ImageView
+                        android:id="@+id/setting_theme_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/theme"
+                        android:layout_centerVertical="true"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/themes_text"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/black"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/playing_time_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/setting_theme_btn"
+                    android:padding="10dp"
+                    android:background="@drawable/items_background_selector"
+
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/playing_time"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/playing_Time_text"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/playing_time_layout"
+                    android:padding="10dp"
+                    android:background="@drawable/items_background_selector"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/unhide_eye"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Hidden_songs_text"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/song_notification_backround"
+                android:layout_below="@+id/palaying_hidenSongLayout"
+              android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:id="@+id/notification_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/items_background_selector"
+
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/notification_gray"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/notification_text"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/feedback_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/notification_layout"
+                    android:padding="10dp"
+                    android:background="@drawable/items_background_selector"
+
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/feedback"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/feedbaack_text"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        />
+
+                    <ImageView
+                        android:id="@+id/feedback_red_dot"
+                        android:layout_width="10dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="end"
+                        android:visibility="gone"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="1dp"
+                        android:src="@drawable/red_dot" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/about_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/items_background_selector"
+
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/about"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/about_text"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/poppins_semibold"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</RelativeLayout>

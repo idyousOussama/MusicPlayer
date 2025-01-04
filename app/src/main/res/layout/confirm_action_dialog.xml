@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/song_notification_backround"
+    >
+
+    <TextView
+        android:id="@+id/conferm_diolog_action_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Background"
+        android:textSize="25sp"
+        android:fontFamily="@font/poppins_bold"
+        />
+        <TextView
+            android:id="@+id/conferm_diolog_action_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        android:layout_below="@+id/conferm_diolog_action_title"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins_light"/>
+
+    <TextView
+        android:id="@+id/conferm_diolog_action_positiveBtn"
+        android:layout_width="72dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/conferm_diolog_action_message"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/enable_btns_backround"
+        android:fontFamily="@font/poppins"
+        android:includeFontPadding="false"
+        android:gravity="center"
+        android:maxLines="1"
+
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        />
+    <TextView
+        android:id="@+id/conferm_diolog_action_negativeBtn"
+        android:layout_width="72dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/conferm_diolog_action_message"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/gray_btns_backround"
+        android:fontFamily="@font/poppins"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+
+        android:gravity="center"
+        android:textColor="@color/Background"
+android:layout_marginEnd="5dp"
+        android:layout_toLeftOf="@id/conferm_diolog_action_positiveBtn"
+        />
+
+
+
+</RelativeLayout>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activities.ThemesActivity">
+    <RelativeLayout
+        android:id="@+id/theme_settings_tool_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/theme_backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:background="@drawable/items_background_selector"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_left" />
+
+        <TextView
+            android:id="@+id/theme_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/theme_backBtn"
+            android:text="@string/themes_text"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="7dp"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:includeFontPadding="false"
+            />
+        <LinearLayout
+            android:id="@+id/item_sum_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+
+            >
+
+            <LinearLayout
+                android:id="@+id/small_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/enable_btns_backround"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/small_items_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/white_small_items" />
+
+                <TextView
+                    android:id="@+id/small_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:fontFamily="@font/poppins"
+                    android:includeFontPadding="false"
+                    android:text="@string/small_text"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/big_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:layout_marginStart="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/big_items_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/black_big_items" />
+
+                <TextView
+                    android:id="@+id/big_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:fontFamily="@font/poppins"
+                    android:includeFontPadding="false"
+                    android:text="@string/big_text"
+                    android:visibility="gone"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/theme_layout_images_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/theme_settings_tool_bar_layout"
+        android:layout_marginTop="50dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        />
+
+
+
+
+        <TextView
+            android:id="@+id/save_theme_Btn"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/enable_btns_backround"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/save_text"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="15sp"
+            android:layout_marginBottom="10dp"
+            />
+
+
+</RelativeLayout>

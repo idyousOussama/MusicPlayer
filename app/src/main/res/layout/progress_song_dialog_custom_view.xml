@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:padding="10dp"
+    android:background="@drawable/disable_btns_backround"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+        <LinearLayout
+            android:id="@+id/hidden_song_dilog_song_name_and_artist_nm_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            >
+            <TextView
+                android:id="@+id/hidden_song_dilog_song_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               android:textSize="20sp"
+                android:textColor="@color/Primary"
+                android:fontFamily="@font/poppins_bold"
+                android:includeFontPadding="false"
+                android:ellipsize="end"
+                android:singleLine="true"
+                />
+
+            <TextView
+                android:id="@+id/hidden_song_dilog_song_artist_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins"
+                android:includeFontPadding="false"
+                android:maxLines="1"
+                android:textSize="15sp"
+                android:textColor="@color/Primary" />
+        </LinearLayout>
+
+
+
+        <SeekBar
+            android:id="@+id/hidden_song_dilog_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:progressTint="@color/Primary"
+            android:layout_centerVertical="true"
+            android:thumbTint="@color/Primary"
+            android:layout_marginTop="20dp"
+           android:layout_below="@+id/hidden_song_dilog_song_name_and_artist_nm_layout"
+            android:layout_toLeftOf="@+id/play_pause_hidden_song_Btn"
+            />
+        <ImageView
+            android:id="@+id/play_pause_hidden_song_Btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/items_background_selector"
+            android:padding="5dp"
+
+            android:layout_alignTop="@+id/hidden_song_dilog_progress_bar"
+            android:layout_alignBottom="@+id/hidden_song_dilog_progress_bar"
+            android:layout_toLeftOf="@+id/dismess_play_hidden_song_dialog_Btn"
+            android:src="@drawable/pause"
+            android:layout_marginEnd="5dp"
+            />
+        <ImageView
+            android:id="@+id/dismess_play_hidden_song_dialog_Btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/items_background_selector"
+            android:padding="5dp"
+            android:layout_alignTop="@+id/hidden_song_dilog_progress_bar"
+            android:layout_alignBottom="@+id/hidden_song_dilog_progress_bar"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/cancel"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

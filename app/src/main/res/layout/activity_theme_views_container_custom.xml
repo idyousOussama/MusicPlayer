@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/main"
+    android:layout_width="250dp"
+    android:layout_height="500dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/theme_views_backround"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <include
+            android:id="@+id/included"
+            layout="@layout/activity_empty_custom_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+

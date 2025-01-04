@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle"
-    >
-<solid
-    android:color="#EFEFEF"/>
-    <corners
-        android:radius="20dp"/>
-
-
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- State when pressed -->
+<item android:state_pressed="true" android:drawable="@drawable/light_gray_btn_background" />
+<!-- State when focused (optional) -->
+<item android:state_focused="true" android:drawable="@drawable/accent_light_backround" />
+<!-- Default state -->
+<item android:drawable="@drawable/accent_light_backround" />
+</selector>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="vertical"
+    android:gravity="center|top"
+    android:background="@drawable/stroke_white_background"
+    >
+
+    <ImageView
+        android:layout_width="310dp"
+        android:layout_height="312dp"
+        android:src="@drawable/get_started_dialog_img" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/get_started_big_title"
+        android:textColor="@color/Primary"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:layout_marginTop="7dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/get_started_small_message"
+        android:gravity="center"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/get_started_Btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/enable_btns_backround"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/get_started_text"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        />
+</LinearLayout>

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id ("kotlin-parcelize")
     id ("kotlin-kapt")
+    alias(libs.plugins.google.gms.google.services)
 
 }
 android {
@@ -37,7 +38,10 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true  // Enable Data Binding
+
     }
+
 }
 
 dependencies {
@@ -48,6 +52,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.palette.ktx)
+    implementation(libs.firebase.database)
+    implementation(libs.play.services.cast.framework)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -55,7 +61,6 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("com.google.android.material:material:1.11.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-
     implementation ("androidx.appcompat:appcompat:1.7.0")
     implementation ("androidx.activity:activity-ktx:1.9.3")
 
@@ -77,6 +82,8 @@ dependencies {
     implementation ("androidx.paging:paging-runtime:3.1.1")
     implementation ("androidx.media:media:1.6.0")
     implementation ("androidx.core:core:1.10.1")
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 
+    implementation ("com.google.android.material:material:1.12.0")
 
 }

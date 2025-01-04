@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
+    android:background="@drawable/song_notification_backround"
+    android:layout_marginBottom="2dp"
+    android:layout_marginStart="7dp"
+    android:layout_marginEnd="7dp"
+    android:layout_marginTop="5dp"
+>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/album_Image_card"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/Accent"
+        app:cardCornerRadius="10dp"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/album_Image"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:src="@drawable/small_place_holder_image" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/album_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_below="@+id/album_Image_card"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Album Name"
+        android:includeFontPadding="false"
+        android:textColor="@color/Primary"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+    <TextView
+        android:id="@+id/album_songNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/album_name"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins_extralight"
+        android:text="100"
+        android:maxLines="1"
+        android:includeFontPadding="false"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/Primary"
+        />
+
+
+
+
+</RelativeLayout>

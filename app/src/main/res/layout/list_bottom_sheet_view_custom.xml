@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/bottom_sheet_background"
+    >
+<TextView
+    android:id="@+id/lists_bottom_sheet_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/add_to_play_list_text"
+    android:textColor="@color/Background"
+    android:fontFamily="@font/poppins_extrabold"
+    android:textSize="20dp"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/lists_bottom_sheet_title"
+        android:layout_marginTop="10dp"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:id="@+id/lists_bottom_sheet_create_new_playlist_layout"
+                android:gravity="center"
+                android:background="@drawable/items_background_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                >
+                <ImageView
+                    android:id="@+id/lists_bottom_sheet_create_Btn"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:background="@drawable/disable_btns_backround"
+                    android:padding="15dp"
+                    android:src="@drawable/add"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Background"
+                    android:text="@string/create_new_playList_text"
+                    android:layout_toRightOf="@+id/lists_bottom_sheet_create_Btn"
+                    android:layout_alignTop="@+id/lists_bottom_sheet_create_Btn"
+                    android:layout_alignBottom="@+id/lists_bottom_sheet_create_Btn"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:includeFontPadding="false"
+                    android:fontFamily="@font/poppins"/>
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/lists_bottom_sheet_playLists_RV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lists_bottom_sheet_create_layout"/>
+
+
+        </LinearLayout>
+
+   </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

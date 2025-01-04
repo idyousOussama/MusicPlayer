@@ -6,19 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:padding="10dp"
     tools:context=".Activities.SearchActivity">
 
     <RelativeLayout
         android:id="@+id/search_toolbar"
-        android:layout_width="401dp"
-        android:layout_height="65dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/search_goBack_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
+            android:background="@drawable/items_background_selector"
             android:src="@drawable/arrow_left" />
 
         <EditText
@@ -37,12 +40,13 @@
     </RelativeLayout>
     <androidx.core.widget.NestedScrollView
         android:id="@+id/searchScroll"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@+id/search_toolbar"
+        android:layout_centerHorizontal="true"
 >
  <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/search_songsText"
@@ -57,9 +61,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/searchRV"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/search_songsText"
+                android:layout_centerHorizontal="true"
                 android:visibility="gone"
 
 
@@ -69,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/searchRV"
-                android:textColor="@color/black"
+                android:textColor="@color/Primary"
                 android:textSize="20sp"
                 android:visibility="gone"
                 android:layout_marginStart="10dp"
@@ -77,10 +82,11 @@
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/searchAlbumRV"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/search_albumText"
                 android:visibility="gone"
+                android:layout_centerHorizontal="true"
                 />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

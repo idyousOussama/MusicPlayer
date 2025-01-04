@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".Activities.ShowFeedbackConversationActivity">
+
+    <LinearLayout
+        android:id="@+id/show_feedback_details_tool_bar_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/show_feedback_details_back_btn"
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:clickable="true"
+            android:src="@drawable/arrow_left"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_txt"
+            android:textColor="@color/Background"
+            android:textSize="25sp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:includeFontPadding="false"/>
+    </LinearLayout>
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/feedback_messages_Rv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:visibility="gone"
+    android:layout_above="@+id/replay_bar_layout"
+    android:layout_below="@+id/show_feedback_details_tool_bar_layout"/>
+    <ProgressBar
+        android:id="@+id/myFeedback_Messages_progress"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        />
+    <LinearLayout
+        android:id="@+id/replay_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="5dp"
+android:gravity="center_vertical"
+        android:background="@color/white"
+        >
+
+        <EditText
+            android:id="@+id/feedback_message_input"
+            android:layout_width="303dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_white_background"
+            android:hint="@string/Replay_text"
+            android:maxLength="500"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/poppins"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/feedback_details_sub_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/disable_btns_backround"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/sub_text"
+            android:gravity="center"
+            android:enabled="false"
+
+android:textColor="@color/disable_text_color"
+            android:fontFamily="@font/poppins"
+            android:includeFontPadding="false"
+            android:layout_marginStart="10dp"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

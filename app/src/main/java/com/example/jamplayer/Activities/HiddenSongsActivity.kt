@@ -1,22 +1,45 @@
 package com.example.jamplayer.Activities
 
 import android.app.Dialog
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.jamplayer.Activities.HiddenSongsActivity.hiddenSongsManager.hiddenSongMediaPlayer
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.executor
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.jamViewModel
-import com.example.jamplayer.Adapters.HiddenSongsAdapter
-import com.example.jamplayer.Listeners.HiddenSongsListener
+import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
+import com.example.jamplayer.Adapters.SelectSongsAdapter
+import com.example.jamplayer.Listeners.SelecteSongsListener
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.ACTION_TRACK_HIDDEN_SONG_UPDATE
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.ACTION_TRACK_UPDATE
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.currentPosition
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.curretSong
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.mediaPlayer
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.random
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.repeate
+import com.example.jamplayer.Services.MusicPlayService
 import com.example.jamplayer.databinding.ActivityHiddenSongsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,11 +47,18 @@ import kotlinx.coroutines.launch
 
 class HiddenSongsActivity : AppCompatActivity() {
     lateinit var binding : ActivityHiddenSongsBinding
- var checkedHiddenSongsList: ArrayList<MusicFile> = ArrayList()
+    lateinit var playPauseBtn : ImageView
+    object hiddenSongsManager {
+        var  hiddenSongMediaPlayer : MediaPlayer? = null
+    }
+    var handler = Handler(Looper.getMainLooper())
+    var hiddenCurrentPosition : Int = 0
+
+    var checkedHiddenSongsList: ArrayList<MusicFile> = ArrayList()
     private lateinit var hiddenSongs: ArrayList<MusicFile>
     private lateinit var processDialog: Dialog
     private var counter = 0
-    val hiddenSongsAdapter  = HiddenSongsAdapter()
+    val hiddenSongsAdapter  = SelectSongsAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 binding = ActivityHiddenSongsBinding.inflate(layoutInflater)
@@ -40,8 +70,13 @@ binding = ActivityHiddenSongsBinding.inflate(layoutInflater)
         unHideSongs()
         searchingUnhiddenSongs()
         selectAllHiddenSongs()
+        initbackBtn()
     }
-
+    private fun initbackBtn() {
+        binding.hiddenGoBackBtn.setOnClickListener {
+            finish()
+        }
+    }
     private fun selectAllHiddenSongs() {
 binding.selectAllBox.setOnClickListener{
     if (binding.selectAllBox.isChecked){
@@ -87,15 +122,21 @@ binding.selectAllBox.setOnClickListener{
 
     private fun setHiddenSongs(hiddenSongList: ArrayList<MusicFile>) {
             if (this.hiddenSongs.isNotEmpty()){
-                hiddenSongsAdapter.setHiddenList(hiddenSongList)
-                binding.hiddenSongList.layoutManager = LinearLayoutManager(baseContext)
-                binding.hiddenSongList.setHasFixedSize(true)
-                binding.hiddenSongList.adapter = hiddenSongsAdapter
+                hiddenSongsAdapter.setSongList(hiddenSongList)
+                binding.hiddenSongList.apply {
+                    if(settings!!.itemType == "small") {
+                        layoutManager = LinearLayoutManager(baseContext)
+                    }else{
+                        layoutManager = GridLayoutManager(baseContext,2)
+                    }
+                    setHasFixedSize(true)
+                    adapter = hiddenSongsAdapter
+                }
             }
         getCheckedSongItem(hiddenSongsAdapter)
     }
-    private fun getCheckedSongItem(hiddenSongsAdapter: HiddenSongsAdapter) {
-        hiddenSongsAdapter.setHiddenSongListener(object : HiddenSongsListener {
+    private fun getCheckedSongItem(hiddenSongsAdapter: SelectSongsAdapter) {
+        hiddenSongsAdapter.setSongListener(object : SelecteSongsListener {
             override fun onItemCheckChanged(hiddenSong: MusicFile, toAdd: Boolean) {
 if(toAdd ){
   checkedHiddenSongsList.add(hiddenSong)
@@ -115,14 +156,105 @@ if(toAdd ){
             disableUnHideBtn()
         }
     }
-
 }
-
-
-
+            }
+            override fun onHiddenSongLongClikcked(selectedSong: MusicFile) {
+              if(mediaPlayer != null && mediaPlayer!!.isPlaying){
+                  startService(MusicPlayService.Actions.PAUSE)
+              }
+                showPlayingHiddenSongDialog(selectedSong)
             }
         })
     }
+        private fun startService(action: MusicPlayService.Actions) {
+            Intent(this, MusicPlayService::class.java).also {
+                it.action = action.name
+                startService(it)
+            }
+    }
+    private fun showPlayingHiddenSongDialog(selectedHiddenSong: MusicFile) {
+        val playHiddenSongView = LayoutInflater.from(baseContext).inflate(R.layout.progress_song_dialog_custom_view, null)
+         playPauseBtn = playHiddenSongView.findViewById<ImageView>(R.id.play_pause_hidden_song_Btn)
+        val cancelBtn = playHiddenSongView.findViewById<ImageView>(R.id.dismess_play_hidden_song_dialog_Btn)
+        playHiddenSongView.findViewById<TextView>(R.id.hidden_song_dilog_song_name).apply {
+           text = selectedHiddenSong.title
+       }
+        val hiddenSongProgress = playHiddenSongView.findViewById<SeekBar>(R.id.hidden_song_dilog_progress_bar)
+         playHiddenSongView .findViewById<TextView>(R.id.hidden_song_dilog_song_artist_name).text = selectedHiddenSong.artist
+        val playHiddenSongDialog = Dialog(this)
+
+        playHiddenSongDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        playHiddenSongDialog.setContentView(playHiddenSongView)
+        hiddenSongMediaPlayer = MediaPlayer.create(baseContext, selectedHiddenSong.path.toUri())
+        val durationInSeconds = hiddenSongMediaPlayer?.duration?.div(1000) ?: 0
+        hiddenSongProgress.max = durationInSeconds
+
+        hiddenSongMediaPlayer?.start()
+        updateSeekBar(hiddenSongProgress,playPauseBtn)
+        seekBarListener(hiddenSongProgress)
+        cancelBtn.setOnClickListener {
+            hiddenSongMediaPlayer?.release()
+            hiddenSongMediaPlayer = null
+            handler.removeCallbacksAndMessages(null)
+            playHiddenSongDialog.dismiss()
+        }
+
+        playPauseBtn.setOnClickListener {
+            hiddenSongMediaPlayer?.let { mediaPlayer ->
+                if (mediaPlayer.isPlaying) {
+                    mediaPlayer.pause()
+                    playPauseBtn.setImageResource(R.drawable.play)
+                } else {
+                    if(PlayingMusicManager.mediaPlayer != null && PlayingMusicManager.mediaPlayer!!.isPlaying){
+                        startService(MusicPlayService.Actions.PAUSE)
+                    }
+                    mediaPlayer.start()
+                    playPauseBtn.setImageResource(R.drawable.pause)
+                }
+            }
+        }
+
+        playHiddenSongDialog.setOnDismissListener {
+            hiddenSongMediaPlayer?.release()
+            hiddenSongMediaPlayer = null
+            handler.removeCallbacksAndMessages(null)
+        }
+
+        playHiddenSongDialog.show()
+    }
+    private fun seekBarListener(hiddenSongProgress: SeekBar?) {
+        hiddenSongProgress!!.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (hiddenSongMediaPlayer != null && fromUser) {
+                    hiddenSongMediaPlayer?.seekTo(progress * 1000)
+                }
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                seekBar?.thumb?.alpha =255
+            }
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            }
+        })
+
+    }
+
+    private fun updateSeekBar(songSeekBar: SeekBar , playPauseBtn : ImageView) {
+        handler.post(object : Runnable {
+            override fun run() {
+                hiddenSongMediaPlayer?.let { mediaPlayer ->
+                    val currentPosition = mediaPlayer.currentPosition / 1000
+                    songSeekBar.progress = currentPosition
+
+                    if (currentPosition >= mediaPlayer.duration / 1000) {
+                        songSeekBar.progress = 0
+                        playPauseBtn.setImageResource(R.drawable.play)
+                    }
+                }
+                handler.postDelayed(this, 1000)
+            }
+        })
+    }
+
 
     private fun enableUnHideBtn() {
         binding.unHideSongsBtn.isEnabled = true
@@ -166,5 +298,21 @@ executor.execute {
     binding.selectAllBox.visibility = View.VISIBLE
 }
 }
+    }
+
+    val broadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val data = intent?.getStringExtra("hidden_data_key")
+            when(data){
+                "pause"->{
+                    playPauseBtn.setImageResource(R.drawable.play)
+                }
+            }
+        }
+    }
+    override fun  onStart() {
+        super.onStart()
+        val filter = IntentFilter(ACTION_TRACK_UPDATE)
+        registerReceiver(broadcastReceiver, filter)
     }
 }

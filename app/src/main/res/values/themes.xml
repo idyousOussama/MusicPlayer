@@ -1,18 +1,56 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.JamPlayer" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.Theme.JamPlayer" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/Primary</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimary">@color/Primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/Accent</item>
+        <item name="colorOnSecondary">@color/black</item>
 
+        <item name="colorTertiary">@color/Highlight</item>
+        <item name="colorOnTertiary">@color/white</item>
+
+
+
+        <!-- Error colors -->
+        <item name="colorError">@color/red</item>
+        <item name="colorOnError">@color/white</item>
     </style>
 
     <style name="Theme.JamPlayer" parent="Base.Theme.JamPlayer" />
 
     <style name="RoundedCorner20dp" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">20dp</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="Theme.JamPlayer.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
+        <!-- Radius of the outer bound of widgets to make the rounded corners -->
+        <item name="appWidgetRadius">16dp</item>
+        <!--
+        Radius of the inner view's bound of widgets to make the rounded corners.
+        It needs to be 8dp or less than the value of appWidgetRadius
+        -->
+        <item name="appWidgetInnerRadius">8dp</item>
+    </style>
+
+    <style name="Theme.JamPlayer.AppWidgetContainer" parent="Theme.JamPlayer.AppWidgetContainerParent">
+        <!-- Apply padding to avoid the content of the widget colliding with the rounded corners -->
+        <item name="appWidgetPadding">16dp</item>
+    </style>
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Customize the dialog style -->
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Material3.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
     </style>
 </resources>

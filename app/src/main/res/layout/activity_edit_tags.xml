@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.EditTagsActivity">
+
+    <ImageView
+        android:id="@+id/edit_tag_back_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
+
+        android:src="@drawable/arrow_left"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/edit_tag_back_btn"
+        android:layout_toRightOf="@+id/edit_tag_back_btn"
+        android:text="@string/edit_tags_text"
+        android:gravity="center_vertical"
+        android:textColor="@color/Background"
+        android:layout_marginStart="5dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins"/>
+
+    <ScrollView
+        android:layout_width="382dp"
+        android:layout_height="743dp"
+        android:layout_below="@+id/edit_tag_back_btn"
+        android:layout_marginTop="30dp"
+        android:layout_above="@+id/save_song_changes_btn"
+        >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/edit_tags_layout_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/name_text"
+            android:textColor="@color/gray"
+            android:textSize="17sp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_tags_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_white_background"
+            android:fontFamily="@font/poppins_light"
+            android:hint="@string/edit_tags_name_hint"
+            android:includeFontPadding="false"
+            android:maxLines="2"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_tags_layout_artist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_tags_layout_name"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/artist_text"
+            android:textColor="@color/gray"
+            android:textSize="17sp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_tags_artist_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/stroke_white_background"
+            android:fontFamily="@font/poppins_light"
+            android:hint="@string/edit_tags_artist_hint"
+            android:includeFontPadding="false"
+            android:maxLines="2"
+            android:padding="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_tags_layout_cover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_tags_layout_artist"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/cover_text"
+            android:textColor="@color/gray"
+            android:textSize="17sp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/edit_tags_song_image"
+            android:layout_width="115dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/small_place_holder_image"
+            app:shapeAppearanceOverlay="@style/RoundedCorner20dp" />
+
+        <TextView
+            android:id="@+id/change_current_song_image_btn"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/disable_btns_backround"
+            android:drawableLeft="@drawable/small_green_edit_icon"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:padding="5dp"
+            android:text="@string/change_text"
+            android:textColor="@color/Primary"
+            android:textSize="17sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_tags_layout_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_tags_layout_cover"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/artist_text"
+            android:textColor="@color/gray"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/edit_tags_path_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:gravity="left"
+            android:includeFontPadding="false"
+            android:maxLines="2"
+            android:padding="10dp" />
+
+    </LinearLayout>
+</RelativeLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/save_song_changes_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/enable_btns_backround"
+        android:fontFamily="@font/poppins_semibold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/save_text"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        />
+
+</RelativeLayout>

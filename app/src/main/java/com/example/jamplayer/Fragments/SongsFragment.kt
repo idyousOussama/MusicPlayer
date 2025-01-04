@@ -1,94 +1,200 @@
 package com.example.jamplayer.Fragments
 
+
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.widget.NestedScrollView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.jamplayer.Activities.HiddenSongsActivity
-
 import com.example.jamplayer.Activities.PlayingActivity
-import com.example.jamplayer.Activities.MainActivity
-import com.example.jamplayer.Activities.PlayingActivity.PlayingMusicManager.curretSong
-import com.example.jamplayer.Activities.PlayingActivity.PlayingMusicManager.songsList
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.allAudios
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.currentPosition
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.curretSong
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.random
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.songsList
 import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.jamViewModel
+import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
+import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.unHideSong
 import com.example.jamplayer.Adapters.AudiosAdapter
 import com.example.jamplayer.Listeners.MusicFileItemsListener
 import com.example.jamplayer.Moduls.MusicFile
-
-import com.example.jamplayer.R
+import com.example.jamplayer.Services.BaseApplication
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
+import com.example.jamplayer.databinding.FragmentSongsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 
 
 class SongsFragment : Fragment() {
-
-    val songsAdapter = AudiosAdapter()
-
+    private val songsAdapter = AudiosAdapter(1)
+    private var _binding: FragmentSongsBinding? = null
+    private val binding get() = _binding!!
+    private val ioScope = CoroutineScope(Dispatchers.IO + Job())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-val view = inflater.inflate(R.layout.fragment_songs, container, false)
-
-        return view
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSongsBinding.inflate(inflater, container, false)
+        return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    val musisRV = view.findViewById<RecyclerView>(R.id.songsList)
-    val hidenSongText = view.findViewById<TextView>(R.id.ViewHidenSongs)
-        val filteredSongsList = allAudios.filter { !it.isShort } as ArrayList<MusicFile>
-  CoroutineScope(Dispatchers.Main).launch {
-      var  hiddenSongsNum =   jamViewModel.getHiddenSongsNum()
-
-      if(hiddenSongsNum != 0){
-          hidenSongText.setText("View " + hiddenSongsNum+ " Hidden songs")
-          hidenSongText.visibility = View.VISIBLE
-      }else{
-          hidenSongText.visibility = View.GONE
-      }
-  }
-        hidenSongText.setOnClickListener {
-            val hiddenSongsIntent = Intent(view.context,HiddenSongsActivity::class.java)
-            startActivity(hiddenSongsIntent)
+        intialSongs(view)
+        removeMessedSongs(view.context)
+        binding.songRefreshSwipe.setOnRefreshListener{
+            refreshSongs(view)
+            removeMessedSongs(view.context)
         }
-        setSongsList(musisRV,view, filteredSongsList)
-        songsAdapter.setListner(object:MusicFileItemsListener{
+    }
+    private fun setupRecyclerView() {
+        binding.songsList.apply {
+            layoutManager = if (settings?.itemType == "small") {
+                LinearLayoutManager(context)
+            } else {
+                GridLayoutManager(context, 2)
+            }
+            setHasFixedSize(true)
+            adapter = songsAdapter
+        }
+        songsAdapter.setListner(object : MusicFileItemsListener {
             override fun onItemClickListner(mFile: MusicFile, position: Int) {
-                var currentMediaPlayer = PlayingActivity.PlayingMusicManager.mediaPlayer
-                if(currentMediaPlayer != null && currentMediaPlayer.isPlaying){
-                    PlayingActivity.PlayingMusicManager.mediaPlayer?.release()
-                    PlayingActivity.PlayingMusicManager.mediaPlayer = null
-                }
-                songsList = allAudios
-                if(filteredSongsList.isNotEmpty()){
-                    PlayingActivity.PlayingMusicManager.songsList = filteredSongsList
-                    val intent = Intent(view.context,PlayingActivity :: class.java)
-                    intent.putExtra("position" ,position)
-                    curretSong = mFile
-                        startActivity(intent)
-                }
+                handleSongClick(mFile, position)
             }
         })
     }
-    private fun setSongsList(
-        musisRV: RecyclerView,
-        v: View,
-        phoneAudiosList: ArrayList<MusicFile>,
-    ) {
-        songsAdapter.setMusicFile(phoneAudiosList)
-        musisRV.layoutManager = LinearLayoutManager(v.context)
-        musisRV.setHasFixedSize(true)
-         musisRV.adapter = songsAdapter
+    private fun refreshSongs(view: View) {
+
+        ioScope.launch {
+            try {
+                withContext(Dispatchers.Main) {
+                    unHideSong = jamViewModel.getunhiddenSongs() as ArrayList<MusicFile>
+                    updateSongsList(unHideSong)
+                    updateHiddenSongsInfo(view.context)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(view.context, "Failed to load songs: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            } finally {
+                withContext(Dispatchers.Main) {
+                    binding.songRefreshSwipe.setRefreshing(false)
+                }
+            }
+        }
+    }
+    private fun updateSongsList(songs: ArrayList<MusicFile>) {
+        if (songs.isEmpty()) {
+            binding.songsNotFound.visibility = View.VISIBLE
+            binding.songsList.visibility = View.GONE
+        } else {
+            binding.songsNotFound.visibility = View.GONE
+            binding.songsList.visibility = View.VISIBLE
+            songsAdapter.setMusicFile(songs)
+            setupRecyclerView()
+
+        }
+    }
+
+    private fun updateHiddenSongsInfo(context: Context) {
+        ioScope.launch {
+            val hiddenSongsNum = jamViewModel.getHiddenSongsNum()
+            withContext(Dispatchers.Main) {
+                if (hiddenSongsNum > 0) {
+                    binding.ViewHidenSongs.apply {
+                        text = "View $hiddenSongsNum Hidden Songs"
+                        visibility = View.VISIBLE
+                        setOnClickListener {
+                            val hiddenSongsIntent = Intent(context, HiddenSongsActivity::class.java)
+                            startActivity(hiddenSongsIntent)
+                        }
+                    }
+                } else {
+                    binding.ViewHidenSongs.visibility = View.GONE
+                }
+            }
+        }
+    }
+
+    private fun handleSongClick(mFile: MusicFile, position: Int) {
+        val currentMediaPlayer = BaseApplication.PlayingMusicManager.mediaPlayer
+        currentMediaPlayer?.let {
+            if (it.isPlaying) addPlayingTime()
+        }
+
+        curretSong = mFile
+        random = false
+        PlayingMusicManager.position = position
+        songsList = unHideSong
+
+        if (songsList.isNotEmpty()) {
+            val intent = Intent(requireContext(), PlayingActivity::class.java)
+            startActivity(intent)
+        }
+    }
+    private fun addPlayingTime() {
+        ioScope.launch {
+            jamViewModel.setPlayingTime(currentPosition)
+            userIsActive = true
+            BaseApplication.PlayingMusicManager.mediaPlayer?.release()
+            BaseApplication.PlayingMusicManager.mediaPlayer = null
+        }
+    }
+    private fun removeMessedSongs(context: Context) {
+        ioScope.launch {
+            val allSongs = jamViewModel.getAllMusic()
+            val messedSongsList = allSongs.filter {checkSongIsNull(it, context) }
+            messedSongsList.forEach { song ->
+                jamViewModel.removeSongById(song.id)
+            }
+            withContext(Dispatchers.Main) {
+                if(messedSongsList.isNotEmpty()){
+                    Toast.makeText(
+                        context,
+                        "Removed ${messedSongsList.size} invalid songs.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                refreshSongs(requireView())
+            }
+        }
+    }
+    private fun checkSongIsNull(songItem: MusicFile, context: Context): Boolean {
+        return try {
+            val file = File(songItem.path)
+            !file.exists()
+        } catch (e: Exception) {
+            true
+        }
+    }
+
+    private fun intialSongs(view: View) {
+        ioScope.launch {
+            try {
+                updateSongsList(unHideSong)
+                withContext(Dispatchers.Main) {
+                    updateHiddenSongsInfo(view.context)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(view.context, "Failed to load songs: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }

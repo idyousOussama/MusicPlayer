@@ -7,9 +7,13 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".Activities.ShowAlbumActivity">
+
 <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:id="@+id/show_album_goBack_Btn"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:padding="5dp"
+    android:background="@drawable/items_background_selector"
     android:src="@drawable/arrow_left"
     android:layout_margin="10dp"/>
 
@@ -19,7 +23,7 @@
         android:layout_height="245dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/Highlight"
+        android:backgroundTint="@color/Accent"
         app:cardCornerRadius="20dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -27,7 +31,7 @@
             android:layout_width="143dp"
             android:layout_height="160dp"
             android:layout_gravity="center"
-            android:src="@drawable/small_place_holder_image" />
+            android:src="@drawable/songs_list_place_holder" />
 
     </androidx.cardview.widget.CardView>
 
@@ -74,7 +78,7 @@ android:layout_centerHorizontal="true"
             android:id="@+id/show_album_play_bln"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:background="@drawable/accent_btns_backround"
+            android:background="@drawable/disable_btns_backround"
             android:gravity="center_vertical"
 
             >
@@ -101,7 +105,7 @@ android:layout_centerHorizontal="true"
             android:id="@+id/show_album_shuffle_btn"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:background="@drawable/accent_btns_backround"
+            android:background="@drawable/disable_btns_backround"
             android:gravity="center_vertical"
 android:layout_marginStart="50dp"
             >
@@ -130,6 +134,29 @@ android:id="@+id/album_songRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
+        android:visibility="gone"
         android:layout_below="@+id/show_album_btns_layout"/>
+    <LinearLayout
+        android:id="@+id/album_notFound_song_wraning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_below="@+id/show_album_btns_layout">
+        <ImageView
+            android:layout_width="82dp"
+            android:layout_height="90dp"
+            android:src="@drawable/list_search" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="@string/no_Songs_fond_text"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/Background"/>
 
+    </LinearLayout>
 </RelativeLayout>

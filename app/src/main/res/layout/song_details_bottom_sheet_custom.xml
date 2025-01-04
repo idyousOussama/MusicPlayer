@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/bottom_sheet_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="50dp"
+        android:layout_height="3dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gray_btn_backround" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+    android:id="@+id/song_details_bottom_sheet_custom_image"
+    android:layout_width="60dp"
+    android:layout_height="50dp"
+        android:layout_below="@+id/view"
+    android:scaleType="centerCrop"
+    android:layout_marginTop="5dp"
+    android:src="@drawable/small_place_holder_image"
+    app:shapeAppearanceOverlay="@style/RoundedCorner20dp" />
+<TextView
+    android:id="@+id/song_details_bottom_sheet_custom_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/song_details_bottom_sheet_custom_image"
+    android:layout_alignTop="@+id/song_details_bottom_sheet_custom_image"
+    android:text="lkqsklq"
+    android:layout_toLeftOf="@+id/song_details_bottom_sheet_custom_edit_song_btn"
+    android:textColor="@color/Primary"
+    android:includeFontPadding="false"
+    android:maxLines="1"
+    android:fontFamily="@font/poppins"
+    android:layout_marginStart="5dp"
+    android:textSize="18sp"
+    android:ellipsize="end"
+    android:textStyle="bold"/>
+    <TextView
+    android:id="@+id/song_details_bottom_sheet_custom_artest_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/song_details_bottom_sheet_custom_image"
+    android:text="lkqsklq"
+        android:layout_alignBottom="@+id/song_details_bottom_sheet_custom_image"
+        android:layout_below="@+id/song_details_bottom_sheet_custom_title"
+    android:textColor="@color/Primary"
+    android:includeFontPadding="false"
+    android:fontFamily="@font/poppins_extralight"
+    android:layout_marginStart="5dp"
+    android:textSize="18sp"
+    android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_toLeftOf="@+id/song_details_bottom_sheet_custom_edit_song_btn"
+    android:textStyle="bold"/>
+    <ImageView
+        android:id="@+id/song_details_bottom_sheet_custom_edit_song_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/items_background_selector"
+        android:padding="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/song_details_bottom_sheet_custom_title"
+        android:layout_alignBottom="@+id/song_details_bottom_sheet_custom_artest_name"
+        android:src="@drawable/edit" />
+    <LinearLayout
+        android:id="@+id/add_to_playlist_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/items_background_selector"
+
+        android:layout_below="@id/song_details_bottom_sheet_custom_image"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/playlist_add"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/add_to_play_list_text"
+            android:gravity="center_vertical"
+            android:textColor="@color/Background"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_light"
+android:includeFontPadding="false"
+            android:layout_marginStart="5dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/share_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_below="@id/add_to_playlist_layout"
+        android:background="@drawable/items_background_selector"
+        android:padding="10dp"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/share"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/share_text"
+            android:gravity="center_vertical"
+            android:textColor="@color/Background"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_light"
+android:includeFontPadding="false"
+            android:layout_marginStart="5dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/hide_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:background="@drawable/items_background_selector"
+        android:layout_below="@id/share_layout"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/unhide_eye"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/hide_text"
+            android:gravity="center_vertical"
+            android:textColor="@color/Background"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_light"
+            android:includeFontPadding="false"
+            android:layout_marginStart="5dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/delete_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:background="@drawable/items_background_selector"
+        android:layout_below="@id/hide_layout"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/trash"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/delete_from_app_text"
+            android:gravity="center_vertical"
+            android:textColor="@color/Background"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_light"
+            android:includeFontPadding="false"
+            android:layout_marginStart="5dp"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

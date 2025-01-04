@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:padding="10dp"
     tools:context=".Activities.HiddenSongsActivity">
     <RelativeLayout
         android:id="@+id/hiddenSongs_toolbar"
@@ -14,8 +15,10 @@
         tools:ignore="UselessParent">
         <ImageView
             android:id="@+id/hidden_goBack_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:background="@drawable/items_background_selector"
             android:layout_marginStart="5dp"
             android:importantForAccessibility="no"
             android:src="@drawable/arrow_left"
@@ -25,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Hidden_songs_text"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Background"
             android:layout_toEndOf="@+id/hidden_goBack_btn"
             android:fontFamily="@font/poppins_semibold"
             android:includeFontPadding="false"
@@ -34,19 +37,21 @@
             android:textSize="25sp"/>
     </RelativeLayout>
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/hiddenSongs_toolbar"
-        android:layout_above="@+id/unHideSongs_Btn">
+        android:layout_above="@+id/unHideSongs_Btn"
+        android:layout_centerHorizontal="true"
+        >
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             tools:ignore="UselessLeaf"
-
+            android:layout_centerHorizontal="true"
             >
             <EditText
                 android:id="@+id/hidden_input_search_bar"
-                android:layout_width="370dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="5dp"
                 android:background="@drawable/inputes_accent_backround"
@@ -76,10 +81,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hidden_SongList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/selectAll_Box"
                 android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
                 />
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

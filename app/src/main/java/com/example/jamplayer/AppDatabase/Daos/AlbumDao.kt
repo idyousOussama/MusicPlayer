@@ -14,10 +14,11 @@ interface AlbumDao {
     @Insert
     fun insertAlbumList(albumList : ArrayList<Album>)
     @Query("Select * from albums")
-    fun getAllMusics() : LiveData<List<Album>>
+    fun getAllMusics() : List<Album>
 
     @Query("SELECT * FROM albums WHERE name LIKE '%' || :title || '%'")
     fun getSongsByTitle (title : String) :List<Album>
-
+ @Query("Select COUNT(*)  from albums where name = :albumName")
+ fun checkIfAlbumIsExistsByName (albumName :String):Int
 
 }

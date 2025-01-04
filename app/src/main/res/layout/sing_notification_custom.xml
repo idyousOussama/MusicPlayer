@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/fourground_notification_remote_view"
 android:background="@drawable/song_notification_backround"
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -66,51 +67,60 @@ android:background="@drawable/song_notification_backround"
 
     <ImageButton
         android:id="@+id/noti_previous_btn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/items_background_selector"
+        android:padding="5dp"
         android:layout_marginEnd="15dp"
         android:scaleType="centerCrop"
-        android:background="@color/transparent"
         android:src="@drawable/previous" />
 
     <ImageButton
         android:id="@+id/noti_paly_pause_btn"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/items_background_selector"
+        android:padding="5dp"
+
         android:scaleType="centerCrop"
-        android:background="@color/transparent"
         android:src="@drawable/pause" />
     <ImageButton
         android:id="@+id/noti_next_btn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/items_background_selector"
+        android:padding="5dp"
+
         android:layout_marginEnd="15dp"
         android:scaleType="centerCrop"
-        android:background="@color/transparent"
         android:layout_marginStart="15dp"
 
         android:src="@drawable/next" />
         <ImageButton
             android:id="@+id/noti_heart_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/items_background_selector"
+            android:padding="7dp"
+
             android:layout_marginEnd="15dp"
             android:layout_marginStart="30dp"
             android:scaleType="centerCrop"
-            android:background="@color/transparent"
             android:src="@drawable/empty_heart" />
 
 </LinearLayout>
     <ImageButton
         android:id="@+id/noti_cancel_btn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/items_background_selector"
+        android:padding="5dp"
+        android:layout_marginEnd="20dp"
         android:scaleType="centerCrop"
 android:layout_below="@id/song_data_layout"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/noti_btns_layout"
-        android:background="@color/transparent"
+        android:layout_alignBottom="@+id/noti_btns_layout"
         android:src="@drawable/cancel" />
 
 </RelativeLayout>

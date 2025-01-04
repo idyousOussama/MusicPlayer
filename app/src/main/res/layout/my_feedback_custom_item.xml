@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@drawable/disable_btns_backround"
+    android:layout_marginTop="5dp"
+    >
+<TextView
+    android:id="@+id/feedback_conver_last_message_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="upDated on Des 17,2024 1:36 AM"
+    android:includeFontPadding="false"
+    android:maxLines="1"
+    android:ellipsize="end"
+    />
+
+    <TextView
+        android:id="@+id/feedback_conver_last_message"
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/feedback_conver_last_message_date"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/poppins"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:text="upDated on Des 17,2024 1:36 AM"
+        android:textColor="@color/Background"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/feedback_newMessageMessage_Num_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:fontFamily="@font/poppins"
+        android:includeFontPadding="false"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/Background"
+        android:background="@drawable/enable_btns_backround"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingStart="7dp"
+        android:paddingEnd="7dp"
+  />
+
+
+</RelativeLayout>

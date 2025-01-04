@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/disable_btns_backround"
+    android:padding="20dp"
+    >
+<TextView
+    android:id="@+id/create_playlist_title_"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+android:text="@string/new_playlist_text"
+android:textColor="@color/Background"
+android:textSize="25sp"
+    android:includeFontPadding="false"
+android:fontFamily="@font/poppins_extrabold"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/create_new_playlist_title_input_layout"
+android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create_playlist_title_"
+        android:layout_marginTop="10dp"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/create_new_playlist_title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/playlist_name_text"
+            android:backgroundTint="@color/transparent"
+            android:fontFamily="@font/poppins_light"
+            android:lineSpacingExtra="5dp"
+            android:singleLine="true"
+            android:maxLength="200"
+           />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/create_playList_positive_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_text"
+        android:padding="10dp"
+        android:background="@drawable/items_background_selector"
+        android:layout_below="@+id/create_new_playlist_title_input_layout"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/gray"
+        android:textSize="20sp"
+        android:enabled="false"
+        android:fontFamily="@font/poppins"
+        android:includeFontPadding="false"
+android:layout_marginTop="20dp"        />
+    <TextView
+        android:id="@+id/create_playList_negative_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cast_tracks_chooser_dialog_cancel"
+        android:padding="10dp"
+        android:background="@drawable/items_background_selector"
+        android:layout_below="@+id/create_new_playlist_title_input_layout"
+        android:layout_toLeftOf="@+id/create_playList_positive_Btn"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/Primary"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins"
+        android:includeFontPadding="false"
+        android:layout_marginTop="20dp"/>
+
+
+</RelativeLayout>

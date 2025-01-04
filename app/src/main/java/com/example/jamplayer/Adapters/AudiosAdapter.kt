@@ -1,19 +1,23 @@
 package com.example.jamplayer.Adapters
 
+import android.content.Context
 import android.graphics.Bitmap
+import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
 import com.example.jamplayer.Listeners.MusicFileItemsListener
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.R
 
-class AudiosAdapter : RecyclerView.Adapter<AudiosAdapter.AudioViewHolder>() {
-private lateinit var musicsList :ArrayList<MusicFile>
+class AudiosAdapter(var requestCode: Int) : RecyclerView.Adapter<AudiosAdapter.AudioViewHolder>() {
+private  var musicsList :ArrayList<MusicFile> = ArrayList()
     private lateinit var fileMusicLestner : MusicFileItemsListener
 
 fun setListner (fileMusicLestner : MusicFileItemsListener){
@@ -25,22 +29,50 @@ this.musicsList = musicsList
 }
 
 
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): AudioViewHolder {
-        val view = LayoutInflater.from(p0.context).inflate(R.layout.audio_custom_item,p0,false)
-        return AudioViewHolder(view)
+        if (requestCode == 1){
+            if(settings!!.itemType == "small"){
+                val view = LayoutInflater.from(p0.context).inflate(R.layout.small_songs_custom_item,p0,false)
+                return AudioViewHolder(view)
+            }else {
+                val view = LayoutInflater.from(p0.context).inflate(R.layout.big_songs_custom_item,p0,false)
+                return AudioViewHolder(view)
+            }
+
+        }else{
+            if(settings!!.itemType == "small"){
+                val view = LayoutInflater.from(p0.context).inflate(R.layout.theme_small_songs_custom_item,p0,false)
+                return AudioViewHolder(view)
+            }else{
+                val view = LayoutInflater.from(p0.context).inflate(R.layout.theme_big_songs_custom_item,p0,false)
+                return AudioViewHolder(view)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
-return musicsList.size
+        if(requestCode == 1){
+            return musicsList.size
+        }else{
+            if(musicsList.size >=  8){
+                return  8
+            }else{
+                return musicsList.size
+
+            }
+        }
     }
 
     override fun onBindViewHolder(p0: AudioViewHolder, p1: Int) {
-       var musicFile = musicsList.get(p1)
-
+       val musicFile = musicsList.get(p1)
             p0.setMusicFile(musicFile.title,musicFile.artist,musicFile.musicImage)
 
         p0.itemView.setOnClickListener {
-            fileMusicLestner.onItemClickListner(musicFile,p1)
+            if(requestCode == 1){
+                fileMusicLestner.onItemClickListner(musicFile,p1)
+
+            }
         }
     }
 
@@ -60,4 +92,5 @@ fun setMusicFile(mTitle:String, mArtist:String, mImage: Bitmap?){
 }
 
     }
+
 }

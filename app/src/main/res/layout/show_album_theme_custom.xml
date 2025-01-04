@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ShowAlbumActivity">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_left"
+     />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/theme_show_album_Image_card"
+        android:layout_width="146dp"
+        android:layout_height="145dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/Accent"
+        app:cardCornerRadius="20dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/theme_show_album_Image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:src="@drawable/small_place_holder_image" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/theme_show_album_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Album Name"
+        android:includeFontPadding="false"
+
+        android:textColor="@color/Primary"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:maxWidth="230dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/theme_show_album_Image_card"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        />
+    <TextView
+        android:id="@+id/theme_show_album_songNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/theme_show_album_name"
+        android:fontFamily="@font/poppins_extralight"
+        android:text="100 Songs"
+        android:layout_marginTop="5dp"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        />
+
+    <LinearLayout
+        android:id="@+id/theme_show_album_btns_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/theme_show_album_songNum"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:weightSum="2"
+        android:gravity="center"
+        >
+        <RelativeLayout
+            android:id="@+id/theme_show_album_play_bln"
+            android:layout_width="wrap_content"
+            android:layout_height="35sp"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/accent_btns_backround"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/theme_play_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/play"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/play_text"
+                    android:gravity="center"
+
+                    android:maxLines="1"
+                    android:autoSizeTextType="uniform"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="2dp"
+                    android:textColor="@color/Primary" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/theme_show_album_shuffle_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="35sp"
+            android:background="@drawable/accent_btns_backround"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/theme_random_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/fill_random"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/shuffle_text"
+                    android:maxLines="1"
+                    android:gravity="center"
+                    android:autoSizeTextType="uniform"
+                    android:includeFontPadding="false"
+                    android:layout_marginStart="2dp"
+                    android:textColor="@color/Primary" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/theme_album_songRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/theme_show_album_btns_layout"/>
+
+</RelativeLayout>

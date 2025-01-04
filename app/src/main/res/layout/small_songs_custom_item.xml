@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginBottom="2dp"
+    android:layout_marginStart="7dp"
+    android:layout_marginEnd="7dp"
+    android:layout_marginTop="5dp"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:background="@drawable/song_notification_backround"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/music_custom_image"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:layout_centerVertical="true"
+        android:src="@drawable/small_place_holder_image"
+        app:shapeAppearanceOverlay="@style/RoundedCorner20dp" />
+
+
+
+    <LinearLayout
+        android:layout_width="321dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toRightOf="@+id/music_custom_image"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/custom_music_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins"
+            android:maxLines="1"
+            android:text="Music "
+            android:paddingTop="5dp"
+            android:textColor="@color/Primary"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/custom_music_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_extralight"
+            android:text="Music "
+            android:textColor="@color/Primary"
+android:paddingTop="5dp"
+            />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

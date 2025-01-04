@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ShowPlaylistActivity">
+
+    <ImageView
+        android:id="@+id/show_playlist_go_back_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
+        android:src="@drawable/arrow_left"
+        android:layout_margin="10dp"
+        />
+    <ImageView
+        android:id="@+id/show_playList_addSongToPlayList_Btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
+        android:src="@drawable/add_circule"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/show_playList_Image_card"
+        android:layout_width="256dp"
+        android:layout_height="245dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/Accent"
+        app:cardCornerRadius="20dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/show_playList_Image"
+            android:layout_width="143dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:src="@drawable/songs_list_place_holder" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/show_playList_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Album Name"
+        android:includeFontPadding="false"
+
+        android:textColor="@color/Primary"
+        android:textSize="25sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:maxWidth="230dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/show_playList_Image_card"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        />
+    <TextView
+        android:id="@+id/show_playList_songNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/show_playList_name"
+        android:fontFamily="@font/poppins_extralight"
+        android:text="100 Songs"
+        android:layout_marginTop="5dp"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        />
+    <LinearLayout
+        android:id="@+id/show_playList_btns_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/show_playList_songNum"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        >
+        <RelativeLayout
+            android:id="@+id/show_playList_play_bln"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:background="@drawable/disable_btns_backround"
+            android:gravity="center_vertical"
+
+            >
+            <ImageView
+                android:id="@+id/play_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/play"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="30dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/play_text"
+                android:gravity="left|center_vertical"
+                android:layout_toRightOf="@+id/play_image"
+                android:paddingTop="3dp"
+                android:layout_marginStart="2dp"
+                android:textColor="@color/Primary" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/show_playList_shuffle_btn"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:background="@drawable/disable_btns_backround"
+            android:gravity="center_vertical"
+            android:layout_marginStart="50dp"
+            >
+            <ImageView
+                android:id="@+id/random_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fill_random"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="25dp"
+                />
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/shuffle_text"
+                android:gravity="left|center_vertical"
+                android:layout_toRightOf="@+id/random_image"
+                android:paddingTop="3dp"
+                android:layout_marginStart="2dp"
+                android:textColor="@color/Primary" />
+        </RelativeLayout>
+
+    </LinearLayout>
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/show_Playlist_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:visibility="gone"
+    android:layout_below="@+id/show_playList_btns_layout"
+
+    >
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playList_songRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+</androidx.core.widget.NestedScrollView>
+<LinearLayout
+    android:id="@+id/playlist_notFound_song_wraning"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_below="@+id/show_playList_btns_layout">
+    <ImageView
+        android:layout_width="82dp"
+        android:layout_height="90dp"
+        android:src="@drawable/list_search" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:text="@string/no_Songs_fond_text"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textColor="@color/Background"/>
+
+</LinearLayout>
+</RelativeLayout>

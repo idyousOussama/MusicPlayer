@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="190dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="7dp"
+    android:background="@drawable/song_notification_backround"
+    android:layout_margin="5dp"
+    >
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:id="@+id/small_playList_itemImage_card"
+        android:layout_height="150dp"
+        android:backgroundTint="@color/Accent"
+        app:cardCornerRadius="20dp"
+        android:layout_centerHorizontal="true"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/small_playList_item_image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:src="@drawable/songs_list_place_holder" />
+
+    </androidx.cardview.widget.CardView>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/small_playList_itemImage_card"
+    android:layout_alignEnd="@+id/small_playList_itemImage_card"
+    android:layout_alignStart="@+id/small_playList_itemImage_card"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_toLeftOf="@+id/small_playList_item_songsNum"
+        >
+    <RelativeLayout
+        android:id="@+id/playList_small_icon_playListNam_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+
+        >
+        <ImageView
+            android:id="@+id/small_playList_item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/most_played_icon"
+            android:layout_alignTop="@+id/small_playList_item_title"
+            android:layout_alignBottom="@+id/small_playList_item_title"
+            />
+        <TextView
+            android:id="@+id/small_playList_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Album Name"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/small_playList_item_icon"
+            android:includeFontPadding="false"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/Primary"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            />
+
+    </RelativeLayout>
+
+       <TextView
+           android:id="@+id/playlist_song_num1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:drawableLeft="@drawable/song_symbol_icon"
+           android:drawablePadding="5dp"
+           android:ellipsize="end"
+           android:fontFamily="@font/poppins_extralight"
+           android:includeFontPadding="false"
+           android:maxWidth="230dp"
+           android:maxLines="1"
+           android:text="Album Name"
+           android:textColor="@color/Primary"
+           android:textSize="15dp" />
+       <TextView
+           android:id="@+id/playlist_song_num2"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:fontFamily="@font/poppins_extralight"
+           android:text="Album Name"
+           android:includeFontPadding="false"
+           android:textColor="@color/Primary"
+           android:textSize="15dp"
+           android:maxLines="1"
+           android:ellipsize="end"
+           android:maxWidth="230dp"
+           android:drawablePadding="5dp"
+           android:drawableLeft="@drawable/song_symbol_icon"
+           />
+   </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/small_playList_item_songsNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/poppins_extralight"
+        android:text="100"
+
+        android:textSize="10sp"
+        android:padding="5dp"
+        android:includeFontPadding="false"
+        android:background="@drawable/white_background"
+        android:maxLines="1"
+        android:textColor="@color/Background"
+        />
+</RelativeLayout>
+
+
+
+
+</RelativeLayout>

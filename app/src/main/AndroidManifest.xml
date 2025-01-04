@@ -4,13 +4,13 @@
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
-
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
-        android:allowBackup="true"
         android:name=".Services.BaseApplication"
+        android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +19,49 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JamPlayer"
         tools:targetApi="31">
+        <activity
+            android:name=".Activities.SelectPlaylistSongsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ShowPlaylistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.EditTagsActivity"
+            android:exported="false" />
 
+        <receiver
+            android:name=".Widgets.MusicTrackWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/music_track_widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".Activities.ShowFeedbackConversationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.UserFeedBackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.FeedBackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ThemesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.NotificationSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.PlayingTimeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.SettingsActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.HiddenSongsActivity"
             android:exported="false" />
@@ -43,20 +85,28 @@
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-    <service android:name=".Services.MusicPlayService"
-        android:exported="false"
-        android:enabled="true"
-        android:foregroundServiceType="mediaPlayback"
-        tools:ignore="ForegroundServicePermission" />
+        <service
+            android:name=".Services.MusicPlayService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback"
+            tools:ignore="ForegroundServicePermission" />
 
-
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
-
 
 </manifest>

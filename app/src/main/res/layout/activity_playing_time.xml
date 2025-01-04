@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:padding="10dp"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.PlayingTimeActivity">
+
+    <RelativeLayout
+        android:id="@+id/playingtime_tool_bar_layout"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/playing_time_backBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:background="@drawable/items_background_selector"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_left" />
+
+        <TextView
+            android:id="@+id/playingtime_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/playing_time_backBtn"
+            android:text="@string/playing_Time_text"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="7dp"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:includeFontPadding="false"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/palying_time_playing_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_playine_time_text"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="7dp"
+        android:layout_below="@+id/playingtime_tool_bar_layout"
+        android:fontFamily="@font/poppins_extralight"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:id="@+id/playingTime_text_bar"
+        android:layout_width="238dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/palying_time_playing_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:background="@drawable/accent_btns_backround"
+        android:fontFamily="@font/poppins_extrabold"
+        android:includeFontPadding="false"
+        android:text="215h 46m"
+        android:textColor="@color/Primary"
+        />
+
+    <RelativeLayout
+        android:id="@+id/musicPlayed_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/playingTime_text_bar"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/items_background_selector"
+
+        >
+        <ImageView
+        android:id="@+id/headcasque_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/head_phone" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+android:layout_toRightOf="@+id/headcasque_image"
+    android:text="@string/music_played_text"
+    android:layout_centerVertical="true"
+    android:layout_marginStart="5dp"/>
+        <TextView
+            android:id="@+id/songs_playing_Time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/Primary"
+    android:text="215h 46m"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:layout_marginStart="5dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/musicPlayed_layout"
+        android:layout_marginTop="10dp"
+        >
+        <ImageView
+            android:id="@+id/video_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/vedio" />
+        <TextView
+            android:id="@+id/video_played_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/video_image"
+            android:text="@string/video_played_text"
+            android:layout_centerVertical="true"
+            android:textColor="@color/disable_gray"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="7dp"
+            android:layout_toRightOf="@+id/video_played_text"
+            android:background="@drawable/enable_btns_backround"
+            android:text="@string/soon_text"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:includeFontPadding="false"
+            android:textColor="@color/white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Accent"
+            android:text="00h 00m"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="5dp"/>
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</RelativeLayout>

@@ -4,19 +4,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.AlbumsFragments">
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/albums_scroll"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/albums_refresh_swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@color/Primary"
         >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/albumsList"
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/albums_scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+android:visibility="gone"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/albumsList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+
+                />
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    <LinearLayout
+        android:id="@+id/album_notFound_wraning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="82dp"
+            android:layout_height="90dp"
+            android:src="@drawable/list_search" />
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            />
-    </androidx.core.widget.NestedScrollView>
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="@string/no_Albums_fond_text"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:textColor="@color/Background"/>
 
-
+    </LinearLayout>
 </RelativeLayout>

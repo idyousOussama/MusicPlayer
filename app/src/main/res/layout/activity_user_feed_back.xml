@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".Activities.UserFeedBackActivity">
+    <LinearLayout
+        android:id="@+id/my_feedback_toolbarlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <ImageView
+            android:id="@+id/my_feed_back_go_back_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/items_background_selector"
+            android:padding="5dp"
+            android:src="@drawable/arrow_left"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_feedbacks_text"
+            android:textColor="@color/Background"
+            android:textSize="25sp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:includeFontPadding="false"/>
+    </LinearLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:backgroundTint="@color/Primary"
+        android:layout_below="@+id/my_feedback_toolbarlayout"
+        >
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+            <LinearLayout
+                android:id="@+id/feedbacks_list_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:gravity="center_horizontal"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/myFeedbackRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/myFeedback_thanck_user_text"
+                    android:fontFamily="@font/poppins"
+                    android:layout_marginTop="10dp"/>
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <ProgressBar
+        android:id="@+id/myFeedback_progress"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        />
+   <LinearLayout
+       android:id="@+id/wraning_layout"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:gravity="center"
+       android:visibility="gone"
+       android:layout_centerInParent="true"
+       >
+
+       <ImageView
+           android:id="@+id/myFeedbacks_wraning_image"
+           android:layout_width="140dp"
+           android:layout_height="140dp"
+           android:src="@drawable/no_internet" />
+       <TextView
+           android:id="@+id/myFeedbacks_wraning_message"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:fontFamily="@font/poppins_extralight"
+           android:includeFontPadding="false"
+           android:layout_marginTop="5dp"
+
+           android:text="@string/no_connection_message_text"/>
+
+   </LinearLayout>
+
+
+
+</RelativeLayout>

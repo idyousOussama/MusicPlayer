@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playing_layout"
-    android:background="@color/white"
+    android:background="@color/Accent_light"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.PlayingActivity">
@@ -14,74 +14,123 @@
     android:layout_alignParentTop="true"
     android:padding="10dp"
     >
+
     <ImageView
         android:id="@+id/goBack_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
+
+        android:layout_alignParentLeft="true"
         android:src="@drawable/arrow_left" />
+    <ImageView
+        android:id="@+id/show_song_details_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/more_dots" />
+
+</RelativeLayout>
+<RelativeLayout
+    android:id="@+id/playing_music_logo_and_appname"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/playing_tooBar_layout"
+    android:layout_centerHorizontal="true"
+android:layout_marginTop="10dp"
+    >
+    <ImageView
+        android:id="@+id/palying_music_app_logo"
+            android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/second_app_logo"/>
 
     <TextView
+        android:id="@+id/playing_music_Activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:fontFamily="@font/poppins_semibold"
-        android:text="@string/play_now_text"
-        android:textSize="20sp"
+        android:text="@string/app_name"
+        android:layout_below="@+id/palying_music_app_logo"
+        android:textSize="25sp"
         android:textStyle="bold"
+        android:layout_marginStart="5dp"
+        android:includeFontPadding="false"
         android:textColor="@color/Primary" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/menu"
-android:layout_alignParentRight="true"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:padding="2dp"
+        android:layout_toRightOf="@+id/playing_music_Activity"
+        android:layout_alignTop="@+id/playing_music_Activity"
+        android:src="@drawable/register_icon"
         />
-</RelativeLayout>
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/music_playing_image"
-        android:layout_width="350dp"
-        android:layout_height="370dp"
-        android:layout_below="@+id/playing_tooBar_layout"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="40dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/small_place_holder_image"
-        app:shapeAppearanceOverlay="@style/RoundedCorner20dp" />
 
+</RelativeLayout>
+
+
+    <RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/music_playing_image"
+    android:layout_marginEnd="20dp"
+        android:background="@color/white"
+        android:layout_marginStart="20dp"
+        android:padding="5dp"
+    >
     <TextView
         android:id="@+id/music_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/Primary"
-        android:layout_below="@+id/music_playing_image"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="MusicName"
+        android:fontFamily="@font/poppins"
         android:includeFontPadding="false"
-        android:textSize="25sp"
-android:maxLines="2"
-        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="170dp"
         android:maxWidth="370dp"
         />
-
+        <TextView
+            android:id="@+id/music_artest_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Primary"
+            android:fontFamily="@font/poppins_extralight"
+            android:includeFontPadding="false"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:maxWidth="370dp"
+            android:layout_below="@+id/music_title"
+            />
     <ImageView
         android:id="@+id/song_like"
-        android:layout_width="30dp"
-        android:layout_height="44dp"
-        android:src="@drawable/empty_heart"
-android:layout_alignParentRight="true"
-        android:layout_marginStart="10dp"
-         android:layout_above="@+id/song_bottomlayout_control"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="10dp"
-        />
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
 
+        android:src="@drawable/empty_heart"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="10dp"
+android:layout_below="@+id/music_artest_name"
+        android:layout_above="@+id/song_bottomlayout_control"
+        android:layout_marginEnd="10dp"
+        />
     <RelativeLayout
         android:id="@+id/song_bottomlayout_control"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
 
         >
@@ -132,6 +181,7 @@ android:layout_alignParentBottom="true"
                 android:id="@+id/previous_btn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:background="@drawable/items_background_selector"
                 android:layout_marginEnd="15dp"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/paly_pause_btn"
@@ -174,6 +224,21 @@ android:layout_alignParentBottom="true"
 
 
     </RelativeLayout>
+</RelativeLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/music_playing_image"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        layout_below="@+id/playing_music_logo_and_appname"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/playing_song_place_holder"
+        android:layout_marginBottom="-180dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="70dp"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/RoundedCorner20dp" />
+
 
 
 

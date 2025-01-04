@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "875008414572",
+    "project_id": "socify-c8c07",
+    "storage_bucket": "socify-c8c07.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875008414572:android:926322ac5c6f9ff3251949",
+        "android_client_info": {
+          "package_name": "com.example.jamplayer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFN5NnAEgXPmqBBlzUm2nH99PAVjw4Srk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

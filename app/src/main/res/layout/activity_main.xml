@@ -17,6 +17,7 @@
         android:id="@+id/mainAppLogo"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:padding="5dp"
         android:src="@drawable/second_app_logo"
 android:layout_centerVertical="true"
 android:layout_marginStart="10dp"
@@ -30,27 +31,50 @@ android:layout_marginStart="10dp"
         android:layout_centerVertical="true"
         android:textColor="@color/Primary"
 android:layout_toRightOf="@+id/mainAppLogo"
-        android:textSize="25dp"
+        android:textSize="23dp"
         android:textStyle="bold"
        android:includeFontPadding="false"
-        android:layout_marginStart="5dp"
         />
+<RelativeLayout
+    android:id="@+id/main_setting_btn_layout"
 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:layout_marginEnd="15dp"
+    >
     <ImageView
         android:id="@+id/main_setting_btn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-android:layout_marginEnd="15dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:background="@drawable/items_background_selector"
+
         android:src="@drawable/settings" />
     <ImageView
+        android:id="@+id/main_red_dot"
+        android:layout_width="7dp"
+        android:visibility="gone"
+        android:layout_height="7dp"
+android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginStart="2dp"
+        android:src="@drawable/red_dot" />
+
+</RelativeLayout>
+
+    <ImageView
         android:id="@+id/main_search_btn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:background="@drawable/items_background_selector"
+
         android:layout_centerVertical="true"
-        android:layout_marginEnd="20dp"
-        android:layout_toLeftOf="@+id/main_setting_btn"
+        android:layout_marginEnd="15dp"
+        android:layout_toLeftOf="@+id/main_setting_btn_layout"
         android:src="@drawable/search" />
 </RelativeLayout>
 <androidx.viewpager.widget.ViewPager

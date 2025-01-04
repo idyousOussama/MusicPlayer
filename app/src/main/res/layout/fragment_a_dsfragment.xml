@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".Fragments.FeedbackFragments.ADsfragment">
+<TextView
+    android:id="@+id/checkBoxTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/select_what_Ad_text"
+android:textColor="@color/Background"
+    android:fontFamily="@font/poppins_semibold"
+    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBoxTitle"
+        android:orientation="vertical"
+
+        >
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/Ads_checkBox_Num1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/items_background_selector"
+            android:fontFamily="@font/poppins_light"
+            android:includeFontPadding="false"
+            android:layout_marginTop="7dp"
+            android:textSize="15sp"
+            android:buttonTint="@color/Primary"
+            android:text="@string/AdsFeedBack_first_checkbox_txt"/>
+           <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/Ads_checkBox_Num2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+               android:background="@drawable/items_background_selector"
+            android:fontFamily="@font/poppins_light"
+            android:includeFontPadding="false"
+               android:textSize="15sp"
+               android:buttonTint="@color/Primary"
+               android:layout_marginTop="7dp"
+            android:text="@string/AdsFeedBack_checkbox_num2_txt"/>
+   <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/Ads_checkBox_Num3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:background="@drawable/items_background_selector"
+            android:fontFamily="@font/poppins_light"
+            android:includeFontPadding="false"
+            android:textSize="15sp"
+            android:buttonTint="@color/Primary"
+           android:layout_marginTop="7dp"
+            android:text="@string/AdsFeedBack_checkbox_num3_txt"/>
+     <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/Ads_checkBox_Num4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+         android:background="@drawable/items_background_selector"
+            android:fontFamily="@font/poppins_light"
+            android:includeFontPadding="false"
+               android:layout_marginTop="7dp"
+         android:textSize="15sp"
+         android:buttonTint="@color/Primary"
+            android:text="@string/AdsFeedBack_checkbox_num4_txt"/>
+       <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/Ads_checkBox_Num5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:includeFontPadding="false"
+           android:textSize="15sp"
+           android:background="@drawable/items_background_selector"
+           android:buttonTint="@color/Primary"
+               android:layout_marginTop="7dp"
+            android:text="@string/AdsFeedBack_checkbox_num5_txt"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/Ads_checkBox_Num6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_light"
+            android:includeFontPadding="false"
+                android:background="@drawable/items_background_selector"
+               android:layout_marginTop="7dp"
+                android:textSize="15sp"
+                android:buttonTint="@color/Primary"
+            android:text="@string/AdsFeedBack_checkbox_num6_txt"/>
+
+        <TextView
+            android:id="@+id/ads_feedback_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_text"
+            android:textColor="@color/Background"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/poppins_semibold"/>
+
+        <EditText
+            android:id="@+id/feed_back_Ads_explain_inpute"
+            android:layout_width="match_parent"
+            android:layout_height="173dp"
+            android:background="@drawable/stroke_white_background"
+            android:padding="15dp"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"
+
+            android:fontFamily="@font/poppins"
+            android:gravity="top|left"
+            android:maxLength="500"
+            android:textSize="15sp"
+            android:hint="@string/feed_back_details_hint_text"/>
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>
