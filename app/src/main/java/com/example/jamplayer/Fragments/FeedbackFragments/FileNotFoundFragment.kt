@@ -6,14 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
-import com.example.jamplayer.Activities.FeedBackActivity.SubmitFeedbackBtnManager.subBtnListner
+import com.example.jamplayer.Activities.Songs.FeedBackActivity.SubmitFeedbackBtnManager.subBtnListner
 import com.example.jamplayer.Listeners.FeedbackListener
 import com.example.jamplayer.Listeners.SubmitButtonListener
-import com.example.jamplayer.R
-import com.example.jamplayer.databinding.FragmentAppSlowFragementBinding
-import com.example.jamplayer.databinding.FragmentFileCantPlayBinding
 import com.example.jamplayer.databinding.FragmentFileNotFoundBinding
 
 class FileNotFoundFragment : Fragment() {

@@ -37,8 +37,7 @@ android:background="@drawable/song_notification_backround"
             android:fontFamily="@font/poppins"
             android:maxLines="1"
             android:paddingTop="5dp"
-            android:text="Music "
-            android:textColor="@color/Primary"
+            android:textColor="@color/Background"
             android:textSize="15dp" />
 
         <TextView
@@ -46,8 +45,7 @@ android:background="@drawable/song_notification_backround"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_extralight"
-            android:text="Music "
-            android:textColor="@color/Primary"
+            android:textColor="@color/Background"
             android:paddingTop="5dp"
             />
 

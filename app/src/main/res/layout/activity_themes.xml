@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activities.ThemesActivity">
+    tools:context=".Activities.Songs.ThemesActivity">
     <RelativeLayout
         android:id="@+id/theme_settings_tool_bar_layout"
         android:layout_width="match_parent"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:padding="10dp"
-    tools:context=".Activities.SearchActivity">
+    tools:context=".Activities.Songs.SearchActivity">
 
     <RelativeLayout
         android:id="@+id/search_toolbar"
@@ -117,6 +117,51 @@
              android:layout_centerHorizontal="true"
              />
 
+     </LinearLayout>
+     <LinearLayout
+         android:id="@+id/search_Video_layout"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:layout_below="@+id/search_playList_layout"
+         >
+         <TextView
+             android:id="@+id/search_videoText"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textColor="@color/Primary"
+             android:textSize="20sp"
+             android:layout_marginStart="10dp"
+             />
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/searchVideoRV"
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:layout_centerHorizontal="true"
+             />
+
+     </LinearLayout>
+     <LinearLayout
+         android:id="@+id/search_Video_albums_layout"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:layout_below="@+id/search_Video_layout"
+         >
+         <TextView
+             android:id="@+id/search_video_album_Text"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:textColor="@color/Primary"
+             android:textSize="20sp"
+             android:layout_marginStart="10dp"
+             />
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/search_Video_Album_RV"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true"
+             />
      </LinearLayout>
 
         </RelativeLayout>

@@ -6,7 +6,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
+    <uses-feature
+        android:name="android.software.picture_in_picture"
+        android:required="true" />
 
     <application
         android:name=".Services.BaseApplication"
@@ -20,46 +25,62 @@
         android:theme="@style/Theme.JamPlayer"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.SelectPlaylistSongsActivity"
+            android:name=".Activities.Vedios.EditVideoTagsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.ShowPlaylistActivity"
+            android:name=".Activities.Vedios.ShowVideoAlbumsVideosActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.EditTagsActivity"
+            android:name=".Activities.Vedios.VideoAlbums"
             android:exported="false" />
         <activity
-            android:name=".Activities.ShowFeedbackConversationActivity"
+            android:name=".Activities.Vedios.PlayVideosActivity"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true" />
+        <activity
+            android:name=".Activities.Songs.SelectPlaylistSongsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.UserFeedBackActivity"
+            android:name=".Activities.Songs.ShowPlaylistActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.FeedBackActivity"
+            android:name=".Activities.Songs.EditTagsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.ThemesActivity"
+            android:name=".Activities.Songs.ShowFeedbackConversationActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.NotificationSettingsActivity"
+            android:name=".Activities.Songs.UserFeedBackActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.PlayingTimeActivity"
+            android:name=".Activities.Songs.FeedBackActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.SettingsActivity"
+            android:name=".Activities.Songs.ThemesActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.HiddenSongsActivity"
+            android:name=".Activities.Songs.NotificationSettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.SearchActivity"
+            android:name=".Activities.Songs.PlayingTimeActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.ShowAlbumActivity"
+            android:name=".Activities.Songs.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.SplachActivity"
+            android:name=".Activities.Songs.HiddenFilesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Songs.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Songs.ShowAlbumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Songs.SplachActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -68,10 +89,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.PlayingActivity"
+            android:name=".Activities.Songs.PlayingActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".Activities.Songs.MainActivity"
             android:exported="false" />
 
         <meta-data
@@ -80,6 +101,12 @@
 
         <service
             android:name=".Services.MusicPlayService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback"
+            tools:ignore="ForegroundServicePermission" />
+        <service
+            android:name=".Services.VideoPlayService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback"

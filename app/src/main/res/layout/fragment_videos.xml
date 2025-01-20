@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".Fragments.VideosFragment">
+    <TextView
+        android:id="@+id/vedios_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@+id/video_folders_icon"
+        android:layout_alignBottom="@+id/video_folders_icon"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/poppins_bold"
+        android:includeFontPadding="false"
+        />
+
+    <ImageView
+        android:id="@+id/video_folders_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@drawable/items_background_selector"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/folder_icon"/>
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/video_folders_icon"
+
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/viedos_listRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            />
+        <TextView
+            android:id="@+id/show_hidden_videos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="View 70 hidden Videos"
+            android:textSize="14sp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/Primary"
+            android:layout_marginTop="5dp"
+            android:drawableRight="@drawable/arrow_view" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>
+
+

@@ -1,17 +1,14 @@
 package com.example.jamplayer.Adapters
 
-import android.content.Context
 import android.graphics.Bitmap
-import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
 import com.example.jamplayer.Listeners.MusicFileItemsListener
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.R

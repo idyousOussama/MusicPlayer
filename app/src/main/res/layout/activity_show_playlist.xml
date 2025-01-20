@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ShowPlaylistActivity">
+    tools:context=".Activities.Songs.ShowPlaylistActivity">
 
     <ImageView
         android:id="@+id/show_playlist_go_back_btn"

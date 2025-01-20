@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="15dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/song_notification_backround">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/video_album_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/playing_song_place_holder" />
+<TextView
+    android:id="@+id/video_album_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Snaptube"
+    android:includeFontPadding="false"
+    android:textColor="@color/Background"
+    android:layout_toRightOf="@+id/video_album_icon"
+    android:layout_alignTop="@+id/video_album_icon"
+    android:layout_alignBottom="@+id/video_album_icon"
+    android:gravity="center_vertical"
+    android:layout_marginStart="10dp"
+    android:textSize="15sp"
+    android:ellipsize="end"
+    android:fontFamily="@font/poppins_bold"/>
+    <TextView
+        android:id="@+id/video_album_item_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:includeFontPadding="false"
+        android:textColor="@color/gray"
+        android:layout_alignTop="@+id/video_album_icon"
+        android:layout_alignBottom="@+id/video_album_icon"
+        android:gravity="center_vertical"
+        android:layout_marginStart="10dp"
+android:layout_toLeftOf="@+id/videos_Album_right_arrow"
+        android:fontFamily="@font/poppins"/>
+    <ImageView
+        android:id="@+id/videos_Album_right_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_right"
+        android:layout_alignTop="@+id/video_album_icon"
+        android:layout_alignBottom="@+id/video_album_icon"
+        android:layout_alignParentRight="true"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/video_album_icon"
+    android:weightSum="2"
+    android:layout_marginTop="10dp"
+    >
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/video_album_img1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:layout_weight="1"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/small_place_holder_image"
+        app:shapeAppearanceOverlay="@style/RoundedCorner20dp" />
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/video_album_img2"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:layout_weight="1"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/small_place_holder_image"
+        app:shapeAppearanceOverlay="@style/RoundedCorner20dp" />
+
+
+</LinearLayout>
+
+
+</RelativeLayout>

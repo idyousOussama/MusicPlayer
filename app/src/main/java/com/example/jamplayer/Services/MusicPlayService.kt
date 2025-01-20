@@ -6,44 +6,36 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.media.AudioManager
 import android.media.MediaPlayer
-import android.os.Handler
 import android.os.IBinder
-import android.os.Looper
 import android.widget.RemoteViews
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.net.toUri
-import com.example.jamplayer.Activities.HiddenSongsActivity.hiddenSongsManager.hiddenSongMediaPlayer
-import com.example.jamplayer.Activities.MainActivity
+
+import com.example.jamplayer.Activities.Songs.MainActivity
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.jamViewModel
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
+import com.example.jamplayer.Fragments.HiddenSongFragment.hiddenSongsManager.hiddenSongMediaPlayer
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.ACTION_TRACK_UPDATE
-import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.currentPosition
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.curretSong
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.mediaPlayer
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.position
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.songsList
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.jamViewModel
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
+
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.R
-import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.ACTION_TRACK_HIDDEN_SONG_UPDATE
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.audioFocusChangeListener
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.audioManager
-import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.currentSongUri
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.plus
 import java.io.File
 
 class MusicPlayService : Service() {
     val SongList = PlayingMusicManager.songsList
-
     lateinit var  remoteViews :RemoteViews
-
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
@@ -276,7 +268,6 @@ class MusicPlayService : Service() {
                 val isLiked = curretSong?.isLiked
                 if(isLiked == true){
                     remoteViews.setImageViewResource(R.id.noti_heart_btn,R.drawable.full_heart)
-
                 } else
                 {
                     remoteViews.setImageViewResource(R.id.noti_heart_btn,R.drawable.empty_heart)
@@ -291,7 +282,7 @@ class MusicPlayService : Service() {
                 remoteViews.setOnClickPendingIntent(R.id.noti_heart_btn, upDateLikedSongPendingIntent())
                 remoteViews.setOnClickPendingIntent(R.id.fourground_notification_remote_view,remoteViewPendingIntent())
 
-                val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+                val notification = NotificationCompat.Builder(this, SONGSCHANNEL_ID)
                     .setSmallIcon(R.drawable.app_logo)
                     .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                     .setCustomContentView(remoteViews)

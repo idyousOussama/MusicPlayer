@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/items_background_selector">
+
+        <!-- Thumbnail Image -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/video_thumbnail"
+        android:layout_width="246dp"
+        android:layout_height="180dp"
+        android:contentDescription="@string/video_thumbnail"
+        android:scaleType="centerCrop"
+        android:src="@drawable/playing_song_place_holder"
+        app:shapeAppearanceOverlay="@style/RoundedCorner20dp" />
+    <TextView
+            android:id="@+id/video_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+
+        android:layout_below="@+id/video_thumbnail"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
+        android:layout_alignEnd="@+id/video_thumbnail"
+            android:text="Video Title" />
+
+        <!-- Video Duration -->
+        <TextView
+            android:id="@+id/video_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_below="@+id/video_title"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            android:layout_alignStart="@+id/video_thumbnail"
+            android:layout_alignEnd="@+id/video_thumbnail"
+            android:ellipsize="end"
+             />
+
+    </RelativeLayout>

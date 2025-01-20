@@ -6,7 +6,7 @@
     android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.EditTagsActivity">
+    tools:context=".Activities.Songs.EditTagsActivity">
 
     <ImageView
         android:id="@+id/edit_tag_back_btn"

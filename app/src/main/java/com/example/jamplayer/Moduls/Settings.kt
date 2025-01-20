@@ -11,6 +11,7 @@ var id :Int = 0,
     var mode : String ,
     var itemType : String ,
     var playingTime : Long,
+    var videoPlayingTime : Long,
    var FSNIsEnable : Boolean ,
     var SecNIsEnable : Boolean,
 

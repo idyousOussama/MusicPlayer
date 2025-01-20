@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/Background"
+    android:id="@+id/main"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Vedios.PlayVideosActivity">
+<RelativeLayout
+    android:id="@+id/playing_video_activity"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <VideoView
+        android:id="@+id/selectedVidio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
+    <RelativeLayout
+        android:id="@+id/playing_video_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+android:layout_marginStart="7dp"
+android:layout_marginEnd="7dp"
+
+
+        >
+
+        <ImageView
+            android:id="@+id/playing_Activity_back_Btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="5dp"
+            android:background="@drawable/playing_video_btns_selector_backround"
+            android:src="@drawable/white_arrow_left" />
+
+        <TextView
+            android:id="@+id/selected_video_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/playing_Activity_back_Btn"
+            android:layout_alignBottom="@+id/playing_Activity_back_Btn"
+            android:layout_marginEnd="10dp"
+            android:layout_toLeftOf="@+id/playing_vedio_details_Btn"
+            android:layout_toRightOf="@+id/playing_Activity_back_Btn"
+            android:ellipsize="end"
+
+            android:fontFamily="@font/poppins"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="fqkslkdqjljeoljlsjdqjdl"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/playing_vedio_details_Btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/playing_video_btns_selector_backround"
+            android:padding="5dp"
+            android:src="@drawable/white_more_dots" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/conrol_btns_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/playing_Activity_previous_Btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="70dp"
+            android:padding="5dp"
+            android:background="@drawable/playing_video_btns_selector_backround"
+            android:src="@drawable/white_previous" />
+
+        <ImageView
+            android:id="@+id/playing_Activity_playPause_Btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/playing_video_btns_selector_backround"
+            android:padding="5dp"
+
+            android:src="@drawable/white_pause" />
+
+        <ImageView
+            android:id="@+id/playing_Activity_next_Btn"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="70dp"
+            android:padding="5dp"
+
+            android:background="@drawable/playing_video_btns_selector_backround"
+            android:src="@drawable/white_next" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/playing_video_progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/transparent"
+            android:padding="10dp">
+
+            <SeekBar
+                android:id="@+id/playing_video_seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/past_duration"
+                android:splitTrack="false"
+                android:thumb="@drawable/seek_bar_thumb"
+                android:progressDrawable="@drawable/seekbar_progress"
+
+                />
+
+
+            <TextView
+                android:id="@+id/past_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+android:layout_alignEnd="@+id/playing_video_seekBar"
+                android:layout_marginEnd="15dp"
+                android:text="100"
+                android:textColor="@color/white"
+
+                />
+
+            <TextView
+                android:id="@+id/originalText_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:text="100"
+
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/playing_vedio_bottom_vedio_features_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
+            <LinearLayout
+                android:id="@+id/change_vedio_to_song_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/circle_gry_btns_background"
+
+                >
+                <ImageView
+                    android:id="@+id/change_vedio_to_song_IMG"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:src="@drawable/music_casque" />
+                <TextView
+                    android:id="@+id/play_video_listen_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/listen_text"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:includeFontPadding="false"
+                    android:visibility="gone"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/rotate_vedio_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/circle_gry_btns_background"
+
+                >
+                <ImageView
+                    android:id="@+id/rotate_vedio"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:src="@drawable/rotate_screen" />
+                <TextView
+                    android:id="@+id/play_video_rotate_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rotate_text"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:includeFontPadding="false"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lock_vedio_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/circle_gry_btns_background"
+
+                >
+                <ImageView
+                    android:id="@+id/lock_vedio"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:src="@drawable/close_lock" />
+                <TextView
+                    android:id="@+id/play_video_lock_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lock_text"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:includeFontPadding="false"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/vedios_playList_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/circle_gry_btns_background"
+
+                >
+                <ImageView
+                    android:id="@+id/vedios_playList"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:src="@drawable/videos_playlist" />
+
+                <TextView
+                    android:id="@+id/play_video_queue_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/queue_text"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:includeFontPadding="false"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    />
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/unlock_vedio_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"
+            android:background="@drawable/circle_gry_btns_background"
+
+            >
+            <ImageView
+                android:id="@+id/unlock_vedio"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:src="@drawable/open_lock" />
+            <TextView
+                android:id="@+id/play_video_unlock_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/unlock_text"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_semibold"
+                android:includeFontPadding="false"
+                android:textSize="20sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

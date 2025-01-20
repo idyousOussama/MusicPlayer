@@ -1,9 +1,9 @@
 package com.example.jamplayer.Fragments
 
 import android.app.Dialog
-import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -14,20 +14,16 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity.RESULT_OK
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jamplayer.Activities.SelectPlaylistSongsActivity
-import com.example.jamplayer.Activities.SelectPlaylistSongsActivity.selectPlayListSongsManager.playListSelectSongs
-import com.example.jamplayer.Activities.ShowPlaylistActivity
-import com.example.jamplayer.Activities.ShowPlaylistActivity.showPlaylistmanager.playList
-import com.example.jamplayer.Activities.ShowPlaylistActivity.showPlaylistmanager.playlistSongs
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.jamViewModel
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.playLists
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
+import com.example.jamplayer.Activities.Songs.ShowPlaylistActivity
+import com.example.jamplayer.Activities.Songs.ShowPlaylistActivity.showPlaylistmanager.playList
+import com.example.jamplayer.Activities.Songs.ShowPlaylistActivity.showPlaylistmanager.playlistSongs
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.jamViewModel
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.playLists
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
+
 import com.example.jamplayer.Adapters.PlaylistAdapter
 import com.example.jamplayer.Listeners.PlayListItemListener
 import com.example.jamplayer.Moduls.MusicFile
@@ -164,14 +160,22 @@ if(noEmpty) {
         binding.playListRV.apply {
             layoutManager = if (settings?.itemType == "small") {
                 LinearLayoutManager(context)
-            } else {
-                GridLayoutManager(context, 2)
+            }
+
+            else{
+                if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    GridLayoutManager(context, 2)
+
+                }else {
+                    GridLayoutManager(context, 4)
+
+                }
             }
             setHasFixedSize(true)
             adapter = playListsAdapter
 
         }
-        binding.playListCreateNewPlayBtn.visibility = View.VISIBLE 
+        binding.playListCreateNewPlayBtn.visibility = View.VISIBLE
 
         binding.playListRefreshSwipe.setRefreshing(false)
 

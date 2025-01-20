@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:id="@+id/video_notification"
+    android:background="@drawable/song_notification_backround"
+    >
+
+    <ImageView
+        android:id="@+id/video_notification_video_img"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:src="@drawable/playing_song_place_holder"
+  android:scaleType="centerCrop"  />
+    <TextView
+        android:id="@+id/video_notification_video_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:layout_centerVertical="true"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/Background"
+        android:includeFontPadding="false"
+        android:layout_toRightOf="@+id/video_notification_video_img"
+        android:fontFamily="@font/poppins"/>
+</RelativeLayout>

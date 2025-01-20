@@ -4,7 +4,7 @@
     android:layout_height="50dp"
 android:layout_marginTop="5dp"
    android:padding="5dp"
-    android:background="@drawable/song_notification_backround"
+    android:background="@drawable/items_background_selector"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -41,7 +41,7 @@ android:layout_marginTop="5dp"
             android:text="Music "
             android:layout_weight="1"
             android:includeFontPadding="false"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Background"
              />
 
         <TextView
@@ -50,7 +50,7 @@ android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_extralight"
             android:text="Musicssss "
-            android:textColor="@color/Primary"
+            android:textColor="@color/Background"
             android:layout_weight="1"
             android:includeFontPadding="false"
             android:gravity="center"

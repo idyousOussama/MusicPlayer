@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.PlayingTimeActivity">
+    tools:context=".Activities.Songs.PlayingTimeActivity">
 
     <RelativeLayout
         android:id="@+id/playingtime_tool_bar_layout"
@@ -123,25 +123,13 @@ android:layout_toRightOf="@+id/headcasque_image"
             android:layout_toRightOf="@+id/video_image"
             android:text="@string/video_played_text"
             android:layout_centerVertical="true"
-            android:textColor="@color/disable_gray"
+            android:textColor="@color/gray"
             android:layout_marginStart="5dp"/>
 
         <TextView
-            android:layout_width="40dp"
-            android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="7dp"
-            android:layout_toRightOf="@+id/video_played_text"
-            android:background="@drawable/enable_btns_backround"
-            android:text="@string/soon_text"
-            android:gravity="center"
-            android:textSize="10sp"
-            android:includeFontPadding="false"
-            android:textColor="@color/white" />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/Accent"
+            android:textColor="@color/Primary"
             android:text="00h 00m"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

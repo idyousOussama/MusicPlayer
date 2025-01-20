@@ -13,7 +13,6 @@ return fragmentsList.size
 
     override fun getItem(p0: Int): Fragment {
        return fragmentsList.get(p0)
-
     }
     fun addFragment (fragment: Fragment, title: String){
         fragmentsList.add(fragment)

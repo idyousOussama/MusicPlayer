@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                android:textSize="20sp"
-                android:textColor="@color/Primary"
+                android:textColor="@color/Background"
                 android:fontFamily="@font/poppins_bold"
                 android:includeFontPadding="false"
                 android:ellipsize="end"
@@ -39,7 +39,7 @@
                 android:includeFontPadding="false"
                 android:maxLines="1"
                 android:textSize="15sp"
-                android:textColor="@color/Primary" />
+                android:textColor="@color/Background" />
         </LinearLayout>
 
 

@@ -8,7 +8,6 @@
     android:layout_marginTop="5dp"
     android:paddingStart="5dp"
     android:paddingEnd="5dp"
-    android:background="@drawable/song_notification_backround"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <CheckBox
@@ -51,7 +50,7 @@ android:includeFontPadding="false"
             android:maxLines="1"
             android:text="Music "
 
-            android:textColor="@color/Primary"
+            android:textColor="@color/Background"
             android:textSize="15dp" />
 
         <TextView
@@ -61,7 +60,7 @@ android:includeFontPadding="false"
             android:fontFamily="@font/poppins_extralight"
             android:text="less than 60 sec"
 android:includeFontPadding="false"
-            android:textColor="@color/Primary"
+            android:textColor="@color/deep_gray"
             />
 
 

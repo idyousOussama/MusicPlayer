@@ -5,28 +5,28 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.jamplayer.AppDatabase.Daos.AlbumDao
-import com.example.jamplayer.AppDatabase.Daos.MusicFileDao
-import com.example.jamplayer.AppDatabase.Daos.PlayListDao
-import com.example.jamplayer.AppDatabase.Daos.SettingsDao
-import com.example.jamplayer.AppDatabase.Daos.UserDao
+import com.example.jamplayer.AppDatabase.Daos.SongsDaos.AlbumDao
+import com.example.jamplayer.AppDatabase.Daos.SongsDaos.MusicFileDao
+import com.example.jamplayer.AppDatabase.Daos.SongsDaos.PlayListDao
+import com.example.jamplayer.AppDatabase.Daos.SongsDaos.SettingsDao
+import com.example.jamplayer.AppDatabase.Daos.SongsDaos.UserDao
+import com.example.jamplayer.AppDatabase.Daos.VideoDaos.VideoDao
 import com.example.jamplayer.Moduls.Album
 import com.example.jamplayer.Moduls.Converter
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.Moduls.PlayList
 import com.example.jamplayer.Moduls.Settings
 import com.example.jamplayer.Moduls.User
-
-@Database(entities = arrayOf(MusicFile::class , Album ::class, Settings::class ,User::class , PlayList :: class), version = 1, exportSchema = false)
+import com.example.jamplayer.Moduls.VideoTable
+@Database(entities = arrayOf(MusicFile::class , Album ::class, Settings::class ,User::class , PlayList :: class , VideoTable :: class), version = 1, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class JamRoom : RoomDatabase() {
     abstract fun musicFileDao(): MusicFileDao
     abstract fun AlbumDao(): AlbumDao
     abstract fun SettingsDao(): SettingsDao
     abstract fun userDao(): UserDao
-    abstract fun PlaylistDao():PlayListDao
+    abstract fun PlaylistDao(): PlayListDao
+    abstract fun videoDao(): VideoDao
     companion object {
         @Volatile
         private var INSTANCE: JamRoom? = null
@@ -35,7 +35,7 @@ abstract class JamRoom : RoomDatabase() {
                 INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     JamRoom::class.java,
-                    "jjhjdsjhkkhkkkjb")
+                    "ousskkkjhjssdsamkidyus")
                     .build().also { INSTANCE = it
                     }
             }

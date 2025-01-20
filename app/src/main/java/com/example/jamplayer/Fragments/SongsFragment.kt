@@ -3,7 +3,7 @@ package com.example.jamplayer.Fragments
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,16 +12,18 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.jamplayer.Activities.HiddenSongsActivity
-import com.example.jamplayer.Activities.PlayingActivity
+import com.example.jamplayer.Activities.Songs.HIDDEN_FILE_FRAGMENT_RES_CODE
+import com.example.jamplayer.Activities.Songs.HiddenFilesActivity
+import com.example.jamplayer.Activities.Songs.MainActivity.Companion.mainScreenIsRotate
+import com.example.jamplayer.Activities.Songs.PlayingActivity
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.jamViewModel
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.unHideSong
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.currentPosition
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.curretSong
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.random
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.songsList
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.jamViewModel
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.unHideSong
 import com.example.jamplayer.Adapters.AudiosAdapter
 import com.example.jamplayer.Listeners.MusicFileItemsListener
 import com.example.jamplayer.Moduls.MusicFile
@@ -31,7 +33,6 @@ import com.example.jamplayer.databinding.FragmentSongsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -42,7 +43,7 @@ class SongsFragment : Fragment() {
     private var _binding: FragmentSongsBinding? = null
     private val binding get() = _binding!!
     private val ioScope = CoroutineScope(Dispatchers.IO + Job())
-
+private var spanCount : Int =  2
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,7 +53,7 @@ class SongsFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        intialSongs(view)
+        intialSongs()
         removeMessedSongs(view.context)
         binding.songRefreshSwipe.setOnRefreshListener{
             refreshSongs(view)
@@ -63,11 +64,20 @@ class SongsFragment : Fragment() {
         binding.songsList.apply {
             layoutManager = if (settings?.itemType == "small") {
                 LinearLayoutManager(context)
-            } else {
-                GridLayoutManager(context, 2)
+            }
+
+            else{
+                if(resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    GridLayoutManager(context, 2)
+
+                }else {
+                    GridLayoutManager(context, 4)
+
+                }
             }
             setHasFixedSize(true)
             adapter = songsAdapter
+
         }
         songsAdapter.setListner(object : MusicFileItemsListener {
             override fun onItemClickListner(mFile: MusicFile, position: Int) {
@@ -118,7 +128,8 @@ class SongsFragment : Fragment() {
                         text = "View $hiddenSongsNum Hidden Songs"
                         visibility = View.VISIBLE
                         setOnClickListener {
-                            val hiddenSongsIntent = Intent(context, HiddenSongsActivity::class.java)
+                            val hiddenSongsIntent = Intent(context, HiddenFilesActivity::class.java)
+                            hiddenSongsIntent.putExtra(HIDDEN_FILE_FRAGMENT_RES_CODE , "hiddenSongs")
                             startActivity(hiddenSongsIntent)
                         }
                     }
@@ -182,20 +193,21 @@ class SongsFragment : Fragment() {
             true
         }
     }
-
-    private fun intialSongs(view: View) {
+    private fun intialSongs() {
         ioScope.launch {
             try {
                 updateSongsList(unHideSong)
                 withContext(Dispatchers.Main) {
-                    updateHiddenSongsInfo(view.context)
+                    updateHiddenSongsInfo(requireContext())
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(view.context, "Failed to load songs: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to load songs: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
+
 }

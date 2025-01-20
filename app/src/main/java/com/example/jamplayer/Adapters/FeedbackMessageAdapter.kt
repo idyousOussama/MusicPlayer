@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.user
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.user
 import com.example.jamplayer.Moduls.FeedbackMessage
 import com.example.jamplayer.R
 
@@ -20,18 +20,15 @@ class FeedbackMessageAdapter : RecyclerView.Adapter<FeedbackMessageAdapter.Feedb
     fun setFeedbackMessageList(feedbackMessagesList: ArrayList<FeedbackMessage>) {
         this.feedbackMessagesList = feedbackMessagesList
     }
-
     fun addNewFeedbackMessage(feedbackMessage: FeedbackMessage) {
         feedbackMessagesList.add(feedbackMessage)
         notifyDataSetChanged()
     }
-
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): FeedbackMessageVH {
         val view = LayoutInflater.from(p0.context)
             .inflate(R.layout.feedback_message_custom_item, p0, false)
         return FeedbackMessageVH(view)
     }
-
     override fun getItemCount(): Int {
         return feedbackMessagesList.size
     }

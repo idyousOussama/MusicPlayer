@@ -10,9 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.albumList
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.unHideSong
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.albumList
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.unHideSong
+
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.R
 

@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
 import com.example.jamplayer.Listeners.SelecteSongsListener
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.R

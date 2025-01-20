@@ -8,7 +8,8 @@
     android:layout_marginTop="5dp"
     android:paddingStart="5dp"
     android:paddingEnd="5dp"
-    android:background="@drawable/song_notification_backround"
+
+    android:background="@drawable/items_background_selector"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.imageview.ShapeableImageView
@@ -17,6 +18,7 @@
         android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
         android:src="@drawable/small_place_holder_image"
         app:shapeAppearanceOverlay="@style/RoundedCorner20dp" />
 
@@ -39,7 +41,7 @@
             android:maxLines="1"
             android:text="Music "
             android:paddingTop="5dp"
-            android:textColor="@color/Primary"
+            android:textColor="@color/Background"
             android:textSize="15dp" />
 
         <TextView
@@ -48,7 +50,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_extralight"
             android:text="Music "
-            android:textColor="@color/Primary"
+            android:textColor="@color/Background"
 android:paddingTop="5dp"
             />
 

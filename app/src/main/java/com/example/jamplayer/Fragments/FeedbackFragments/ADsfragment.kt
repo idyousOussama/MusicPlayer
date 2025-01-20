@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import com.example.jamplayer.Activities.FeedBackActivity.SubmitFeedbackBtnManager.subBtnListner
+import com.example.jamplayer.Activities.Songs.FeedBackActivity.SubmitFeedbackBtnManager.subBtnListner
 import com.example.jamplayer.Listeners.FeedbackListener
 import com.example.jamplayer.Listeners.SubmitButtonListener
 import com.example.jamplayer.databinding.FragmentADsfragmentBinding

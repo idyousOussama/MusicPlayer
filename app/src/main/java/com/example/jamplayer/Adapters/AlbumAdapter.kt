@@ -1,6 +1,5 @@
 package com.example.jamplayer.Adapters
 
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.settings
-import com.example.jamplayer.Activities.SplachActivity.ItemsManagers.unHideSong
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.unHideSong
+
 import com.example.jamplayer.Listeners.AlbumMusicLisntener
 import com.example.jamplayer.Moduls.Album
 import com.example.jamplayer.Moduls.MusicFile

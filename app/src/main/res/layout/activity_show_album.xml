@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activities.ShowAlbumActivity">
+    tools:context=".Activities.Songs.ShowAlbumActivity">
 
 <ImageView
     android:id="@+id/show_album_goBack_Btn"

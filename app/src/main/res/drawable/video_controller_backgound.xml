@@ -1,0 +1,7 @@
+<!-- res/drawable/custom_gradient.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    >
+<solid
+    android:color="#72A8A8A8"/>
+</shape>

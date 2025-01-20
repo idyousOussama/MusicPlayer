@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".Activities.ShowFeedbackConversationActivity">
+    tools:context=".Activities.Songs.ShowFeedbackConversationActivity">
 
     <LinearLayout
         android:id="@+id/show_feedback_details_tool_bar_layout"
