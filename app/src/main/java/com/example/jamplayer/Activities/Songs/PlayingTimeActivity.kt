@@ -23,8 +23,9 @@ class PlayingTimeActivity : AppCompatActivity() {
         }
     }
     private fun setPalyingTime() {
-               binding.playingTimeTextBar.setText(formatTime(settings!!.playingTime.toInt()))
-       binding.songsPlayingTime.setText(formatTime(settings!!.playingTime.toInt()))
+               binding.playingTimeTextBar.setText(formatTime((settings!!.playingTime + settings!!.videoPlayingTime).toInt()))
+               binding.videosPlayingTime.setText(formatTime(settings!!.videoPlayingTime.toInt()))
+               binding.songsPlayingTime.setText(formatTime(settings!!.playingTime.toInt()))
     }
     private fun formatTime(playingTime: Int): String {
         val hours = (playingTime / 3600).toString()

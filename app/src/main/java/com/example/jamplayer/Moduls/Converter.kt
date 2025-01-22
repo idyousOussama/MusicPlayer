@@ -50,13 +50,13 @@ class Converter {
         }
     }
     @TypeConverter
-    fun fromArrayList(list: ArrayList<Int>?): String {
-        return Gson().toJson(list ?: emptyList<Int>()) // Handle null by saving as an empty list
+    fun fromArrayList(list: ArrayList<String>?): String {
+        return Gson().toJson(list ?: emptyList<String>()) // Handle null by saving as an empty list
     }
 
     @TypeConverter
-    fun toArrayList(value: String?): ArrayList<Int> {
-        val listType = object : TypeToken<ArrayList<Int>>() {}.type
+    fun toArrayList(value: String?): ArrayList<String> {
+        val listType = object : TypeToken<ArrayList<String>>() {}.type
         return Gson().fromJson(value ?: "[]", listType) // Handle null by returning an empty list
     }
 }

@@ -90,7 +90,6 @@ initBtns()
     private fun sentIntent(intClass: Class<*>) {
 val intent = Intent(this,intClass)
         startActivity(intent)
-        finish()
 
     }
     override fun onDestroy() {

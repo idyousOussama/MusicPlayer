@@ -25,6 +25,7 @@ class VideoAlbums : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 binding = ActivityVideoAlbumsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initBackBtn()
         videosAlbums =  getVideoAlbums()
         videoAlbumsAdapter.setVideoAlbumsList(videosAlbums)
         binding.videoAlbumsList.apply {
@@ -44,6 +45,12 @@ binding = ActivityVideoAlbumsBinding.inflate(layoutInflater)
         }
         setAlbumListener ()
 
+    }
+
+    private fun initBackBtn() {
+        binding.videoAlbumsBackBtn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setAlbumListener() {

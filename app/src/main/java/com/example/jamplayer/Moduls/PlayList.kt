@@ -10,5 +10,5 @@ data class PlayList (
     var id : Int,
     val title : String ,
     var icon : Int?
-,var playlistSong : ArrayList<Int>
+,var playlistSong : ArrayList<String>
 )

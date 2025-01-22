@@ -102,12 +102,11 @@ if(titleText.isNotEmpty()){
             playList = jamViewModel.getPlaylistByTitle(titleText)
 if(playList == null){
     Toast.makeText(requireContext() , R.string.adding_new_play_list_text , Toast.LENGTH_SHORT).show()
-    val newPlaylistSongList : ArrayList<Int> = ArrayList()
+    val newPlaylistSongList : ArrayList<String> = ArrayList()
     val newPlayList =PlayList(0,titleText,null,newPlaylistSongList)
     jamViewModel.insertNewPalyList(newPlayList)
     Toast.makeText(requireContext(),R.string.newPlaylist_added, Toast.LENGTH_SHORT).show()
    playList = jamViewModel.getPlaylistByTitle(titleText)
-    playLists.add(playList!!)
     playListsAdapter.setNewPlayList(playList!!)
     dialog.dismiss()
 }else {

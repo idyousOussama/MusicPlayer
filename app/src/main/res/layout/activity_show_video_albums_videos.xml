@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@color/white"
     tools:context=".Activities.Vedios.ShowVideoAlbumsVideosActivity">
     <ImageView
         android:id="@+id/show_video_albums_back_Btn"
@@ -18,17 +19,19 @@
         android:id="@+id/show_video_albums_album_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
+        android:fontFamily="@font/poppins"
         android:textColor="@color/Background"
         android:text="Instagram"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:ellipsize="end"
         android:includeFontPadding="false"
+        android:layout_marginStart="5dp"
+        android:textSize="20sp"
         android:layout_toRightOf="@+id/show_video_albums_back_Btn"
         android:layout_alignTop="@+id/show_video_albums_back_Btn"
         android:layout_alignBottom="@+id/show_video_albums_back_Btn"/>
-        />
+
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/show_video_albums_videos_RV"
     android:layout_width="match_parent"

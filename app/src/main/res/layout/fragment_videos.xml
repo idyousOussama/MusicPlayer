@@ -26,41 +26,52 @@
         android:background="@drawable/items_background_selector"
         android:layout_alignParentRight="true"
         android:src="@drawable/folder_icon"/>
-<androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@+id/video_folders_icon"
-
-    >
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/videos_refresh_swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
+        android:backgroundTint="@color/Primary"
+        android:layout_below="@+id/video_folders_icon"
+
         >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/viedos_listRV"
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/viedos_listRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
 
-            />
-        <TextView
-            android:id="@+id/show_hidden_videos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="View 70 hidden Videos"
-            android:textSize="14sp"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/Primary"
-            android:layout_marginTop="5dp"
-            android:drawableRight="@drawable/arrow_view" />
+                    />
+                <TextView
+                    android:id="@+id/show_hidden_videos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="View 70 hidden Videos"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/Primary"
+                    android:layout_marginTop="5dp"
+                    android:drawableRight="@drawable/arrow_view" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 
 </RelativeLayout>

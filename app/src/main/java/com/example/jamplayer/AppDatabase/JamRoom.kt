@@ -17,8 +17,9 @@ import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.Moduls.PlayList
 import com.example.jamplayer.Moduls.Settings
 import com.example.jamplayer.Moduls.User
+import com.example.jamplayer.Moduls.Video
 import com.example.jamplayer.Moduls.VideoTable
-@Database(entities = arrayOf(MusicFile::class , Album ::class, Settings::class ,User::class , PlayList :: class , VideoTable :: class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(MusicFile::class , Album ::class, Settings::class ,User::class , PlayList :: class , Video :: class), version = 1, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class JamRoom : RoomDatabase() {
     abstract fun musicFileDao(): MusicFileDao
@@ -35,7 +36,7 @@ abstract class JamRoom : RoomDatabase() {
                 INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     JamRoom::class.java,
-                    "ousskkkjhjssdsamkidyus")
+                    "socim  fy_DATAbase")
                     .build().also { INSTANCE = it
                     }
             }

@@ -22,8 +22,6 @@ import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.setti
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.videosList
 import com.example.jamplayer.Activities.Vedios.PlayVideosActivity
 import com.example.jamplayer.R
-import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.currentPosition
-import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.mediaPlayer
 import com.example.jamplayer.Services.BaseApplication.playingVideoManager.ACTION_VIDEO_UPDATE
 import com.example.jamplayer.Services.BaseApplication.playingVideoManager.currentVideo
 import com.example.jamplayer.Services.BaseApplication.playingVideoManager.handler
@@ -36,7 +34,6 @@ import com.example.jamplayer.Services.BaseApplication.playingVideoManager.videoP
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 class VideoPlayService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -146,7 +143,34 @@ class VideoPlayService : Service() {
         }
        }
 
-    private fun stopVideo() {
+    private fun stopVideo() {        settings?.let {
+        if (it.FSNIsEnable && currentVideo != null) {
+            val thumbnail = getVideoThumbnail(currentVideo!!.filePath.toUri())
+
+            val videoNotificationRemoteView = RemoteViews(packageName, R.layout.play_video_notification_remote_view).apply {
+                setTextViewText(R.id.video_notification_video_title, currentVideo!!.title)
+                setImageViewBitmap(R.id.video_notification_video_img, thumbnail)
+                setOnClickPendingIntent(R.id.video_notification, notificationRemoteViewPendingIntent())
+            }
+            val notification = NotificationCompat.Builder(this, VIDEOCHANNEL_ID)
+                .setSmallIcon(R.drawable.app_logo)
+                .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                .setCustomContentView(videoNotificationRemoteView)
+                .setPriority(NotificationCompat.PRIORITY_HIGH) // Priority for pre-Oreo
+                .setCategory(NotificationCompat.CATEGORY_TRANSPORT)
+                .setOngoing(true)
+                .setAutoCancel(false)
+                .setColor(resources.getColor(R.color.Primary))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build()
+
+            // Start foreground service with the notification
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.notify(2, notification)
+            startForeground(2, notification)
+        }
+    }
+
         videoMediaPlayer!!.pause()
         videoMediaPlayer!!.seekTo(0)
         sendVideoIntentAction("stop")
@@ -154,33 +178,6 @@ class VideoPlayService : Service() {
     }
     private fun createVideoNotification() {
         // Ensure that settings and video are available
-        settings?.let {
-            if (it.FSNIsEnable && currentVideo != null) {
-                val thumbnail = getVideoThumbnail(currentVideo!!.filePath.toUri())
-
-                val videoNotificationRemoteView = RemoteViews(packageName, R.layout.play_video_notification_remote_view).apply {
-                    setTextViewText(R.id.video_notification_video_title, currentVideo!!.title)
-                    setImageViewBitmap(R.id.video_notification_video_img, thumbnail)
-                    setOnClickPendingIntent(R.id.video_notification, notificationRemoteViewPendingIntent())
-                }
-                val notification = NotificationCompat.Builder(this, VIDEOCHANNEL_ID)
-                    .setSmallIcon(R.drawable.app_logo)
-                    .setStyle(NotificationCompat.DecoratedCustomViewStyle())
-                    .setCustomContentView(videoNotificationRemoteView)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH) // Priority for pre-Oreo
-                    .setCategory(NotificationCompat.CATEGORY_TRANSPORT)
-                    .setOngoing(true)
-                    .setAutoCancel(false)
-                    .setColor(resources.getColor(R.color.Primary))
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .build()
-
-                // Start foreground service with the notification
-                val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-                notificationManager.notify(2, notification)
-                startForeground(2, notification)
-            }
-        }
     }
 
     private fun notificationRemoteViewPendingIntent(): PendingIntent? {

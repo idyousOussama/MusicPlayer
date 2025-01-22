@@ -28,6 +28,7 @@ private val VideoAdapter = VideoAdapter(0)
        binding = ActivityShowVideoAlbumsVideosBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initVideosList()
+        initBackBtn()
 setVideoItemListener()
     }
     private fun setVideoItemListener() {
@@ -40,6 +41,11 @@ setVideoItemListener()
 
         })
     }
+     private fun initBackBtn() {
+         binding.showVideoAlbumsBackBtn.setOnClickListener {
+             finish()
+         }
+     }
     private fun navigateToNewActivity(newActivity: Class<*>) {
 val newActivityIntent  = Intent(this@ShowVideoAlbumsVideosActivity , newActivity)
         startActivity(newActivityIntent)

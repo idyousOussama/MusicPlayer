@@ -1,13 +1,16 @@
 package com.example.jamplayer.Adapters
 
 import android.graphics.Bitmap
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
 import com.example.jamplayer.Listeners.MusicFileItemsListener
 import com.example.jamplayer.Moduls.MusicFile
@@ -63,7 +66,7 @@ this.musicsList = musicsList
 
     override fun onBindViewHolder(p0: AudioViewHolder, p1: Int) {
        val musicFile = musicsList.get(p1)
-            p0.setMusicFile(musicFile.title,musicFile.artist,musicFile.musicImage)
+            p0.setMusicFile(musicFile.title,musicFile.artist,musicFile.musicImage,musicFile.path.toUri())
 
         p0.itemView.setOnClickListener {
             if(requestCode == 1){
@@ -78,14 +81,15 @@ this.musicsList = musicsList
 private val title = itemView.findViewById<TextView>(R.id.custom_music_title)
 private val artist = itemView.findViewById<TextView>(R.id.custom_music_artist)
 private val image = itemView.findViewById<ImageView>(R.id.music_custom_image)
-fun setMusicFile(mTitle:String, mArtist:String, mImage: Bitmap?){
+fun setMusicFile(mTitle:String, mArtist:String, mImage: Bitmap? , songUri : Uri ){
     title.setText(mTitle)
     artist.setText(mArtist)
-    if(mImage != null){
-        image.setImageBitmap(mImage)
-    }else{
-        image.setImageResource(R.drawable.small_place_holder_image)
-    }
+
+     if(mImage != null) {
+         image.setImageBitmap(mImage)
+     }else {
+         image.setImageResource(R.drawable.small_place_holder_image)
+     }
 }
 
     }

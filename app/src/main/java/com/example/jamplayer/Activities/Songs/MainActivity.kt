@@ -40,6 +40,8 @@
 
  import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
  import com.example.jamplayer.Services.BaseApplication.playingVideoManager.videosAlbums
+ import com.example.jamplayer.Services.MusicPlayService
+ import com.example.jamplayer.Services.ShowNewFileService
  import com.example.jamplayer.databinding.ActivityMainBinding
  import com.google.firebase.database.DataSnapshot
  import com.google.firebase.database.DatabaseError
@@ -49,9 +51,7 @@
  class MainActivity : AppCompatActivity() {
      private lateinit var binding: ActivityMainBinding
      private val musicImageCache = mutableMapOf<String, Bitmap?>()
-companion object {
-var  mainScreenIsRotate  = false
-}
+
 
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
@@ -62,9 +62,22 @@ var  mainScreenIsRotate  = false
          userIsActive = true
          jamViewModel = ViewModelProvider(this).get(JamViewModel::class.java)
          initBtns()
-
          initViewPager()
          checkNewMessage()
+         scannAllFilesStatus()
+
+     }
+
+     private fun scannAllFilesStatus() {
+         startScannFilesAction(ShowNewFileService.ShowNewFileAction.SCANNINGSONGS)
+         startScannFilesAction(ShowNewFileService.ShowNewFileAction.SCANNINGVIDEOS)
+     }
+
+     private fun startScannFilesAction(scannFilesAction: ShowNewFileService.ShowNewFileAction) {
+         Intent(this, ShowNewFileService::class.java).also {
+             it.action = scannFilesAction.name
+             startService(it)
+         }
      }
 
      private fun checkNewMessage() {
@@ -116,22 +129,5 @@ var  mainScreenIsRotate  = false
          super.onDestroy()
          userIsActive = false
      }
-     private fun getMusicImage(uri: String): Bitmap? {
-         return musicImageCache[uri] ?: run {
-             val retriever = MediaMetadataRetriever()
-             try {
-                 retriever.setDataSource(uri)
-                 val imageData = retriever.embeddedPicture
-                 val bitmap = imageData?.let { BitmapFactory.decodeByteArray(it, 0, it.size) }
-                 musicImageCache[uri] = bitmap
-                 bitmap
-             } catch (e: Exception) {
-                 null
-             } finally {
-                 retriever.release()
-             }
-         }
-     }
-
 
  }

@@ -26,8 +26,10 @@ import java.util.ArrayList
 
 const val SONGSCHANNEL_ID = "SONGS_CHANNEL_ID"
 const val VIDEOCHANNEL_ID = "VIDEO_CHANNEL_ID"
+const val SCANNFILESCHANNEL_ID = "VIDEO_CHANNEL_ID"
 const val  SONGCHANNEL_NAME = "SONGS CHANNEL"
 const val  VIDEOCHANNEL_NAME = "VIDEO CHANNEL"
+const val  SCANNFILESCHANNEL_NAME = "VIDEO CHANNEL"
 
 class BaseApplication : Application() {
     object PlayingMusicManager {
@@ -89,6 +91,7 @@ if(!userIsActive){
         }
         createSongChannel()
         createVideoChannel()
+        createScannFilesChannel()
     }
     private fun createVideoChannel() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -107,6 +110,16 @@ if(!userIsActive){
             val channel = NotificationChannel(SONGSCHANNEL_ID, SONGCHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT).apply {
                 description = "Notification for music playback control"
                 setSound(null, null) // تعطيل الصوت
+                enableVibration(false)
+            }
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+    private fun createScannFilesChannel() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val channel = NotificationChannel(SCANNFILESCHANNEL_ID, SCANNFILESCHANNEL_NAME, NotificationManager.IMPORTANCE_LOW).apply {
+                description = "Notification for scanning files"
                 enableVibration(false)
             }
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

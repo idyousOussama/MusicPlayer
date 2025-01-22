@@ -4,7 +4,12 @@ package com.example.jamplayer.Fragments
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.media.MediaMetadataRetriever
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +19,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jamplayer.Activities.Songs.HIDDEN_FILE_FRAGMENT_RES_CODE
 import com.example.jamplayer.Activities.Songs.HiddenFilesActivity
-import com.example.jamplayer.Activities.Songs.MainActivity.Companion.mainScreenIsRotate
 import com.example.jamplayer.Activities.Songs.PlayingActivity
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.jamViewModel
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
@@ -28,8 +32,12 @@ import com.example.jamplayer.Adapters.AudiosAdapter
 import com.example.jamplayer.Listeners.MusicFileItemsListener
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.Services.BaseApplication
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.mediaPlayer
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
+import com.example.jamplayer.Services.BaseApplication.playingVideoManager.videoMediaPlayer
+import com.example.jamplayer.Services.ShowNewFileService
 import com.example.jamplayer.databinding.FragmentSongsBinding
+import com.google.android.gms.cast.CastRemoteDisplayLocalService.startService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -41,9 +49,10 @@ import java.io.File
 class SongsFragment : Fragment() {
     private val songsAdapter = AudiosAdapter(1)
     private var _binding: FragmentSongsBinding? = null
+    private val musicImageCache = mutableMapOf<String, Bitmap?>()
+
     private val binding get() = _binding!!
     private val ioScope = CoroutineScope(Dispatchers.IO + Job())
-private var spanCount : Int =  2
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,10 +63,9 @@ private var spanCount : Int =  2
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         intialSongs()
-        removeMessedSongs(view.context)
         binding.songRefreshSwipe.setOnRefreshListener{
+            startScannSongAction(ShowNewFileService.ShowNewFileAction.SCANNINGSONGS)
             refreshSongs(view)
-            removeMessedSongs(view.context)
         }
     }
     private fun setupRecyclerView() {
@@ -143,7 +151,15 @@ private var spanCount : Int =  2
     private fun handleSongClick(mFile: MusicFile, position: Int) {
         val currentMediaPlayer = BaseApplication.PlayingMusicManager.mediaPlayer
         currentMediaPlayer?.let {
-            if (it.isPlaying) addPlayingTime()
+            if (it.isPlaying) {
+                addPlayingTime()
+                mediaPlayer!!.pause()
+                mediaPlayer!!.release()
+            } else if (!it.isPlaying && mediaPlayer != null) {
+                addPlayingTime()
+                mediaPlayer!!.release()
+            }
+
         }
 
         curretSong = mFile
@@ -165,34 +181,7 @@ private var spanCount : Int =  2
             BaseApplication.PlayingMusicManager.mediaPlayer = null
         }
     }
-    private fun removeMessedSongs(context: Context) {
-        ioScope.launch {
-            val allSongs = jamViewModel.getAllMusic()
-            val messedSongsList = allSongs.filter {checkSongIsNull(it, context) }
-            messedSongsList.forEach { song ->
-                jamViewModel.removeSongById(song.id)
-            }
-            withContext(Dispatchers.Main) {
-                if(messedSongsList.isNotEmpty()){
-                    Toast.makeText(
-                        context,
-                        "Removed ${messedSongsList.size} invalid songs.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
 
-                refreshSongs(requireView())
-            }
-        }
-    }
-    private fun checkSongIsNull(songItem: MusicFile, context: Context): Boolean {
-        return try {
-            val file = File(songItem.path)
-            !file.exists()
-        } catch (e: Exception) {
-            true
-        }
-    }
     private fun intialSongs() {
         ioScope.launch {
             try {
@@ -208,6 +197,10 @@ private var spanCount : Int =  2
             }
         }
     }
-
-
+    private fun startScannSongAction(scannFilesAction: ShowNewFileService.ShowNewFileAction) {
+        Intent(requireContext(), ShowNewFileService::class.java).also {
+            it.action = scannFilesAction.name
+            requireContext().startService(it)
+        }
+    }
 }

@@ -4,6 +4,7 @@ package com.example.jamplayer.Activities.Songs
 
 import android.Manifest
 import android.app.Dialog
+import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -24,6 +25,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.jamViewModel
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.playLists
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.unHideSong
 import com.example.jamplayer.AppDatabase.ViewModels.SongViewModel.JamViewModel
 import com.example.jamplayer.Moduls.Album
 import com.example.jamplayer.Moduls.MusicFile
@@ -88,7 +90,7 @@ class SplachActivity : AppCompatActivity() {
             fetchedList = ItemsManagers.jamViewModel.getunhiddenSongs() as ArrayList<MusicFile>
             ItemsManagers.albumList = ItemsManagers.jamViewModel.getAllAlbums() as ArrayList<Album>
             if (fetchedList.isNotEmpty()) {
-                ItemsManagers.unHideSong = fetchedList
+                unHideSong = fetchedList
                 playLists = jamViewModel.getAllPlayLists() as ArrayList<PlayList>
                 ItemsManagers.settings = ItemsManagers.jamViewModel.getSettings()
                 navigateToMain()
@@ -110,7 +112,6 @@ class SplachActivity : AppCompatActivity() {
         ItemsManagers.jamViewModel.insertUser(newUser)
         return newUser
     }
-
     private fun showGetStartedDialog(songsList: ArrayList<MusicFile>) {
         binding.splachProgress.visibility = View.GONE
         val dialogView = LayoutInflater.from(this).inflate(R.layout.get_started_dialog_custom, null)
@@ -139,8 +140,8 @@ class SplachActivity : AppCompatActivity() {
     }
 
     private suspend fun insertDefaultPlayLists(): ArrayList<PlayList> {
-        val likedSongList :ArrayList<Int> = ArrayList()
-        val mostPlayedSongList :ArrayList<Int> = ArrayList()
+        val likedSongList :ArrayList<String> = ArrayList()
+        val mostPlayedSongList :ArrayList<String> = ArrayList()
         val defaultPlayLists : ArrayList<PlayList> = ArrayList()
         defaultPlayLists.add( PlayList(0 ,getString(R.string.likedSongs_text),R.drawable.full_heart,likedSongList))
         defaultPlayLists.add(PlayList(0 ,getString(R.string.mostPlayedSongs_text),R.drawable.most_played_icon,mostPlayedSongList) )
@@ -192,14 +193,14 @@ class SplachActivity : AppCompatActivity() {
                 val duration = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION))
                 val data = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA)) ?: continue
                 val artist = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)) ?: "Unknown Artist"
-                val id = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID))
+                val id = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media._ID))
                 val album = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM)) ?: "Unknown Album"
-
+                val dataUri =
+                    ContentUris.withAppendedId(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, id)
                 if (duration >= 60000) {
-                    audioList.add(MusicFile(0, data, getMusicImage(data), title, artist, album, duration.toString(), false, false, false, id,0,false))
+                    audioList.add(MusicFile(id.toString(), data, getMusicImage(data), title, artist, album, duration.toString(), false, false, false, id.toString(),0,false , dataUri.toString()))
                 }else{
-                    audioList.add(MusicFile(0, data, getMusicImage(data), title, artist, album, duration.toString(), true, false, false, id , 0,false))
-
+                    audioList.add(MusicFile(id.toString(), data, getMusicImage(data), title, artist, album, duration.toString(), true, false, false, id.toString() , 0,false , dataUri.toString()))
                 }
             }
         }

@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 @Entity(tableName = "MusicFile")
 data class MusicFile(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+  @PrimaryKey()
+    var id: String ,
     var path: String, var musicImage: Bitmap?, var title: String, var artist: String, var album:String,
-    var duration: String , var isShort : Boolean , var isChecked : Boolean,var isLiked : Boolean,var songUri : String ,var playedNumber : Int ,var isPlayedRecently : Boolean) : Serializable
+    var duration: String , var isShort : Boolean , var isChecked : Boolean,var isLiked : Boolean,var songUri : String ,var playedNumber : Int ,var isPlayedRecently : Boolean , var imagePath : String) : Serializable

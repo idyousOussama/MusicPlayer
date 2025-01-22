@@ -90,6 +90,7 @@
     android:layout_height="wrap_content"
 android:layout_toRightOf="@+id/headcasque_image"
     android:text="@string/music_played_text"
+    android:textColor="@color/Background"
     android:layout_centerVertical="true"
     android:layout_marginStart="5dp"/>
         <TextView
@@ -123,10 +124,12 @@ android:layout_toRightOf="@+id/headcasque_image"
             android:layout_toRightOf="@+id/video_image"
             android:text="@string/video_played_text"
             android:layout_centerVertical="true"
-            android:textColor="@color/gray"
+            android:textColor="@color/Background"
             android:layout_marginStart="5dp"/>
 
         <TextView
+            android:id="@+id/videos_playing_Time"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/Primary"

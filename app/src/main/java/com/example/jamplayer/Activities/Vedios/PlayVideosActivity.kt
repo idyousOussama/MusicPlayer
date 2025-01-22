@@ -147,19 +147,17 @@ class PlayVideosActivity : AppCompatActivity() {
                     binding.pastDuration.text = formatTime(progress)
                 }
             }
-
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
                 binding.playingVideoSeekBar.thumb.alpha = 0
                 videoMediaPlayer?.pause()
                 isTracking = true
                 toggleUIVisibility(false)
-
             }
-
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 binding.playingVideoSeekBar.thumb.alpha = 1
                 binding.playingVideoSeekBar.thumb = resources.getDrawable(R.drawable.seek_bar_thumb, null)
                 videoMediaPlayer?.start()
+                binding.playingActivityPlayPauseBtn.setImageResource(R.drawable.white_pause)
                 isTracking = false
                 toggleUIVisibility(true)
             }
@@ -280,21 +278,26 @@ class PlayVideosActivity : AppCompatActivity() {
         val videoDetailsBottomSheetDialog = BottomSheetDialog(this,R.style.BottomSheetDialog)
         videoDetailsBottomSheetDialog.setContentView(detailsView)
         detailsViewBinding.videoShareLayout.setOnClickListener {
+            videoDetailsBottomSheetDialog.dismiss()
             shareVideo(currentVideo!!)
         }
         detailsViewBinding.videoHideLayout.setOnClickListener {
+            videoDetailsBottomSheetDialog.dismiss()
             showCofirmationDialog("Hide")
             videoDetailsBottomSheetDialog.dismiss()
         }
         detailsViewBinding.deleteLayout.setOnClickListener {
+            videoDetailsBottomSheetDialog.dismiss()
             showCofirmationDialog("Delete")
             videoDetailsBottomSheetDialog.dismiss()
         }
         detailsViewBinding.videoPlayModeLayout.setOnClickListener {
             videoDetailsBottomSheetDialog.dismiss()
+            videoDetailsBottomSheetDialog.dismiss()
 showPlayModeBottomSheet()
         }
         detailsViewBinding.videoDetailsBottomSheetCustomEditVideoBtn.setOnClickListener {
+            videoDetailsBottomSheetDialog.dismiss()
             navigateToNewActivityResult(EditVideoTagsActivity::class.java , EDIT_VIDEO_REQ_CODE)
         }
         detailsViewBinding.videoFloatingWindoowLayout.setOnClickListener {
@@ -533,24 +536,7 @@ val  playModeView = layoutInflater.inflate(R.layout.play_video_mode_bottom_sheet
     }
 
     private fun playSelectedVideo() {
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-            val params = binding.selectedVidio.layoutParams
-            params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-            params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-            binding.selectedVidio.setLayoutParams(params)
-            showVideoFeaturesTitles()
-
-        } else {
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-            val params = binding.selectedVidio.layoutParams
-            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            binding.selectedVidio.setLayoutParams(params);
-            hideVideoFeaturesTitles()
-
-        }
-        // Safely get the current video
-        currentVideo = selectedVideoList.getOrNull(videoPosition)
+          currentVideo = selectedVideoList.getOrNull(videoPosition)
         currentVideo?.let { video ->
             binding.selectedVidio.setVideoURI(currentVideo!!.path.toUri())
             videoMediaPlayer = MediaPlayer.create(this , currentVideo!!.path.toUri())
@@ -716,7 +702,5 @@ val  playModeView = layoutInflater.inflate(R.layout.play_video_mode_bottom_sheet
     sendVideoServiceActions(VideoPlayService.VideoActions.PLAY)
 
     }
-
-
     }
 }

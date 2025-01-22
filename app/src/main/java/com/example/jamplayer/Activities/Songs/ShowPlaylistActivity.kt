@@ -23,6 +23,7 @@ import com.example.jamplayer.Services.BaseApplication
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.currentPosition
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.curretSong
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.mediaPlayer
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.position
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.random
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.songsList
@@ -46,8 +47,8 @@ class ShowPlaylistActivity : AppCompatActivity() {
         binding = ActivityShowPlaylistBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initShowPlaylistActivity()
-   handlePlaySongListBtn()
-    moveToAddSongs()
+        handlePlaySongListBtn()
+        moveToAddSongs()
         moveBack()
     }
     private fun moveBack() {
@@ -62,7 +63,6 @@ class ShowPlaylistActivity : AppCompatActivity() {
         binding.showPlayListAddSongToPlayListBtn.setOnClickListener {
             if(playList != null) {
                 playListSelectSongs = playList
-                finish()
             navigateToNewActivity(SelectPlaylistSongsActivity::class.java)
             }else{
                 runOnUiThread {
@@ -71,10 +71,10 @@ class ShowPlaylistActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun navigateToNewActivity(newActivity: Class<SelectPlaylistSongsActivity>) {
 val newActivityIntent = Intent(baseContext , newActivity)
         startActivity(newActivityIntent)
+        finish()
     }
 
     private fun handlePlaySongListBtn() {
@@ -145,7 +145,15 @@ val newActivityIntent = Intent(baseContext , newActivity)
     private fun handleSongClick(mFile: MusicFile, position: Int) {
         val currentMediaPlayer = BaseApplication.PlayingMusicManager.mediaPlayer
         currentMediaPlayer?.let {
-            if (it.isPlaying) addPlayingTime()
+            if (it.isPlaying) {
+                addPlayingTime()
+                mediaPlayer!!.pause()
+                mediaPlayer!!.release()
+            } else if (!it.isPlaying && mediaPlayer != null) {
+                addPlayingTime()
+                mediaPlayer!!.release()
+            }
+
         }
         curretSong = mFile
         random = false
@@ -181,4 +189,5 @@ val newActivityIntent = Intent(baseContext , newActivity)
         super.onDestroy()
         userIsActive = false
     }
+
 }

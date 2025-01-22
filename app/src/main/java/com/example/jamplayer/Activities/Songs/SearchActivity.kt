@@ -244,6 +244,18 @@ class SearchActivity : AppCompatActivity() {
 
         songsAdapter.setListner(object : MusicFileItemsListener{
             override fun onItemClickListner(mFile: MusicFile, position: Int) {
+                val currentMediaPlayer = BaseApplication.PlayingMusicManager.mediaPlayer
+                currentMediaPlayer?.let {
+                    if (it.isPlaying) {
+                        addPlayingTime()
+                        mediaPlayer!!.pause()
+                        mediaPlayer!!.release()
+                    } else if (!it.isPlaying && mediaPlayer != null) {
+                        addPlayingTime()
+                        mediaPlayer!!.release()
+                    }
+
+                }
                 if(mFile != null){
                     curretSong = mFile
                     val songList : ArrayList<MusicFile> =ArrayList()
@@ -317,6 +329,13 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
+    private fun setSongsListForPlaying(positionz: Int, songList : ArrayList<MusicFile>, isRandom: Boolean) {
+        songsList = songList
+        random = isRandom
+        position =  positionz
+        val intent = Intent(baseContext, PlayingActivity :: class.java)
+        startActivity(intent)
+    }
 
 
 
@@ -368,19 +387,6 @@ val newActivityInntent = Intent(baseContext , newActivity)
         startActivity(newActivityInntent)
     }
 
-    private fun setSongsListForPlaying(positionz: Int, songList : ArrayList<MusicFile>, isRandom: Boolean) {
-        var currentMediaPlayer = BaseApplication.PlayingMusicManager.mediaPlayer
-        if(mediaPlayer!!.isPlaying){
-            addPlayingTime()
-        } else if(videoMediaPlayer!!.isPlaying) {
-            addPlayingVideoTime()
-        }
-        songsList = songList
-        random = isRandom
-        position =  positionz
-        val intent = Intent(baseContext, PlayingActivity :: class.java)
-        startActivity(intent)
-    }
 
     private fun addPlayingVideoTime() {
         ioScope.launch{

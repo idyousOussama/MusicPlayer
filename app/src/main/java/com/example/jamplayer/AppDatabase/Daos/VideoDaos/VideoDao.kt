@@ -10,11 +10,11 @@ import com.example.jamplayer.Moduls.VideoTable
 interface VideoDao {
 
 @Insert
- fun insertNewVideo(newVideo : VideoTable)
+ fun insertNewVideo(newVideo : Video)
  @Query("select * from video")
- fun getAllVideos() : List<VideoTable>
+ fun getAllVideos() : List<Video>
  @Query("SELECT * from video where id  =:id")
- fun getVideoById(id : String) : VideoTable
+ fun getVideoById(id : String) : Video
  @Query("upDate video set isHide = :isHide where id = :id")
  fun HideAndUnhieVideo(isHide : Boolean , id : String)
  @Query("upDate video set title = :title where id = :id")
@@ -23,5 +23,8 @@ interface VideoDao {
  @Query("upDate video set isHide = :isHide where id = :id")
  fun upDateVideosHideById( id : String , isHide : Boolean )
  @Query("select * from video where isHide = 1")
- fun getHiddenVideos() : List<VideoTable>
+ fun getHiddenVideos() : List<Video>
+ @Query("delete from video where id = :id")
+ fun deleteVideoById(id : String)
+
 }

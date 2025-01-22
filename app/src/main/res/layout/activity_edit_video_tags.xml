@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 android:padding="10dp"
+    android:background="@color/white"
     tools:context=".Activities.Vedios.EditVideoTagsActivity">
 
     <ImageView
@@ -30,6 +31,7 @@ android:padding="10dp"
         android:textColor="@color/Background"
         android:layout_marginStart="5dp"
         android:textSize="20sp"
+        android:includeFontPadding="false"
         android:fontFamily="@font/poppins"/>
 
     <ScrollView

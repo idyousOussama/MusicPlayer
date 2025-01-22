@@ -22,6 +22,7 @@ import com.example.jamplayer.Moduls.Album
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.R
 import com.example.jamplayer.Services.BaseApplication
+import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.mediaPlayer
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.userIsActive
 import com.example.jamplayer.databinding.ActivityShowAlbumBinding
 import kotlinx.coroutines.CoroutineScope
@@ -133,9 +134,17 @@ if(selectedAlbumSongsList.get(0).musicImage != null){
     }
 
     private fun setSongsListForPlaying(positionz: Int, albumSongsList : ArrayList<MusicFile>, isRandom: Boolean) {
-        var currentMediaPlayer =  BaseApplication.PlayingMusicManager.mediaPlayer
-        if(currentMediaPlayer != null){
-              addPlayingTime()
+        val currentMediaPlayer = BaseApplication.PlayingMusicManager.mediaPlayer
+        currentMediaPlayer?.let {
+            if (it.isPlaying) {
+                addPlayingTime()
+                mediaPlayer!!.pause()
+                mediaPlayer!!.release()
+            } else if (!it.isPlaying && mediaPlayer != null) {
+                addPlayingTime()
+                mediaPlayer!!.release()
+            }
+
         }
         songsList = albumSongsList
         curretSong = albumSongsList.get(positionz)

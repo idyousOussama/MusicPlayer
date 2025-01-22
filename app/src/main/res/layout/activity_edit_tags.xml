@@ -6,6 +6,7 @@
     android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".Activities.Songs.EditTagsActivity">
 
     <ImageView
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignTop="@+id/edit_tag_back_btn"
+        android:layout_alignBottom="@+id/edit_tag_back_btn"
         android:layout_toRightOf="@+id/edit_tag_back_btn"
         android:text="@string/edit_tags_text"
         android:gravity="center_vertical"
@@ -32,8 +34,8 @@
         android:fontFamily="@font/poppins"/>
 
     <ScrollView
-        android:layout_width="382dp"
-        android:layout_height="743dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/edit_tag_back_btn"
         android:layout_marginTop="30dp"
         android:layout_above="@+id/save_song_changes_btn"
@@ -157,7 +159,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins_semibold"
-            android:text="@string/artist_text"
+            android:text="@string/song_path_text"
             android:textColor="@color/gray"
             android:textSize="17sp" />
 

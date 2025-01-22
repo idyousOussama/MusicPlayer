@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Vibe</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="song_text">song</string>
     <string name="song_txt">songs</string>
@@ -148,4 +147,10 @@
     <string name="hidden_video_text">Hidden video</string>
     <string name="show_text">Show</string>
     <string name="Hidden_video_text">hidden videos</string>
+    <string name="confiramtion_video_changes_message">You want to save video changes.</string>
+    <string name="exit_text">Exit</string>
+    <string name="save_audio_chages">Save audio changes !</string>
+    <string name="save_video_chages">Save video  changes !</string>
+    <string name="song_path_text">Song path*</string>
+    <string name="Hidden_files_text">Hidden files</string>
 </resources>

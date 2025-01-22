@@ -50,7 +50,6 @@ fun setVideosList (videoList : ArrayList<Video>){
                 val previousPosition = videoList.indexOf(lastVideo)
                 lastVideo.isSelected = false
                 notifyItemChanged(previousPosition)
-                Toast.makeText(p0.itemView.context , lastVideo.title , Toast.LENGTH_SHORT).show()
             }
                 video.isSelected = true
                 lastVideoClicked = video

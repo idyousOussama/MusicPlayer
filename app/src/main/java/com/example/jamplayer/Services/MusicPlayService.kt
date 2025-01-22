@@ -12,7 +12,6 @@ import android.os.IBinder
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.net.toUri
-
 import com.example.jamplayer.Activities.Songs.MainActivity
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.jamViewModel
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
@@ -23,7 +22,6 @@ import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.curret
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.mediaPlayer
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.position
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.songsList
-
 import com.example.jamplayer.Moduls.MusicFile
 import com.example.jamplayer.R
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.audioFocusChangeListener
@@ -40,17 +38,17 @@ class MusicPlayService : Service() {
         return null
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-    when (intent!!.action){
-        Actions.PLAY.name -> play()
-        Actions.PAUSE.name -> pause()
-        Actions.NEXT.name -> next()
-        Actions.PREV.name -> previous()
-        Actions.REPEAT.name -> repeat()
-        Actions.REPEAT.name -> random()
-        Actions.CANCEL.name -> cancelNotification()
-        Actions.LIKE.name -> LikeAndDisLikeSong()
-        Actions.MOVE_TO_MAIN_ACTIVITY.name -> moveToMainActivity()
-    }
+        when (intent!!.action){
+            Actions.PLAY.name -> play()
+            Actions.PAUSE.name -> pause()
+            Actions.NEXT.name -> next()
+            Actions.PREV.name -> previous()
+            Actions.REPEAT.name -> repeat()
+            Actions.REPEAT.name -> random()
+            Actions.CANCEL.name -> cancelNotification()
+            Actions.LIKE.name -> LikeAndDisLikeSong()
+            Actions.MOVE_TO_MAIN_ACTIVITY.name -> moveToMainActivity()
+        }
         return START_STICKY
     }
     private fun moveToMainActivity() {
@@ -85,7 +83,7 @@ class MusicPlayService : Service() {
             if (requestAudioFocus()){
                 mediaPlayer!!.release()
                 mediaPlayer = MediaPlayer.create(this, songsList[position].path.toUri())
-              mediaPlayer!!.start()
+                mediaPlayer!!.start()
                 CoroutineScope(Dispatchers.IO).launch {
                     jamViewModel.upDateNumPlayedSongById(curretSong!!.id)
                 }
@@ -95,7 +93,7 @@ class MusicPlayService : Service() {
             pause()
         }
 
-   }
+    }
     private fun LikeAndDisLikeSong() {
         try{
             if (curretSong?.isLiked == true){
@@ -198,7 +196,7 @@ class MusicPlayService : Service() {
             pause()
 
         }
-        }
+    }
     private fun play() {
         try {
             if (requestAudioFocus()) {
@@ -216,7 +214,7 @@ class MusicPlayService : Service() {
                 else if (mediaPlayer == null) {
                     if (checkSongIsNull(curretSong!!)) {
                         next()
-                    // Skip to the next song if the current song file is invalid
+                        // Skip to the next song if the current song file is invalid
                     } else {
                         mediaPlayer = MediaPlayer.create(baseContext, curretSong!!.path.toUri())
                         mediaPlayer!!.start()
@@ -236,18 +234,18 @@ class MusicPlayService : Service() {
             pause()
         }
     }
-      private fun pause(){
-          try {
-              if(mediaPlayer != null && mediaPlayer!!.isPlaying){
-                  mediaPlayer!!.pause()
-                  sendIntentAction("pause")
-              }
-              createNotification()
-          }catch (ex : Exception) {
-              createNotification()
-              sendIntentAction("pause")
+    private fun pause(){
+        try {
+            if(mediaPlayer != null && mediaPlayer!!.isPlaying){
+                mediaPlayer!!.pause()
+                sendIntentAction("pause")
+            }
+            createNotification()
+        }catch (ex : Exception) {
+            createNotification()
+            sendIntentAction("pause")
 
-          }
+        }
 
     }
     enum class Actions {
@@ -310,9 +308,9 @@ class MusicPlayService : Service() {
 
     }
     private fun upDateLikedSongPendingIntent(): PendingIntent? {
-  val intent = Intent(this,MusicPlayService::class.java).apply {
-      action = Actions.LIKE.name
-  }
+        val intent = Intent(this,MusicPlayService::class.java).apply {
+            action = Actions.LIKE.name
+        }
         return PendingIntent.getService(this,0,intent,PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
     }
@@ -330,19 +328,19 @@ class MusicPlayService : Service() {
         )
     }
     private fun pausePendingIntent(): PendingIntent {
-         var  intent = Intent(this,MusicPlayService::class.java).apply {
-                action = Actions.PAUSE.name
-            }
+        var  intent = Intent(this,MusicPlayService::class.java).apply {
+            action = Actions.PAUSE.name
+        }
         return PendingIntent.getService(this,1,intent,PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
     }
     private fun  playPendingIntent () : PendingIntent {
-    val intent = Intent(this , MusicPlayService::class.java).apply {
-        action = Actions.PLAY.name
-    }
-    return PendingIntent.getService(this,0,intent,PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        val intent = Intent(this , MusicPlayService::class.java).apply {
+            action = Actions.PLAY.name
+        }
+        return PendingIntent.getService(this,0,intent,PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
- }
+    }
     private fun  nextPendingIntent () : PendingIntent {
         val intent = Intent(this , MusicPlayService::class.java).apply {
             action = Actions.NEXT.name
@@ -370,13 +368,13 @@ class MusicPlayService : Service() {
         return songsList.random()
     }
     private fun addPlayingTime(){
-CoroutineScope(Dispatchers.Main).launch{
-    jamViewModel.setPlayingTime(mediaPlayer!!.currentPosition.div(1000))
-}
-}
+        CoroutineScope(Dispatchers.Main).launch{
+            jamViewModel.setPlayingTime(mediaPlayer!!.currentPosition.div(1000))
+        }
+    }
     override fun onDestroy() {
         super.onDestroy()
-     //   unregisterReceiver(mediaScannerReceiver)
+        //   unregisterReceiver(mediaScannerReceiver)
         releaseAudioFocus()
         cancelNotification()
     }

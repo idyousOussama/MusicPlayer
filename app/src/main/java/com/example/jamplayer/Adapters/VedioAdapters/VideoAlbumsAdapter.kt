@@ -40,10 +40,8 @@ return videosAlbumsList.size    }
     override fun onBindViewHolder(p0: VideoAlbumsVH, p1: Int) {
         val videoAlbum = videosAlbumsList[p1]
         val filteredVideosList = videosList?.filter { it.album == videoAlbum.name } ?: emptyList()
-
         val firstVideoUri = filteredVideosList.getOrNull(0)?.path?.toUri()
         val secondVideoUri = filteredVideosList.getOrNull(1)?.path?.toUri()
-
         p0.setVideoAlbum(
             videoAlbum.name,
             filteredVideosList.size.toString(),

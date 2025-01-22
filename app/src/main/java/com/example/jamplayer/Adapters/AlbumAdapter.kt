@@ -62,9 +62,8 @@ class AlbumAdapter(var requestCode: Int) : RecyclerView.Adapter<AlbumAdapter.Alb
 val albumItem =  albumList.get(p1)
         val albumSonglist = unHideSong.filter { it.album == albumItem.name || it.album == albumItem.artist} as ArrayList
         if(albumSonglist.isNotEmpty()){
-            p0.setAlbum(albumItem.name!!,albumSonglist.size.toString(),albumSonglist[0],albumSonglist,requestCode) }else {
-            p0.setAlbum(albumItem.name!!,albumSonglist.size.toString(),null , albumSonglist,requestCode)
-            }
+            p0.setAlbum(albumItem.name!!,albumSonglist.size.toString(),albumSonglist[0],albumSonglist,requestCode) }
+
     p0.itemView.setOnClickListener {
         if(requestCode == 1){
             lestner.onAlbumItemClicked(albumItem,albumSonglist)

@@ -65,6 +65,12 @@ val fragmentRequetCode = requestCodeIntent.getStringExtra(HIDDEN_FILE_FRAGMENT_R
                 HiddenVideosFragemntIsAttached = true
                 HiddenSongsFragemntIsAttached = false
             }
+       else -> {
+           upDateHiddenSongsBtnLayout()
+           replaceFirstFragment(songFragment)
+           HiddenVideosFragemntIsAttached = false
+           HiddenSongsFragemntIsAttached = true
+       }
         }
 
 

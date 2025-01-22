@@ -2,7 +2,6 @@ package com.example.jamplayer.AppDatabase.Repositories.SongRepository
 
 import android.app.Application
 import android.graphics.Bitmap
-import androidx.room.Query
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.executor
 import com.example.jamplayer.AppDatabase.JamRoom
 import com.example.jamplayer.Listeners.JamRoomListener
@@ -12,10 +11,8 @@ import com.example.jamplayer.Moduls.PlayList
 import com.example.jamplayer.Moduls.Settings
 import com.example.jamplayer.Moduls.User
 import com.example.jamplayer.Moduls.Video
-import com.example.jamplayer.Moduls.VideoTable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
 class JamRepository(application: Application) {
 
     val jamDB = JamRoom.getDatabase(application)
@@ -80,6 +77,11 @@ withContext(Dispatchers.IO) {
        }
     }
 
+    suspend fun getSongsById(id : String) : MusicFile {
+        return withContext(Dispatchers.IO)  {
+            fileMusicDao.getSongsById(id)
+        }
+    }
 
 
     suspend fun getAllMusic () : List<MusicFile> {
@@ -128,7 +130,7 @@ suspend  fun getunhiddenSongs() : List<MusicFile>{
     }
 
 }
-    suspend fun upDateLikedSong(isLiked : Boolean , id :Int) {
+    suspend fun upDateLikedSong(isLiked : Boolean , id :String) {
         withContext(Dispatchers.IO){
             fileMusicDao.upDateLikedSong(isLiked,id)
         }
@@ -173,22 +175,22 @@ suspend  fun getunhiddenSongs() : List<MusicFile>{
             albumDao.checkIfAlbumIsExistsByName(albumName)
         }
     }
-    suspend fun upDateCurrentSongById(id : Int , title : String , artist :String , image : Bitmap?) {
+    suspend fun upDateCurrentSongById(id : String , title : String , artist :String , image : Bitmap?) {
       withContext(Dispatchers.IO){
           fileMusicDao.upDateCurrentSongById(id,title,artist,image)
       }
     }
-    suspend fun upDateCheckedSongById(id:Int , isChecked : Boolean){
+    suspend fun upDateCheckedSongById(id:String , isChecked : Boolean){
         withContext(Dispatchers.IO){
             fileMusicDao.upDateCheckedSongById(id , isChecked)
         }
     }
-    fun upDateSongsById(id : Int , isShort: Boolean) {
+    fun upDateSongsById(id : String , isShort: Boolean) {
         executor.execute {
             fileMusicDao.upDateSongsById(id,isShort)
         }
     }
-    suspend  fun upDateNumPlayedSongById(id:Int) {
+    suspend  fun upDateNumPlayedSongById(id:String) {
         withContext(Dispatchers.IO){
          fileMusicDao.upDateNumPlayedSongById(id)
         }
@@ -210,24 +212,23 @@ suspend  fun getunhiddenSongs() : List<MusicFile>{
     }
 
 
-   suspend fun deleteCurrentSongById(id : Int){
+   suspend fun deleteCurrentSongById(id : String){
         withContext(Dispatchers.IO){
             fileMusicDao.deleteCurrentSongById(id)
         }
 
    }
-
-    fun unHideCurrentSong(id : Int){
+    fun unHideCurrentSong(id : String){
         executor.execute {
             fileMusicDao.unHideCurrentSong(id)
         }
     }
-    suspend fun removeSongById(id : Int) {
+    suspend fun removeSongById(id : String) {
         withContext(Dispatchers.IO){
             fileMusicDao.removeSongById(id)
         }
     }
-  suspend  fun upDatePlaylistSongsList( playlistId : Int , upDatedPlayList:ArrayList<Int>){
+  suspend  fun upDatePlaylistSongsList( playlistId : Int , upDatedPlayList:ArrayList<String>){
         withContext(Dispatchers.IO){
         playlistDao.upDatePlaylistSongsList(playlistId,upDatedPlayList)
         }
@@ -235,17 +236,17 @@ suspend  fun getunhiddenSongs() : List<MusicFile>{
     }
 
 
-suspend fun insertNewVideo(newVideo : VideoTable){
+suspend fun insertNewVideo(newVideo : Video){
         withContext(Dispatchers.IO){
             videoDao.insertNewVideo(newVideo)
         }
     }
-   suspend fun getAllVideos() : List<VideoTable> {
+   suspend fun getAllVideos() : List<Video> {
         return withContext(Dispatchers.IO){
             videoDao.getAllVideos()
         }
     }
-   suspend fun getVideoById(id : String) : VideoTable {
+   suspend fun getVideoById(id : String) : Video {
         return  withContext(Dispatchers.IO){
             videoDao.getVideoById(id)
         }
@@ -266,7 +267,7 @@ suspend fun insertNewVideo(newVideo : VideoTable){
             videoDao.upDateVideoTitleById(title,id)
         }
     }
- suspend fun getHiddenVideos() : List<VideoTable> {
+ suspend fun getHiddenVideos() : List<Video> {
      return withContext(Dispatchers.IO) {
      videoDao.getHiddenVideos()
 
@@ -278,6 +279,11 @@ suspend fun insertNewVideo(newVideo : VideoTable){
         }
 
         }
+ suspend fun deleteVideoById(id : String) {
+     withContext(Dispatchers.IO) {
+         videoDao.deleteVideoById(id)
+     }
+ }
 
 
 }

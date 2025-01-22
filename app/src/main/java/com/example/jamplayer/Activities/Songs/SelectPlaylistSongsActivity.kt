@@ -1,6 +1,7 @@
 package com.example.jamplayer.Activities.Songs
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jamplayer.Activities.Songs.SelectPlaylistSongsActivity.selectPlayListSongsManager.playListSelectSongs
+import com.example.jamplayer.Activities.Songs.ShowPlaylistActivity.showPlaylistmanager.playList
+import com.example.jamplayer.Activities.Songs.ShowPlaylistActivity.showPlaylistmanager.playlistSongs
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.executor
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.jamViewModel
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.settings
@@ -29,7 +32,7 @@ import kotlinx.coroutines.launch
 
 class SelectPlaylistSongsActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySelectPlaylistSongsBinding
-    var checkedPlaylistSongsList: ArrayList<Int> = ArrayList()
+    var checkedPlaylistSongsList: ArrayList<String> = ArrayList()
     private lateinit var processDialog: Dialog
     var playListSongs : ArrayList<MusicFile> = unHideSong
     object selectPlayListSongsManager{
@@ -51,7 +54,6 @@ class SelectPlaylistSongsActivity : AppCompatActivity() {
     private fun initSelectSongs() {
         playListSelectSongs?.let { selectedSongs ->
             if (selectedSongs.playlistSong.isNotEmpty()) {
-                // Filter out songs that are already in the selected playlist
                 playListSongs = playListSongs.filter { item ->
                     selectedSongs.playlistSong.none { playListSng ->
                         item.id == playListSng
@@ -102,13 +104,24 @@ class SelectPlaylistSongsActivity : AppCompatActivity() {
                     Toast.makeText(this@SelectPlaylistSongsActivity, "No songs found in the playlist", Toast.LENGTH_SHORT).show()
                     return@launch
                 }
-
                 updatedSongs.addAll(checkedPlaylistSongsList)
                 jamViewModel.upDatePlaylistSongsList(playListSelectSongs!!.id, updatedSongs)
-                finish()
+                playlistSongs!!.clear()
+                 for (it in updatedSongs) {
+                     playlistSongs!!.add(jamViewModel.getSongsById(it))
+                 }
+                playList = playListSelectSongs
+                navigateToNewActivity(ShowPlaylistActivity::class.java)
             }
         }
     }
+
+    private fun navigateToNewActivity(newActivity: Class<ShowPlaylistActivity>) {
+val newActivityIntent = Intent(baseContext,newActivity)
+ startActivity(newActivityIntent)
+        finish()
+    }
+
     private fun setSongs(hiddenSongList: ArrayList<MusicFile>) {
         if (this.playListSongs.isNotEmpty()){
             hiddenSongsAdapter.setSongList(hiddenSongList)

@@ -17,7 +17,7 @@ fun insertNewPalyList(playList : PlayList)
  @Query("UPDATE PlayList SET playlistSong = :songs WHERE id = :id")
  suspend fun upDatePlaylistSongsList(
   id: Int,
-  songs: ArrayList<Int>
+  songs: ArrayList<String>
  )
  @Query("Select * from PlayList where title = :title")
 fun getPlaylistByTitle(title : String) : PlayList

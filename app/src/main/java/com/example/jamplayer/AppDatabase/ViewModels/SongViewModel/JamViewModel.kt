@@ -11,7 +11,6 @@ import com.example.jamplayer.Moduls.PlayList
 import com.example.jamplayer.Moduls.Settings
 import com.example.jamplayer.Moduls.User
 import com.example.jamplayer.Moduls.Video
-import com.example.jamplayer.Moduls.VideoTable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -44,11 +43,16 @@ class JamViewModel(application: Application) : AndroidViewModel(application) {
         return jamRepo.getAllAlbums()
     }
 
+    suspend fun getSongsById(id : String) : MusicFile {
+        return jamRepo.getSongsById(id)
+
+    }
+
     fun getSongListByTitle(title: String, listener: JamRoomListener) {
         jamRepo.getSongListByTitle(title, listener)
     }
 
-    fun upDateSongsById(id: Int, isShort: Boolean) {
+    fun upDateSongsById(id: String, isShort: Boolean) {
         jamRepo.upDateSongsById(id, isShort)
     }
 
@@ -56,7 +60,7 @@ class JamViewModel(application: Application) : AndroidViewModel(application) {
         return jamRepo.getHiddenSongs()
     }
 
-    suspend fun upDateCheckedSongById(id: Int, isChecked: Boolean) {
+    suspend fun upDateCheckedSongById(id: String, isChecked: Boolean) {
         jamRepo.upDateCheckedSongById(id, isChecked)
     }
 
@@ -72,7 +76,7 @@ class JamViewModel(application: Application) : AndroidViewModel(application) {
         return jamRepo.getunhiddenSongs()
     }
 
-    suspend fun upDateLikedSong(isLiked: Boolean, id: Int) {
+    suspend fun upDateLikedSong(isLiked: Boolean, id: String) {
         jamRepo.upDateLikedSong(isLiked, id)
     }
 
@@ -117,20 +121,20 @@ class JamViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-    suspend fun upDateCurrentSongById(id: Int, title: String, artist: String, image: Bitmap?) {
+    suspend fun upDateCurrentSongById(id: String, title: String, artist: String, image: Bitmap?) {
         jamRepo.upDateCurrentSongById(id, title, artist, image)
     }
 
-   suspend fun deleteCurrentSongById(id: Int) {
+   suspend fun deleteCurrentSongById(id: String) {
         jamRepo.deleteCurrentSongById(id)
 
     }
 
-    fun unHideCurrentSong(id: Int) {
+    fun unHideCurrentSong(id: String) {
         jamRepo.unHideCurrentSong(id)
     }
 
-    suspend fun removeSongById(id : Int) {
+    suspend fun removeSongById(id : String) {
             jamRepo.removeSongById(id)
     }
     suspend fun chechSongExistsBySongId(title : String):Int{
@@ -151,22 +155,22 @@ class JamViewModel(application: Application) : AndroidViewModel(application) {
     suspend  fun getAllPlayLists() : List<PlayList> {
         return jamRepo.getAllPlayLists()
     }
-    suspend fun upDatePlaylistSongsList(playlistId : Int , upDatedPlayList:ArrayList<Int>){
+    suspend fun upDatePlaylistSongsList(playlistId: Int, upDatedPlayList: ArrayList<String>){
 jamRepo.upDatePlaylistSongsList(playlistId,upDatedPlayList)
     }
     suspend fun getPlaylistByTitle(title : String) : PlayList {
         return jamRepo.getPlaylistByTitle(title)
     }
-    suspend  fun upDateNumPlayedSongById(id:Int) {
+    suspend  fun upDateNumPlayedSongById(id:String) {
             jamRepo.upDateNumPlayedSongById(id)
     }
-    suspend fun insertNewVideo(newVideo : VideoTable){
+    suspend fun insertNewVideo(newVideo : Video){
             jamRepo.insertNewVideo(newVideo)
     }
-    suspend fun getAllVideos() : List<VideoTable> {
+    suspend fun getAllVideos() : List<Video> {
            return jamRepo.getAllVideos()
     }
-    suspend fun getVideoById(id : String) : VideoTable {
+    suspend fun getVideoById(id : String) : Video {
            return jamRepo.getVideoById(id)
     }
     suspend fun HideAndUnhieVideo(isHide : Boolean , id : String) {
@@ -180,11 +184,16 @@ jamRepo.upDatePlaylistSongsList(playlistId,upDatedPlayList)
             jamRepo.upDateVideoTitleById(title,id)
     }
 
-    suspend fun getHiddenVideos() : List<VideoTable> {
+    suspend fun getHiddenVideos() : List<Video> {
           return jamRepo.getHiddenVideos()
     }
 
    suspend  fun upDateVideosHideById( id : String , isHide : Boolean ) {
             jamRepo.upDateVideosHideById(id,isHide)
+    }
+    suspend fun deleteVideoById(id : String) {
+
+            jamRepo.deleteVideoById(id)
+
     }
 }

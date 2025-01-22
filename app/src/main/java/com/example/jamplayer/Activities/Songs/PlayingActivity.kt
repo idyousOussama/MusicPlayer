@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.jamplayer.Activities.Songs.ShowPlaylistActivity.showPlaylistmanager.playList
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.jamViewModel
 import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.playLists
+import com.example.jamplayer.Activities.Songs.SplachActivity.ItemsManagers.unHideSong
 import com.example.jamplayer.Adapters.PlaylistAdapter
 import com.example.jamplayer.Listeners.PlayListItemListener
 import com.example.jamplayer.Services.BaseApplication.PlayingMusicManager.ACTION_TRACK_UPDATE
@@ -69,7 +70,6 @@ class PlayingActivity : AppCompatActivity() {
         binding.goBackBtn.setOnClickListener {
             finish()
         }
-        // Set SeekBar listener
         binding.musicProgress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (mediaPlayer != null && fromUser) {
@@ -93,7 +93,6 @@ class PlayingActivity : AppCompatActivity() {
             showBottomSheet()
         }
     }
-
     private fun showBottomSheet() {
         val bottomSheetView = layoutInflater.inflate(R.layout.song_details_bottom_sheet_custom,null)
        val song_title = bottomSheetView.findViewById<TextView>(R.id.song_details_bottom_sheet_custom_title)
@@ -114,6 +113,7 @@ class PlayingActivity : AppCompatActivity() {
             song_image.setImageResource(R.drawable.small_place_holder_image)
         }
      shareBtn.setOnClickListener {
+         bottomSheet.dismiss()
          val file = File(curretSong!!.path) // Replace with the actual file path
          val uri = FileProvider.getUriForFile(baseContext, "${packageName}.provider", file)
 
@@ -130,10 +130,12 @@ class PlayingActivity : AppCompatActivity() {
             startActivity(EditTagIntent)
         }
         hideCurrentSong.setOnClickListener {
+            bottomSheet.dismiss()
             showWraningDialog(R.string.hide_cureentSong_title , R.string.hideSong_wraning_message,"Hide")
-
         }
         deleteCurrentSong.setOnClickListener {
+            bottomSheet.dismiss()
+
             showWraningDialog(R.string.delete_cureentSong_title , R.string.delete_song_wraning_message,"Delete")
 
         }
@@ -203,7 +205,7 @@ class PlayingActivity : AppCompatActivity() {
             playList = jamViewModel.getPlaylistByTitle(titleText)
             if(playList == null){
                 Toast.makeText(baseContext , R.string.adding_new_play_list_text , Toast.LENGTH_SHORT).show()
-                val newPlaylistSongList : ArrayList<Int> = ArrayList()
+                val newPlaylistSongList : ArrayList<String> = ArrayList()
                 newPlaylistSongList.add(curretSong!!.id)
                 val newPlayList =PlayList(0,titleText,null,newPlaylistSongList)
                 jamViewModel.insertNewPalyList(newPlayList)
@@ -238,10 +240,9 @@ class PlayingActivity : AppCompatActivity() {
                     // Check if playlistSong is null
                     updatedSongs.add(curretSong!!.id)
                     jamViewModel.upDatePlaylistSongsList(selectedPlayList.id, updatedSongs)
-                 runOnUiThread {
-                     Toast.makeText(baseContext , R.string.this_PlayList_added , Toast.LENGTH_SHORT).show()
-                 }
+                    selectedPlayList.playlistSong.add(curretSong!!.id)
                     playListsDialog.dismiss()
+                    Toast.makeText(baseContext,"Song added to play list successfully" , Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -281,20 +282,21 @@ val wraningDialogView = LayoutInflater.from(this@PlayingActivity).inflate(R.layo
         wraningTitle.setText(hideCureentsongTitle)
         wraningMessage.setText(hidesongWraningMessage)
         positiveBtn.setText(action)
+        negativeBtn.setText(getString(R.string.cancel_text))
         positiveBtn.setOnClickListener {
             if(action == "Hide"){
                 jamViewModel.unHideCurrentSong(curretSong!!.id)
                 if(mediaPlayer!!.isPlaying){
                     mediaPlayer!!.release()
-                    mediaPlayer = null
-                    songsList.remove(curretSong)
+                    mediaPlayer = null}
+                    unHideSong .remove(curretSong)
                     runOnUiThread{
                         Toast.makeText(baseContext , curretSong!!.title + " " + "Is Hidden",Toast.LENGTH_SHORT).show()
                     }
                     val intent = Intent(this , MainActivity::class.java)
                     startActivity(intent)
+                    wraningDialog.dismiss()
 
-                }
             }else if (action == "Delete"){
                 CoroutineScope(Dispatchers.Main).launch{
                     if(mediaPlayer!!.isPlaying){
